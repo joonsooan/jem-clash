@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GameManger : MonoBehaviour
+public class UnitManager : MonoBehaviour
 {
     // Start is called before the first frame update
     private void Start()
