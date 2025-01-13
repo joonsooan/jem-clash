@@ -17,6 +17,6 @@ public class UnitStats : MonoBehaviour
     private void Die()
     {
         Destroy(gameObject);
-        Debug.Log("Game Over");
+        Debug.Log("Unit Destroyed");
     }
 }

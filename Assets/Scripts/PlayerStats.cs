@@ -10,7 +10,8 @@ public class PlayerStats : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        if (health <= 0) GameOver();
+        if (health <= 0) 
+            GameOver();
     }
 
     private void GameOver()
