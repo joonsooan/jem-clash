@@ -3,31 +3,24 @@ using UnityEngine;
 public class UnitCollision : MonoBehaviour
 {
     public bool isAlly; // 아군 적군 구분
-    private UnitMovement movement;
-    private Rigidbody2D rb;
+
     private UnitStats stats;
 
     private void Awake()
     {
-        rb = gameObject.GetComponent<Rigidbody2D>();
         stats = GetComponent<UnitStats>();
-        movement = GetComponent<UnitMovement>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject otherObj = collision.gameObject;
+        if (!otherObj.CompareTag("Unit")) return; // 유닛이 아니면 리턴
 
-        // 유닛이 아니면 리턴
-        if (!otherObj.CompareTag("Unit")) return;
+        UnitCollision otherCollision = otherObj.GetComponent<UnitCollision>();
+        if (isAlly == otherCollision.isAlly) return; // 아군일 경우 리턴
 
         UnitStats otherStats = otherObj.GetComponent<UnitStats>();
-        UnitCollision otherCollision = otherObj.GetComponent<UnitCollision>();
 
-        // 아군일 경우 리턴
-        if (isAlly == otherCollision.isAlly) return;
-
-        // 데미지 계산
-        stats.TakeDamage(otherStats.attackDamage);
+        stats.TakeDamage(otherStats.attackDamage); // 데미지 계산
     }
 }

@@ -12,10 +12,16 @@ public class UnitMovement : MonoBehaviour
         stats = GetComponent<UnitStats>();
     }
 
-    private void Start()
+    private void OnEnable()
+    {
+        MoveInRandomDirection();
+    }
+
+    private void MoveInRandomDirection()
     {
         Vector2 randomVec = new Vector2(
             Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
+        rb.velocity = Vector2.zero;
         rb.AddForce(randomVec * stats.moveSpeed, ForceMode2D.Impulse);
     }
 }
