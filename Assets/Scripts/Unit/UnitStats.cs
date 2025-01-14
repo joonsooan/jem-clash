@@ -26,7 +26,7 @@ public class UnitStats : MonoBehaviour
         if (health <= 0) Die();
     }
 
-    private void Die()
+    public void Die()
     {
         gameObject.SetActive(false);
     }

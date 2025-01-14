@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be3ae1b9b40440a41a22fa5bac03869a, type: 3}
   m_Name: Ally Unit Data
   m_EditorClassIdentifier: 
-  health: 10
+  health: 100
   attackDamage: 2
-  moveSpeed: 10
+  moveSpeed: 15
