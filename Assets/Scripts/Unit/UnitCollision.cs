@@ -3,15 +3,15 @@ using UnityEngine;
 public class UnitCollision : MonoBehaviour
 {
     public bool isAlly; // 아군 적군 구분
+    private UnitMovement movement;
     private Rigidbody2D rb;
     private UnitStats stats;
-    private UnitMovement unitMovement;
 
     private void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         stats = GetComponent<UnitStats>();
-        unitMovement = GetComponent<UnitMovement>();
+        movement = GetComponent<UnitMovement>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
