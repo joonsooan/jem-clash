@@ -33,6 +33,7 @@ public class PoolManager : MonoBehaviour
             pools[index].Add(select);
         }
 
+        select.transform.SetParent(transform); // PoolManager의 자식으로 설정
         return select;
     }
 }
