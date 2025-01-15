@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class Nexus : MonoBehaviour
@@ -5,6 +6,18 @@ public class Nexus : MonoBehaviour
     public bool isAlly;
     public int health;
     public int attackDamage;
+
+    private TMP_Text healthText;
+
+    private void Awake()
+    {
+        healthText = GetComponentInChildren<TMP_Text>();
+    }
+
+    private void Update()
+    {
+        healthText.text = health.ToString();
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
