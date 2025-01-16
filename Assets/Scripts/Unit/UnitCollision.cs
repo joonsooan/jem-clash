@@ -4,11 +4,11 @@ public class UnitCollision : MonoBehaviour
 {
     public bool isAlly; // 아군 적군 구분
 
-    private UnitStats stats;
+    private UnitStats _stats;
 
     private void Awake()
     {
-        stats = GetComponent<UnitStats>();
+        _stats = GetComponent<UnitStats>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -21,6 +21,6 @@ public class UnitCollision : MonoBehaviour
 
         UnitStats otherStats = otherObj.GetComponent<UnitStats>();
 
-        stats.TakeDamage(otherStats.attackDamage); // 데미지 계산
+        _stats.TakeDamage(otherStats.attackDamage); // 데미지 계산
     }
 }

@@ -6,24 +6,24 @@ public class UnitSpawner : MonoBehaviour
     public UnitData enemyData;
     public Transform[] spawnPoints;
 
-    private int i;
+    private int _i;
 
     private void Awake()
     {
         spawnPoints = GetComponentsInChildren<Transform>();
-        i = 0;
+        _i = 0;
     }
 
     private void Update()
     {
         // 유닛 100개씩으로 시작
-        if (i < 100)
+        if (_i < 200)
         {
             GameObject allyUnit = GameManager.Instance.poolManager.Get(0);
             InitUnit(allyUnit, allyData, spawnPoints[1].position);
             GameObject enemyUnit = GameManager.Instance.poolManager.Get(1);
             InitUnit(enemyUnit, enemyData, spawnPoints[2].position);
-            i++;
+            _i++;
         }
 
         KeyTest();

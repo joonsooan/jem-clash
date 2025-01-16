@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class UnitMovement : MonoBehaviour
 {
-    private Vector2 currentDirection;
-    private Rigidbody2D rb;
-    private UnitStats stats;
+    private Vector2 _currentDirection;
+    private Rigidbody2D _rb;
+    private UnitStats _stats;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        stats = GetComponent<UnitStats>();
+        _rb = GetComponent<Rigidbody2D>();
+        _stats = GetComponent<UnitStats>();
     }
 
     private void OnEnable()
@@ -21,7 +21,7 @@ public class UnitMovement : MonoBehaviour
     {
         Vector2 randomVec = new Vector2(
             Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
-        rb.velocity = Vector2.zero;
-        rb.AddForce(randomVec * stats.moveSpeed, ForceMode2D.Impulse);
+        _rb.velocity = Vector2.zero;
+        _rb.AddForce(randomVec * _stats.moveSpeed, ForceMode2D.Impulse);
     }
 }

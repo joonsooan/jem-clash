@@ -7,16 +7,16 @@ public class Nexus : MonoBehaviour
     public int health;
     public int attackDamage;
 
-    private TMP_Text healthText;
+    private TMP_Text _healthText;
 
     private void Awake()
     {
-        healthText = GetComponentInChildren<TMP_Text>();
+        _healthText = GetComponentInChildren<TMP_Text>();
     }
 
     private void Update()
     {
-        healthText.text = health.ToString();
+        _healthText.text = health.ToString();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
