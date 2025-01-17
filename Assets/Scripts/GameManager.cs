@@ -7,11 +7,13 @@ public class GameManager : MonoBehaviour
     [Header("Managers")] public PoolManager poolManager;
 
     public ResourceManager resourceManager;
-    [HideInInspector] public bool gameLive;
 
-    [Header("Nexus")] public Transform playerNexus;
+    [Header("Game Objects")] public bool gameLive;
 
+    public Transform playerNexus;
     public Transform enemyNexus;
+    public GameObject supplyText;
+    public GameObject energyText;
 
     private void Awake()
     {

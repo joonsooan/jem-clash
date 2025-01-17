@@ -2430,7 +2430,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Supply : 99999'
+  m_text: 'Supply : 9999999'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4198,7 +4198,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Energy : 99999'
+  m_text: 'Energy : 9999999'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5736,11 +5736,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b54ab53565f92c34389afe9a8dd2e6f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameLive: 1
   poolManager: {fileID: 403360136}
   resourceManager: {fileID: 384785505}
+  gameLive: 1
   playerNexus: {fileID: 1389562664}
   enemyNexus: {fileID: 644913459}
+  supplyText: {fileID: 393012308}
+  energyText: {fileID: 789858530}
 --- !u!1 &1116988934
 GameObject:
   m_ObjectHideFlags: 0
@@ -10323,12 +10325,12 @@ SceneRoots:
   - {fileID: 403360135}
   - {fileID: 384785504}
   - {fileID: 1706652888}
+  - {fileID: 1882189962}
+  - {fileID: 986329066}
   - {fileID: 47818106401746418}
   - {fileID: 289651802}
   - {fileID: 609812384}
   - {fileID: 1139614775}
-  - {fileID: 1882189962}
-  - {fileID: 986329066}
   - {fileID: 987799335}
   - {fileID: 1639021496}
   - {fileID: 336599651}

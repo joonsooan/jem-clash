@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
@@ -5,10 +6,25 @@ public class ResourceManager : MonoBehaviour
     public int supply;
     public int energy;
 
+    private TMP_Text _energyText;
+    private TMP_Text _supplyText;
+
     private void Awake()
     {
         supply = 0;
         energy = 0;
+    }
+
+    private void Start()
+    {
+        _supplyText = GameManager.Instance.supplyText.GetComponent<TMP_Text>();
+        _energyText = GameManager.Instance.energyText.GetComponent<TMP_Text>();
+    }
+
+    private void Update()
+    {
+        _supplyText.text = $"Supply : {supply.ToString()}";
+        _energyText.text = $"Energy : {energy.ToString()}";
     }
 
     public void AddSupply(int amount)
