@@ -19,7 +19,7 @@ public class UnitMovement : MonoBehaviour
         MoveInRandomDirection();
     }
 
-    private void MoveInRandomDirection()
+    public void MoveInRandomDirection()
     {
         Vector2 randomVec = new Vector2(
             Random.Range(0f, 1f) * _unitCollision.isAlly, Random.Range(-0.5f, 0.5f)).normalized;
