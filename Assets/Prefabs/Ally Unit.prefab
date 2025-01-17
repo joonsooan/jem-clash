@@ -166,7 +166,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 2e72558bea8ee81459fdf14096d514f7, type: 2}
   health: 10
   attackDamage: 2
-  moveSpeed: 5
+  moveSpeed: 3
 --- !u!114 &3430666866166136232
 MonoBehaviour:
   m_ObjectHideFlags: 0

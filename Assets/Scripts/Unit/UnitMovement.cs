@@ -21,7 +21,8 @@ public class UnitMovement : MonoBehaviour
     {
         Vector2 randomVec = new Vector2(
             Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
-        _rb.velocity = Vector2.zero;
-        _rb.AddForce(randomVec * _stats.moveSpeed, ForceMode2D.Impulse);
+        Debug.Log(_stats.moveSpeed);
+        _rb.velocity = randomVec * _stats.moveSpeed;
+        // _rb.AddForce(randomVec * _stats.moveSpeed, ForceMode2D.Impulse);
     }
 }

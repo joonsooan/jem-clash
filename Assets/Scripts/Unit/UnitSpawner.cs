@@ -25,8 +25,8 @@ public class UnitSpawner : MonoBehaviour
     {
         while (true)
         {
-            for (int i = 0; i < 50; i++) SpawnUnits();
-
+            // for (int i = 0; i < 10; i++)
+            SpawnUnits();
             yield return new WaitForSeconds(3f);
         }
     }
@@ -60,6 +60,7 @@ public class UnitSpawner : MonoBehaviour
         unit.transform.position = position;
         UnitStats stats = unit.GetComponent<UnitStats>();
         stats.data = data;
+        Debug.Log($"Move Speed : {stats.data.moveSpeed}");
         stats.InitStats();
     }
 }
