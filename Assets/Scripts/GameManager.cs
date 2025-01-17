@@ -4,11 +4,13 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public bool gameLive;
-    public PoolManager poolManager;
-    public ResourceManager resourceManager;
+    [Header("Managers")] public PoolManager poolManager;
 
-    public Transform playerNexus;
+    public ResourceManager resourceManager;
+    [HideInInspector] public bool gameLive;
+
+    [Header("Nexus")] public Transform playerNexus;
+
     public Transform enemyNexus;
 
     private void Awake()

@@ -14,20 +14,29 @@ public class Resource : MonoBehaviour
     public int resourceAmount = 1;
 
     private bool _playerInZone;
+    private Coroutine _resourceCoroutine;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             _playerInZone = true;
-            StartCoroutine(GainResource());
+            if (_resourceCoroutine == null)
+                _resourceCoroutine = StartCoroutine(GainResource());
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
+        {
             _playerInZone = false;
+            if (_resourceCoroutine != null)
+            {
+                StopCoroutine(_resourceCoroutine);
+                _resourceCoroutine = null;
+            }
+        }
     }
 
     private IEnumerator GainResource()
