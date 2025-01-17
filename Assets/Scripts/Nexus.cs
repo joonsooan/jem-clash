@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Nexus : MonoBehaviour
 {
-    public bool isAlly;
+    public int isAlly; // 1 : player, -1 : enemy
     public int health;
     public int attackDamage;
 

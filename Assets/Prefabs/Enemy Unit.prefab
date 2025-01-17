@@ -191,4 +191,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19f6b3de3ba6dc84bab7eb7f9a835202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAlly: 0
+  isAlly: -1

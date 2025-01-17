@@ -25,8 +25,8 @@ public class UnitSpawner : MonoBehaviour
     {
         while (true)
         {
-            // for (int i = 0; i < 10; i++)
-            SpawnUnits();
+            for (int i = 0; i < 10; i++)
+                SpawnUnits();
             yield return new WaitForSeconds(3f);
         }
     }

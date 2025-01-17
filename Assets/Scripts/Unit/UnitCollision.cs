@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class UnitCollision : MonoBehaviour
 {
-    public bool isAlly; // 아군 적군 구분
+    public int isAlly; // 1 : player, -1 : enemy
 
     private UnitStats _stats;
 
