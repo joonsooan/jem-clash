@@ -4,7 +4,7 @@ public class PlayerBuff : MonoBehaviour
 {
     public float buffRadius;
 
-    private Color _color;
+    private Color _color; // 버그가 있긴 한데, 일단 중요한건 아니니까 무시
 
     private void Update()
     {
