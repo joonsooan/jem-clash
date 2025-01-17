@@ -19,10 +19,11 @@ public class PlayerBuff : MonoBehaviour
         // other.GetComponent<SpriteRenderer>().color = Color.green;
 
         UnitCollision unitCollision = other.GetComponent<UnitCollision>();
-        if (unitCollision.isAlly == -1) return; // 적군이면 리턴
+        // if (unitCollision.isAlly == -1) return; // 적군이면 리턴
 
-        UnitMovement unitMovement = other.GetComponent<UnitMovement>();
-        unitMovement.MoveInRandomDirection();
+        // 상대 넥서스 방향으로 이동
+        // UnitMovement unitMovement = other.GetComponent<UnitMovement>();
+        // unitMovement.HeadToEnemyNexus();
     }
 
     private void OnTriggerExit2D(Collider2D other)

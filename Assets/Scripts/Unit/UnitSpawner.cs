@@ -7,12 +7,9 @@ public class UnitSpawner : MonoBehaviour
     public UnitData enemyData;
     public Transform[] spawnPoints;
 
-    private int _i;
-
     private void Awake()
     {
         spawnPoints = GetComponentsInChildren<Transform>();
-        _i = 0;
         StartCoroutine(SpawnUnitsCoroutine());
     }
 

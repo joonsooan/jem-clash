@@ -6,6 +6,10 @@ public class GameManager : MonoBehaviour
 
     public bool gameLive;
     public PoolManager poolManager;
+    public ResourceManager resourceManager;
+
+    public Transform playerNexus;
+    public Transform enemyNexus;
 
     private void Awake()
     {
