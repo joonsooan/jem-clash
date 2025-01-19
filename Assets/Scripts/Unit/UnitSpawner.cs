@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class UnitSpawner : MonoBehaviour
@@ -10,7 +9,7 @@ public class UnitSpawner : MonoBehaviour
     private void Awake()
     {
         spawnPoints = GetComponentsInChildren<Transform>();
-        StartCoroutine(SpawnUnitsCoroutine());
+        // StartCoroutine(SpawnUnitsCoroutine());
     }
 
     private void Update()
@@ -18,15 +17,15 @@ public class UnitSpawner : MonoBehaviour
         KeyTest();
     }
 
-    private IEnumerator SpawnUnitsCoroutine()
-    {
-        while (true)
-        {
-            for (int i = 0; i < 10; i++)
-                SpawnUnits();
-            yield return new WaitForSeconds(3f);
-        }
-    }
+    // private IEnumerator SpawnUnitsCoroutine()
+    // {
+    //     while (true)
+    //     {
+    //         for (int i = 0; i < 10; i++)
+    //             SpawnUnits();
+    //         yield return new WaitForSeconds(3f);
+    //     }
+    // }
 
     private void SpawnUnits()
     {
@@ -35,6 +34,12 @@ public class UnitSpawner : MonoBehaviour
 
         GameObject enemyUnit = GameManager.Instance.poolManager.Get(1);
         InitUnit(enemyUnit, enemyData, spawnPoints[2].position);
+    }
+
+    public void SpawnAllyUnit()
+    {
+        GameObject allyUnit = GameManager.Instance.poolManager.Get(0);
+        InitUnit(allyUnit, allyData, spawnPoints[1].position);
     }
 
     // 키보드 입력 테스트용
