@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     [Header("Managers")] public PoolManager poolManager;
 
     public ResourceManager resourceManager;
+    public UnitSpawner unitSpawner;
 
     [Header("Game Objects")] public bool gameLive;
 

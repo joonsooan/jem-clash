@@ -5,6 +5,7 @@ public class UnitSpawner : MonoBehaviour
     public UnitData allyData;
     public UnitData enemyData;
     public Transform[] spawnPoints;
+    public int spawnCount;
 
     private void Awake()
     {
@@ -36,10 +37,13 @@ public class UnitSpawner : MonoBehaviour
         InitUnit(enemyUnit, enemyData, spawnPoints[2].position);
     }
 
-    public void SpawnAllyUnit()
+    public void SpawnAllyUnit(int count)
     {
-        GameObject allyUnit = GameManager.Instance.poolManager.Get(0);
-        InitUnit(allyUnit, allyData, spawnPoints[1].position);
+        for (int i = 0; i < count; i++)
+        {
+            GameObject allyUnit = GameManager.Instance.poolManager.Get(0);
+            InitUnit(allyUnit, allyData, spawnPoints[1].position);
+        }
     }
 
     // 키보드 입력 테스트용

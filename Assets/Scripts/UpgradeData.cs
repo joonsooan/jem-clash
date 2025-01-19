@@ -9,9 +9,11 @@ public class UpgradeData : ScriptableObject
         SupplyUp,
         EnergyUp,
         UnitAuto,
+        SpawnCount,
         UnitHealth
     }
 
+    public UpgradeType type;
     public Sprite upgradeIcon;
     [TextArea] public string upgradeDescription;
 
