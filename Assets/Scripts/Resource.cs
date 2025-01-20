@@ -11,7 +11,7 @@ public class Resource : MonoBehaviour
 {
     public ResourceType resourceType;
     public int resourceInterval = 1;
-    public int resourceAmount = 1;
+    public int resourceAmount = 2;
 
     private bool _playerInZone;
     private Coroutine _resourceCoroutine;

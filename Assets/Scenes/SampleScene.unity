@@ -2709,7 +2709,7 @@ Transform:
   m_GameObject: {fileID: 987799333}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.25, y: 6, z: 0}
+  m_LocalPosition: {x: -7.62, y: 3.66, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2729,7 +2729,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceType: 0
   resourceInterval: 1
-  resourceAmount: 1
+  resourceAmount: 2
 --- !u!61 &987799337
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4298,7 +4298,7 @@ Transform:
   m_GameObject: {fileID: 1639021494}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.25, y: 6, z: 0}
+  m_LocalPosition: {x: -7.6, y: 0.02, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4531,6 +4531,7 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 65f140ddd47703345837fc0beb3a96a6, type: 2}
   spawnPoints: []
   spawnCount: 1
+  unitCost: 5
 --- !u!4 &1706652888
 Transform:
   m_ObjectHideFlags: 0
