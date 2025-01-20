@@ -6,7 +6,8 @@ public class UnitSpawner : MonoBehaviour
     [Header("Data")] public UnitData allyData;
 
     public UnitData enemyData;
-    public Transform[] spawnPoints;
+
+    [Header("Spawn Points")] public Transform[] spawnPoints;
 
     [Header("Numbers")] public int spawnCount;
 
@@ -14,8 +15,15 @@ public class UnitSpawner : MonoBehaviour
     public float autoSpawnInterval;
     public bool isAutoSpawn;
 
+    private UnitDataBackup _allyDataBackup;
+    private UnitDataBackup _enemyDataBackup;
+
     private void Awake()
     {
+        // 유닛 기본 데이터 백업
+        _allyDataBackup = new UnitDataBackup(allyData);
+        _enemyDataBackup = new UnitDataBackup(enemyData);
+
         spawnPoints = GetComponentsInChildren<Transform>();
         if (isAutoSpawn) StartCoroutine(SpawnUnitsCoroutine());
     }
@@ -23,6 +31,13 @@ public class UnitSpawner : MonoBehaviour
     private void Update()
     {
         KeyTest();
+    }
+
+    private void OnDestroy()
+    {
+        // 유닛 기본 데이터 복구
+        _allyDataBackup.Restore(allyData);
+        _enemyDataBackup.Restore(enemyData);
     }
 
     public void SetAutoSpawn(bool value)
@@ -44,14 +59,14 @@ public class UnitSpawner : MonoBehaviour
         }
     }
 
-    private void SpawnUnits()
-    {
-        GameObject allyUnit = GameManager.Instance.poolManager.Get(0);
-        InitUnit(allyUnit, allyData, spawnPoints[1].position);
-
-        GameObject enemyUnit = GameManager.Instance.poolManager.Get(1);
-        InitUnit(enemyUnit, enemyData, spawnPoints[2].position);
-    }
+    // private void SpawnUnits()
+    // {
+    //     GameObject allyUnit = GameManager.Instance.poolManager.Get(0);
+    //     SpawnUnit(allyUnit, allyData, spawnPoints[1].position);
+    //
+    //     GameObject enemyUnit = GameManager.Instance.poolManager.Get(1);
+    //     SpawnUnit(enemyUnit, enemyData, spawnPoints[2].position);
+    // }
 
     public void SpawnAllyUnit(int count)
     {
@@ -65,7 +80,7 @@ public class UnitSpawner : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             GameObject allyUnit = GameManager.Instance.poolManager.Get(0);
-            InitUnit(allyUnit, allyData, spawnPoints[1].position);
+            SpawnUnit(allyUnit, allyData, spawnPoints[1].position);
         }
 
         GameManager.Instance.resourceManager.SpendSupply(unitCost * count);
@@ -77,20 +92,20 @@ public class UnitSpawner : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             GameObject allyUnit = GameManager.Instance.poolManager.Get(0);
-            InitUnit(allyUnit, allyData, spawnPoints[1].position);
+            SpawnUnit(allyUnit, allyData, spawnPoints[1].position);
         }
         else if (Input.GetKeyDown(KeyCode.R))
         {
             GameObject enemyUnit = GameManager.Instance.poolManager.Get(1);
-            InitUnit(enemyUnit, enemyData, spawnPoints[2].position);
+            SpawnUnit(enemyUnit, enemyData, spawnPoints[2].position);
         }
     }
 
-    private void InitUnit(GameObject unit, UnitData data, Vector3 position)
+    private void SpawnUnit(GameObject unit, UnitData data, Vector3 position)
     {
         unit.transform.position = position;
         UnitStats stats = unit.GetComponent<UnitStats>();
-        stats.data = data;
+        stats.unitData = data;
         // Debug.Log($"Move Speed : {stats.data.moveSpeed}");
         stats.InitStats();
     }

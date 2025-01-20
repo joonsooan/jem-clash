@@ -7,19 +7,14 @@ public class Upgrade : MonoBehaviour
     public UpgradeData upgradeData;
     public int level;
 
-    private Image icon;
-    private TMP_Text textDescription;
-    private TMP_Text textLevel;
-    private TMP_Text textName;
+    private Image _icon;
+    private TMP_Text _textDescription;
+    private TMP_Text _textLevel;
+    private TMP_Text _textName;
 
     private void Awake()
     {
-        icon = GetComponentsInChildren<Image>()[1];
-        icon.sprite = upgradeData.upgradeIcon;
-        var texts = GetComponentsInChildren<TMP_Text>();
-        textName = texts[0];
-        // textLevel = texts[1];
-        // textDescription = texts[2];
+        InitializeUI();
     }
 
     public void OnEnable()
@@ -43,43 +38,102 @@ public class Upgrade : MonoBehaviour
         }
     }
 
+    private void InitializeUI()
+    {
+        _icon = GetComponentsInChildren<Image>()[1];
+        _icon.sprite = upgradeData.upgradeIcon;
+
+        var texts = GetComponentsInChildren<TMP_Text>();
+        _textName = texts[0];
+        // textLevel = texts[1];
+        // textDescription = texts[2];
+    }
+
     public void OnClick()
     {
         switch (upgradeData.type)
         {
             case UpgradeData.UpgradeType.UnitSpawn:
-                GameManager.Instance.unitSpawner.SpawnAllyUnit(
-                    GameManager.Instance.unitSpawner.spawnCount);
-                level++;
+                SpawnAllyUnit();
+                IncrementLevel();
                 break;
 
             case UpgradeData.UpgradeType.SupplyUp:
-                GameManager.Instance.resourceManager.SupplyAmountUp(
-                    upgradeData.counts[level]);
-                level++;
+                IncreaseSupply();
+                IncrementLevel();
                 break;
 
             case UpgradeData.UpgradeType.EnergyUp:
-                GameManager.Instance.resourceManager.EnergyAmountUp(
-                    upgradeData.counts[level]);
-                level++;
+                IncreaseEnergy();
+                IncrementLevel();
                 break;
 
             case UpgradeData.UpgradeType.UnitAuto:
-                GameManager.Instance.unitSpawner.SetAutoSpawn(!GameManager.Instance.unitSpawner.isAutoSpawn);
+                ToggleAutoSpawn();
                 break;
 
             case UpgradeData.UpgradeType.SpawnCount:
-                GameManager.Instance.unitSpawner.spawnCount += upgradeData.counts[level];
-                level++;
+                IncreaseSpawnCount();
+                IncrementLevel();
                 break;
 
             case UpgradeData.UpgradeType.UnitHealth:
+                IncreaseUnitHealth();
+                IncrementLevel();
+                break;
+
+            case UpgradeData.UpgradeType.UnitAttack:
+                IncreaseUnitAttack();
+                IncrementLevel();
                 break;
         }
 
         if (upgradeData.type != UpgradeData.UpgradeType.UnitAuto)
             if (level == upgradeData.counts.Length)
                 GetComponent<Button>().interactable = false;
+    }
+
+    private void IncrementLevel()
+    {
+        level++;
+    }
+
+    private void IncreaseUnitAttack()
+    {
+        GameManager.Instance.unitSpawner.allyData.attackDamage += upgradeData.counts[level];
+    }
+
+    private void IncreaseUnitHealth()
+    {
+        GameManager.Instance.unitSpawner.allyData.health += upgradeData.counts[level];
+    }
+
+    private void IncreaseSpawnCount()
+    {
+        GameManager.Instance.unitSpawner.spawnCount += upgradeData.counts[level];
+    }
+
+    private static void ToggleAutoSpawn()
+    {
+        GameManager.Instance.unitSpawner.SetAutoSpawn(
+            !GameManager.Instance.unitSpawner.isAutoSpawn);
+    }
+
+    private void IncreaseEnergy()
+    {
+        GameManager.Instance.resourceManager.EnergyAmountUp(
+            upgradeData.counts[level]);
+    }
+
+    private void IncreaseSupply()
+    {
+        GameManager.Instance.resourceManager.SupplyAmountUp(
+            upgradeData.counts[level]);
+    }
+
+    private static void SpawnAllyUnit()
+    {
+        GameManager.Instance.unitSpawner.SpawnAllyUnit(
+            GameManager.Instance.unitSpawner.spawnCount);
     }
 }

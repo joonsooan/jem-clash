@@ -2,22 +2,44 @@ using UnityEngine;
 
 public class UnitStats : MonoBehaviour
 {
-    public UnitData data;
-    public int health;
+    public UnitData unitData;
+
+    [Header("Runtime Stats")] public int health;
+
     public int attackDamage;
     public float moveSpeed;
 
-    private void Start()
-    {
-        InitStats();
-    }
+    private int _baseAttackDamage;
+    private int _baseHealth;
+    private float _baseMoveSpeed;
+
+    // private void Awake()
+    // {
+    //     CacheBaseStats();
+    // }
+    //
+    // private void CacheBaseStats()
+    // {
+    //     _baseHealth = unitData.health;
+    //     _baseAttackDamage = unitData.attackDamage;
+    //     _baseMoveSpeed = unitData.moveSpeed;
+    // }
 
     public void InitStats()
     {
-        health = data.health;
-        attackDamage = data.attackDamage;
-        moveSpeed = data.moveSpeed;
+        health = unitData.health;
+        attackDamage = unitData.attackDamage;
+        moveSpeed = unitData.moveSpeed;
     }
+
+    // public void ResetStats()
+    // {
+    //     unitData.health = _baseHealth;
+    //     unitData.attackDamage = _baseAttackDamage;
+    //     unitData.moveSpeed = _baseMoveSpeed;
+    //
+    //     InitStats();
+    // }
 
     public void TakeDamage(int damage)
     {
