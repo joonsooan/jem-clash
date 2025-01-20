@@ -51,8 +51,8 @@ public class UnitSpawner : MonoBehaviour
             GameObject allyUnit = GameManager.Instance.poolManager.Get(0);
             InitUnit(allyUnit, allyData, spawnPoints[1].position);
         }
-        
-        GameManager.Instance.resourceManager.supply -= unitCost * count;
+
+        GameManager.Instance.resourceManager.SpendSupply(unitCost * count);
     }
 
     // 키보드 입력 테스트용
@@ -75,7 +75,7 @@ public class UnitSpawner : MonoBehaviour
         unit.transform.position = position;
         UnitStats stats = unit.GetComponent<UnitStats>();
         stats.data = data;
-        Debug.Log($"Move Speed : {stats.data.moveSpeed}");
+        // Debug.Log($"Move Speed : {stats.data.moveSpeed}");
         stats.InitStats();
     }
 }

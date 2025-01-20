@@ -3,8 +3,12 @@ using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
 {
-    public int supply;
+    [Header("Resources")] public int supply;
+
     public int energy;
+    public int resourceInterval = 1;
+    public int supplyAmount = 2;
+    public int energyAmount = 2;
 
     private TMP_Text _energyText;
     private TMP_Text _supplyText;
@@ -53,5 +57,15 @@ public class ResourceManager : MonoBehaviour
 
         energy -= amount;
         Debug.Log($"에너지 {amount} 사용. 남은 에너지 : {supply}");
+    }
+
+    public void SupplyAmountUp(int amount)
+    {
+        supplyAmount += amount;
+    }
+
+    public void EnergyAmountUp(int amount)
+    {
+        energyAmount += amount;
     }
 }

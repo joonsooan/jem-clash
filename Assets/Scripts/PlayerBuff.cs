@@ -14,7 +14,7 @@ public class PlayerBuff : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Unit")) return;
-        Debug.Log("Unit entered");
+        // Debug.Log("Unit entered");
         // _color = other.GetComponent<SpriteRenderer>().color;
         // other.GetComponent<SpriteRenderer>().color = Color.green;
 
@@ -29,13 +29,13 @@ public class PlayerBuff : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         if (!other.CompareTag("Unit")) return;
-        Debug.Log("Unit exited");
+        // Debug.Log("Unit exited");
         // other.GetComponent<SpriteRenderer>().color = _color;
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
         if (!other.CompareTag("Unit")) return;
-        Debug.Log("Unit is in buff zone");
+        // Debug.Log("Unit is in buff zone");
     }
 }

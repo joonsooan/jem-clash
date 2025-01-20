@@ -54,9 +54,15 @@ public class Upgrade : MonoBehaviour
                 break;
 
             case UpgradeData.UpgradeType.SupplyUp:
+                GameManager.Instance.resourceManager.SupplyAmountUp(
+                    upgradeData.counts[level]);
+                level++;
                 break;
 
             case UpgradeData.UpgradeType.EnergyUp:
+                GameManager.Instance.resourceManager.EnergyAmountUp(
+                    upgradeData.counts[level]);
+                level++;
                 break;
 
             case UpgradeData.UpgradeType.UnitAuto:
@@ -70,5 +76,7 @@ public class Upgrade : MonoBehaviour
             case UpgradeData.UpgradeType.UnitHealth:
                 break;
         }
+
+        if (level == upgradeData.counts.Length) GetComponent<Button>().interactable = false;
     }
 }

@@ -10,8 +10,6 @@ public enum ResourceType
 public class Resource : MonoBehaviour
 {
     public ResourceType resourceType;
-    public int resourceInterval = 1;
-    public int resourceAmount = 2;
 
     private bool _playerInZone;
     private Coroutine _resourceCoroutine;
@@ -43,17 +41,30 @@ public class Resource : MonoBehaviour
     {
         while (_playerInZone)
         {
-            yield return new WaitForSeconds(resourceInterval);
+            yield return new WaitForSeconds(GameManager.Instance.resourceManager.resourceInterval);
 
             switch (resourceType)
             {
                 case ResourceType.Supply:
-                    GameManager.Instance.resourceManager.AddSupply(resourceAmount);
+                    GameManager.Instance.resourceManager.AddSupply(GameManager.Instance.resourceManager.supplyAmount);
                     break;
                 case ResourceType.Energy:
-                    GameManager.Instance.resourceManager.AddEnergy(resourceAmount);
+                    GameManager.Instance.resourceManager.AddEnergy(GameManager.Instance.resourceManager.energyAmount);
                     break;
             }
+        }
+    }
+
+    public void ResourceAmountUp(int amount)
+    {
+        switch (resourceType)
+        {
+            case ResourceType.Supply:
+                GameManager.Instance.resourceManager.supplyAmount += amount;
+                break;
+            case ResourceType.Energy:
+                GameManager.Instance.resourceManager.energyAmount += amount;
+                break;
         }
     }
 }

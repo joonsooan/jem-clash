@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7dbf9f8560f0e734baab86fd1c1f0b7d, type: 3}
-  m_Name: Supply Up
+  m_Name: Energy Up
   m_EditorClassIdentifier: 
-  type: 1
+  type: 2
   upgradeIcon: {fileID: 0}
   upgradeDescription: 
   baseCount: 1
-  counts: 020000000400000006000000080000000a000000
+  counts: 0100000002000000030000000400000005000000

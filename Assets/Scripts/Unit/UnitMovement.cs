@@ -39,7 +39,7 @@ public class UnitMovement : MonoBehaviour
     {
         Vector2 randomVec = new Vector2(
             Random.Range(0f, 1f) * _unitCollision.isAlly, Random.Range(-0.5f, 0.5f)).normalized;
-        Debug.Log(_stats.moveSpeed);
+        // Debug.Log(_stats.moveSpeed);
         _rb.velocity = randomVec * _stats.moveSpeed;
     }
 
