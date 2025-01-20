@@ -34,13 +34,13 @@ public class ResourceManager : MonoBehaviour
     public void AddSupply(int amount)
     {
         supply += amount;
-        Debug.Log($"자원 {amount} 획득");
+        // Debug.Log($"자원 {amount} 획득");
     }
 
     public void AddEnergy(int amount)
     {
         energy += amount;
-        Debug.Log($"에너지 {amount} 획득");
+        // Debug.Log($"에너지 {amount} 획득");
     }
 
     public void SpendSupply(int amount)
@@ -48,7 +48,7 @@ public class ResourceManager : MonoBehaviour
         if (supply < amount) return;
 
         supply -= amount;
-        Debug.Log($"자원 {amount} 사용. 남은 자원 : {supply}");
+        // Debug.Log($"자원 {amount} 사용. 남은 자원 : {supply}");
     }
 
     public void SpendEnergy(int amount)
@@ -56,7 +56,7 @@ public class ResourceManager : MonoBehaviour
         if (energy < amount) return;
 
         energy -= amount;
-        Debug.Log($"에너지 {amount} 사용. 남은 에너지 : {supply}");
+        // Debug.Log($"에너지 {amount} 사용. 남은 에너지 : {supply}");
     }
 
     public void SupplyAmountUp(int amount)

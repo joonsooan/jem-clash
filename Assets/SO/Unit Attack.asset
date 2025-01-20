@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7dbf9f8560f0e734baab86fd1c1f0b7d, type: 3}
-  m_Name: Spawn Count
+  m_Name: Unit Attack
   m_EditorClassIdentifier: 
-  type: 4
+  type: 6
   upgradeIcon: {fileID: 0}
   upgradeDescription: 
-  counts: 0100000001000000010000000100000001000000
+  counts: 0100000002000000030000000400000005000000
   energyCosts: 0a000000140000003200000064000000c8000000

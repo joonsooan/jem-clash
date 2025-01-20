@@ -54,17 +54,4 @@ public class Resource : MonoBehaviour
             }
         }
     }
-
-    public void ResourceAmountUp(int amount)
-    {
-        switch (resourceType)
-        {
-            case ResourceType.Supply:
-                GameManager.Instance.resourceManager.supplyAmount += amount;
-                break;
-            case ResourceType.Energy:
-                GameManager.Instance.resourceManager.energyAmount += amount;
-                break;
-        }
-    }
 }

@@ -55,17 +55,14 @@ public class Upgrade : MonoBehaviour
         {
             case UpgradeData.UpgradeType.UnitSpawn:
                 SpawnAllyUnit();
-                IncrementLevel();
                 break;
 
             case UpgradeData.UpgradeType.SupplyUp:
                 IncreaseSupply();
-                IncrementLevel();
                 break;
 
             case UpgradeData.UpgradeType.EnergyUp:
                 IncreaseEnergy();
-                IncrementLevel();
                 break;
 
             case UpgradeData.UpgradeType.UnitAuto:
@@ -74,43 +71,45 @@ public class Upgrade : MonoBehaviour
 
             case UpgradeData.UpgradeType.SpawnCount:
                 IncreaseSpawnCount();
-                IncrementLevel();
                 break;
 
             case UpgradeData.UpgradeType.UnitHealth:
                 IncreaseUnitHealth();
-                IncrementLevel();
                 break;
 
             case UpgradeData.UpgradeType.UnitAttack:
                 IncreaseUnitAttack();
-                IncrementLevel();
                 break;
         }
 
-        if (upgradeData.type != UpgradeData.UpgradeType.UnitAuto)
-            if (level == upgradeData.counts.Length)
-                GetComponent<Button>().interactable = false;
+        if (level == upgradeData.counts.Length)
+            GetComponent<Button>().interactable = false;
     }
 
-    private void IncrementLevel()
+    private static void SpawnAllyUnit()
     {
-        level++;
+        GameManager.Instance.unitSpawner.SpawnAllyUnit(
+            GameManager.Instance.unitSpawner.spawnCount);
     }
 
-    private void IncreaseUnitAttack()
+    private void IncreaseSupply()
     {
-        GameManager.Instance.unitSpawner.allyData.attackDamage += upgradeData.counts[level];
+        if (!EnoughEnergy()) return;
+
+        SpendEnergy();
+        GameManager.Instance.resourceManager.SupplyAmountUp(
+            upgradeData.counts[level]);
+        IncrementLevel();
     }
 
-    private void IncreaseUnitHealth()
+    private void IncreaseEnergy()
     {
-        GameManager.Instance.unitSpawner.allyData.health += upgradeData.counts[level];
-    }
+        if (!EnoughEnergy()) return;
 
-    private void IncreaseSpawnCount()
-    {
-        GameManager.Instance.unitSpawner.spawnCount += upgradeData.counts[level];
+        SpendEnergy();
+        GameManager.Instance.resourceManager.EnergyAmountUp(
+            upgradeData.counts[level]);
+        IncrementLevel();
     }
 
     private static void ToggleAutoSpawn()
@@ -119,21 +118,45 @@ public class Upgrade : MonoBehaviour
             !GameManager.Instance.unitSpawner.isAutoSpawn);
     }
 
-    private void IncreaseEnergy()
+    private void IncreaseSpawnCount()
     {
-        GameManager.Instance.resourceManager.EnergyAmountUp(
-            upgradeData.counts[level]);
+        if (!EnoughEnergy()) return;
+
+        SpendEnergy();
+        GameManager.Instance.unitSpawner.spawnCount += upgradeData.counts[level];
+        IncrementLevel();
     }
 
-    private void IncreaseSupply()
+    private void IncreaseUnitHealth()
     {
-        GameManager.Instance.resourceManager.SupplyAmountUp(
-            upgradeData.counts[level]);
+        if (!EnoughEnergy()) return;
+
+        SpendEnergy();
+        GameManager.Instance.unitSpawner.allyData.health += upgradeData.counts[level];
+        IncrementLevel();
     }
 
-    private static void SpawnAllyUnit()
+    private void IncreaseUnitAttack()
     {
-        GameManager.Instance.unitSpawner.SpawnAllyUnit(
-            GameManager.Instance.unitSpawner.spawnCount);
+        if (!EnoughEnergy()) return;
+
+        SpendEnergy();
+        GameManager.Instance.unitSpawner.allyData.attackDamage += upgradeData.counts[level];
+        IncrementLevel();
+    }
+
+    private bool EnoughEnergy()
+    {
+        return GameManager.Instance.resourceManager.energy >= upgradeData.energyCosts[level];
+    }
+
+    private void SpendEnergy()
+    {
+        GameManager.Instance.resourceManager.SpendEnergy(upgradeData.energyCosts[level]);
+    }
+
+    private void IncrementLevel()
+    {
+        level++;
     }
 }

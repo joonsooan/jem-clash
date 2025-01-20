@@ -18,6 +18,6 @@ public class UpgradeData : ScriptableObject
     public Sprite upgradeIcon;
     [TextArea] public string upgradeDescription;
 
-    public int baseCount;
     public int[] counts;
+    public int[] energyCosts;
 }

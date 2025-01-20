@@ -15,5 +15,5 @@ MonoBehaviour:
   type: 5
   upgradeIcon: {fileID: 0}
   upgradeDescription: 
-  baseCount: 10
   counts: 050000000a0000000f0000001400000019000000
+  energyCosts: 0a000000140000003200000064000000c8000000
