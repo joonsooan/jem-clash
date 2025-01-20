@@ -1,17 +1,23 @@
+using System.Collections;
 using UnityEngine;
 
 public class UnitSpawner : MonoBehaviour
 {
-    public UnitData allyData;
+    [Header("Data")] public UnitData allyData;
+
     public UnitData enemyData;
     public Transform[] spawnPoints;
-    public int spawnCount;
+
+    [Header("Numbers")] public int spawnCount;
+
     public int unitCost;
+    public float autoSpawnInterval;
+    public bool isAutoSpawn;
 
     private void Awake()
     {
         spawnPoints = GetComponentsInChildren<Transform>();
-        // StartCoroutine(SpawnUnitsCoroutine());
+        if (isAutoSpawn) StartCoroutine(SpawnUnitsCoroutine());
     }
 
     private void Update()
@@ -19,15 +25,24 @@ public class UnitSpawner : MonoBehaviour
         KeyTest();
     }
 
-    // private IEnumerator SpawnUnitsCoroutine()
-    // {
-    //     while (true)
-    //     {
-    //         for (int i = 0; i < 10; i++)
-    //             SpawnUnits();
-    //         yield return new WaitForSeconds(3f);
-    //     }
-    // }
+    public void SetAutoSpawn(bool value)
+    {
+        isAutoSpawn = value;
+
+        if (isAutoSpawn)
+            StartCoroutine(SpawnUnitsCoroutine());
+        else
+            StopCoroutine(SpawnUnitsCoroutine());
+    }
+
+    private IEnumerator SpawnUnitsCoroutine()
+    {
+        while (isAutoSpawn)
+        {
+            SpawnAllyUnit(spawnCount);
+            yield return new WaitForSeconds(autoSpawnInterval);
+        }
+    }
 
     private void SpawnUnits()
     {
@@ -40,11 +55,12 @@ public class UnitSpawner : MonoBehaviour
 
     public void SpawnAllyUnit(int count)
     {
-        if (GameManager.Instance.resourceManager.supply < unitCost)
+        int maxCount = GameManager.Instance.resourceManager.supply / unitCost;
+
+        if (maxCount <= 0)
             return;
 
-        if (GameManager.Instance.resourceManager.supply < unitCost * count)
-            count = GameManager.Instance.resourceManager.supply / unitCost;
+        count = Mathf.Min(count, maxCount);
 
         for (int i = 0; i < count; i++)
         {

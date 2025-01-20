@@ -66,6 +66,7 @@ public class Upgrade : MonoBehaviour
                 break;
 
             case UpgradeData.UpgradeType.UnitAuto:
+                GameManager.Instance.unitSpawner.SetAutoSpawn(!GameManager.Instance.unitSpawner.isAutoSpawn);
                 break;
 
             case UpgradeData.UpgradeType.SpawnCount:
@@ -77,6 +78,8 @@ public class Upgrade : MonoBehaviour
                 break;
         }
 
-        if (level == upgradeData.counts.Length) GetComponent<Button>().interactable = false;
+        if (upgradeData.type != UpgradeData.UpgradeType.UnitAuto)
+            if (level == upgradeData.counts.Length)
+                GetComponent<Button>().interactable = false;
     }
 }

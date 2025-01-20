@@ -4125,7 +4125,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1625387010
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4142,10 +4142,10 @@ RectTransform:
   - {fileID: 1094896091}
   m_Father: {fileID: 1126660493}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 175, y: -22.5}
-  m_SizeDelta: {x: 50, y: 45}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1625387011
 MonoBehaviour:
@@ -4190,7 +4190,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1625387012}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1625387014}
+        m_TargetAssemblyTypeName: Upgrade, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1625387012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4241,7 +4253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd27186ee489b74d850e3887a7430aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeData: {fileID: 0}
+  upgradeData: {fileID: 11400000, guid: 3bd331550e7624c46b555525486fe2f9, type: 2}
   level: 0
 --- !u!1 &1639021494
 GameObject:
@@ -4555,6 +4567,8 @@ MonoBehaviour:
   spawnPoints: []
   spawnCount: 1
   unitCost: 5
+  isAutoSpawn: 0
+  autoSpawnInterval: 1
 --- !u!4 &1706652888
 Transform:
   m_ObjectHideFlags: 0
