@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62173eb7f6aa4c34b86d2d50f0049a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 2e72558bea8ee81459fdf14096d514f7, type: 2}
+  unitData: {fileID: 11400000, guid: 2e72558bea8ee81459fdf14096d514f7, type: 2}
   health: 10
   attackDamage: 2
   moveSpeed: 3
@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98ebbfa705ae3e8418a7fe4ed96d2565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
 --- !u!114 &2455051332088279798
 MonoBehaviour:
   m_ObjectHideFlags: 0
