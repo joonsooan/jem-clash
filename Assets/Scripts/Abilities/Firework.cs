@@ -30,10 +30,9 @@ public class Firework : MonoBehaviour
     {
         for (int i = 0; i < unitCount; i++)
         {
-            // 풀매니저에서 가져와서 부모 오브젝트 할당
             GameObject pooledObject = GameManager.Instance.poolManager.Get(0);
             Transform spawnUnit = pooledObject.transform;
-            spawnUnit.parent = spawnPoint;
+            spawnUnit.SetParent(spawnPoint);
 
             // 위치, 회전 초기화
             spawnUnit.localPosition = Vector3.zero;
@@ -48,6 +47,8 @@ public class Firework : MonoBehaviour
             Vector2 dirVec = (spawnPoint.position - spawnUnit.position).normalized;
             UnitStats stats = spawnUnit.GetComponent<UnitStats>();
             spawnUnit.GetComponent<Rigidbody2D>().velocity = dirVec * stats.moveSpeed;
+
+            spawnUnit.SetParent(GameManager.Instance.poolManager.transform);
         }
     }
 }
