@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     public ResourceManager resourceManager;
     public UnitSpawner unitSpawner;
+    public GameObject abilityManager;
 
     [Header("Game Objects")] public bool gameLive;
 

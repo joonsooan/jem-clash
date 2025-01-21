@@ -35,6 +35,8 @@ public class Upgrade : MonoBehaviour
                 break;
             case UpgradeData.UpgradeType.UnitHealth:
                 break;
+            case UpgradeData.UpgradeType.Fireworks:
+                break;
         }
     }
 
@@ -79,6 +81,10 @@ public class Upgrade : MonoBehaviour
 
             case UpgradeData.UpgradeType.UnitAttack:
                 IncreaseUnitAttack();
+                break;
+
+            case UpgradeData.UpgradeType.Fireworks:
+                ActivateFirework();
                 break;
         }
 
@@ -143,6 +149,15 @@ public class Upgrade : MonoBehaviour
         SpendEnergy();
         GameManager.Instance.unitSpawner.allyData.attackDamage += upgradeData.counts[level];
         IncrementLevel();
+    }
+
+    private void ActivateFirework()
+    {
+        // if (!EnoughEnergy()) return;
+        //
+        // SpendEnergy();
+        GameManager.Instance.abilityManager.GetComponent<Firework>().SetFireworkPoints();
+        GameManager.Instance.abilityManager.GetComponent<Firework>().SpawnFireworks();
     }
 
     private bool EnoughEnergy()

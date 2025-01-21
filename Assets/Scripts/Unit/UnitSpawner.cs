@@ -26,6 +26,7 @@ public class UnitSpawner : MonoBehaviour
 
         spawnPoints = GetComponentsInChildren<Transform>();
         if (isAutoSpawn) StartCoroutine(SpawnUnitsCoroutine());
+        StartCoroutine(SpawnEnemyUnitsCoroutine());
     }
 
     private void Update()
@@ -59,14 +60,24 @@ public class UnitSpawner : MonoBehaviour
         }
     }
 
-    // private void SpawnUnits()
-    // {
-    //     GameObject allyUnit = GameManager.Instance.poolManager.Get(0);
-    //     SpawnUnit(allyUnit, allyData, spawnPoints[1].position);
-    //
-    //     GameObject enemyUnit = GameManager.Instance.poolManager.Get(1);
-    //     SpawnUnit(enemyUnit, enemyData, spawnPoints[2].position);
-    // }
+    private IEnumerator SpawnEnemyUnitsCoroutine()
+    {
+        while (true)
+        {
+            for (int i = 0; i < 10; i++) SpawnUnits();
+
+            yield return new WaitForSeconds(5);
+        }
+    }
+
+    private void SpawnUnits()
+    {
+        // GameObject allyUnit = GameManager.Instance.poolManager.Get(0);
+        // SpawnUnit(allyUnit, allyData, spawnPoints[1].position);
+
+        GameObject enemyUnit = GameManager.Instance.poolManager.Get(1);
+        SpawnUnit(enemyUnit, enemyData, spawnPoints[2].position);
+    }
 
     public void SpawnAllyUnit(int count)
     {
