@@ -44,7 +44,7 @@ public class Firework : MonoBehaviour
             spawnUnit.Translate(spawnUnit.up * 0.2f, Space.World);
 
             // 지정한 방향으로 이동 시작
-            Vector2 dirVec = (spawnPoint.position - spawnUnit.position).normalized;
+            Vector2 dirVec = (spawnUnit.position - spawnPoint.position).normalized;
             UnitStats stats = spawnUnit.GetComponent<UnitStats>();
             spawnUnit.GetComponent<Rigidbody2D>().velocity = dirVec * stats.moveSpeed;
 
