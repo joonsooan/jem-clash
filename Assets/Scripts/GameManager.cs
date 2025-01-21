@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Game Objects")] public bool gameLive;
 
+    public GameObject player;
     public Transform playerNexus;
     public Transform enemyNexus;
     public GameObject supplyText;

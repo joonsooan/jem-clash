@@ -12,7 +12,8 @@ public class UpgradeData : ScriptableObject
         SpawnCount,
         UnitHealth,
         UnitAttack,
-        Fireworks
+        Fireworks,
+        UnitControl
     }
 
     public UpgradeType type;

@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -43,6 +44,8 @@ public class Upgrade : MonoBehaviour
             case UpgradeData.UpgradeType.UnitHealth:
                 break;
             case UpgradeData.UpgradeType.Fireworks:
+                break;
+            case UpgradeData.UpgradeType.UnitControl:
                 break;
         }
     }
@@ -110,6 +113,10 @@ public class Upgrade : MonoBehaviour
 
             case UpgradeData.UpgradeType.Fireworks:
                 ActivateFirework();
+                break;
+
+            case UpgradeData.UpgradeType.UnitControl:
+                ActivateUnitControl();
                 break;
         }
 
@@ -198,6 +205,19 @@ public class Upgrade : MonoBehaviour
     {
         GameManager.Instance.abilityManager.GetComponent<Firework>().SetFireworkPoints();
         GameManager.Instance.abilityManager.GetComponent<Firework>().SpawnFireworks();
+    }
+
+    private void ActivateUnitControl()
+    {
+        GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().isUnitControl = true;
+        StartCoroutine(DeactivateUnitControlAfterDelay(
+            GameManager.Instance.abilityManager.GetComponent<UnitControl>().controlTime));
+    }
+
+    private IEnumerator DeactivateUnitControlAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().isUnitControl = false;
     }
 
     private void UpgradeFirework()
