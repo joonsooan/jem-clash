@@ -8,6 +8,8 @@ public class Upgrade : MonoBehaviour
     public int level;
 
     private Image _icon;
+
+    private bool _isShiftPressed;
     private TMP_Text _textDescription;
     private TMP_Text _textLevel;
     private TMP_Text _textName;
@@ -15,6 +17,11 @@ public class Upgrade : MonoBehaviour
     private void Awake()
     {
         InitializeUI();
+    }
+
+    private void Update()
+    {
+        _isShiftPressed = Input.GetKey(KeyCode.LeftShift);
     }
 
     public void OnEnable()
@@ -53,6 +60,24 @@ public class Upgrade : MonoBehaviour
 
     public void OnClick()
     {
+        if (_isShiftPressed) OnShiftClick();
+        else OnNormalClick();
+    }
+
+    private void OnNormalClick()
+    {
+        Debug.Log("Normal Click detected!");
+        HandleUpgrade();
+    }
+
+    private void OnShiftClick()
+    {
+        Debug.Log("Shift + Click detected!");
+        HandleShiftUpgrade();
+    }
+
+    private void HandleUpgrade()
+    {
         switch (upgradeData.type)
         {
             case UpgradeData.UpgradeType.UnitSpawn:
@@ -88,8 +113,26 @@ public class Upgrade : MonoBehaviour
                 break;
         }
 
+        if (upgradeData.type == UpgradeData.UpgradeType.Fireworks) return;
+
         if (level == upgradeData.counts.Length)
             GetComponent<Button>().interactable = false;
+    }
+
+    private void HandleShiftUpgrade()
+    {
+        if (level == upgradeData.counts.Length)
+        {
+            Debug.Log("Upgrade is already at max level.");
+            return;
+        }
+
+        switch (upgradeData.type)
+        {
+            case UpgradeData.UpgradeType.Fireworks:
+                UpgradeFirework();
+                break;
+        }
     }
 
     private static void SpawnAllyUnit()
@@ -153,11 +196,17 @@ public class Upgrade : MonoBehaviour
 
     private void ActivateFirework()
     {
-        // if (!EnoughEnergy()) return;
-        //
-        // SpendEnergy();
         GameManager.Instance.abilityManager.GetComponent<Firework>().SetFireworkPoints();
         GameManager.Instance.abilityManager.GetComponent<Firework>().SpawnFireworks();
+    }
+
+    private void UpgradeFirework()
+    {
+        if (!EnoughEnergy()) return;
+
+        SpendEnergy();
+        GameManager.Instance.abilityManager.GetComponent<Firework>().unitCount += upgradeData.counts[level];
+        IncrementLevel();
     }
 
     private bool EnoughEnergy()
