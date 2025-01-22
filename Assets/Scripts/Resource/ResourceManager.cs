@@ -16,7 +16,7 @@ public class ResourceManager : MonoBehaviour
     private void Awake()
     {
         supply = 0;
-        energy = 0;
+        // energy = 0;
     }
 
     private void Start()
