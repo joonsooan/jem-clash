@@ -42,6 +42,7 @@ public class Firework : MonoBehaviour
             Vector3 rotVec = Vector3.forward * 360 * i / unitCount;
             spawnUnit.Rotate(rotVec);
             spawnUnit.Translate(spawnUnit.up * 0.2f, Space.World);
+            spawnUnit.Rotate(-rotVec);
 
             // 지정한 방향으로 이동 시작
             Vector2 dirVec = (spawnUnit.position - spawnPoint.position).normalized;
