@@ -8,8 +8,6 @@ public class Upgrade : MonoBehaviour
     public UpgradeData upgradeData;
     public int level;
 
-    private Image _icon;
-
     private bool _isShiftPressed;
     private TMP_Text _textDescription;
     private TMP_Text _textLevel;
@@ -52,9 +50,6 @@ public class Upgrade : MonoBehaviour
 
     private void InitializeUI()
     {
-        _icon = GetComponentsInChildren<Image>()[1];
-        _icon.sprite = upgradeData.upgradeIcon;
-
         var texts = GetComponentsInChildren<TMP_Text>();
         _textName = texts[0];
         // textLevel = texts[1];

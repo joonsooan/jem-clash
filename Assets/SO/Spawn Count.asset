@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Spawn Count
   m_EditorClassIdentifier: 
   type: 4
-  upgradeIcon: {fileID: 927338625, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
+  upgradeIcon: {fileID: 21300000, guid: 33b9a7ce7029f9c438b6f039f68043c0, type: 3}
   upgradeDescription: 
   counts: 0100000001000000010000000100000001000000
   energyCosts: 0a000000140000003200000064000000c8000000

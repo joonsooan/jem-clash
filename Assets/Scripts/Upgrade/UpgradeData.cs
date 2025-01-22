@@ -17,7 +17,6 @@ public class UpgradeData : ScriptableObject
     }
 
     public UpgradeType type;
-    public Sprite upgradeIcon;
     [TextArea] public string upgradeDescription;
 
     public int[] counts;
