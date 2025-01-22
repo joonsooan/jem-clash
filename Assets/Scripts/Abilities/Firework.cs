@@ -6,6 +6,7 @@ public class Firework : MonoBehaviour
     public int unitCount;
 
     public Transform[] _spawnPoints = new Transform[3];
+    public float yOffset;
 
     private void Awake()
     {
@@ -15,9 +16,9 @@ public class Firework : MonoBehaviour
 
     public void SetFireworkPoints()
     {
-        _spawnPoints[0].position = new Vector2(Random.Range(-9f, -7f), Random.Range(-6f, 6f));
-        _spawnPoints[1].position = new Vector2(Random.Range(-2f, 2f), Random.Range(-6f, 6f));
-        _spawnPoints[2].position = new Vector2(Random.Range(7f, 9f), Random.Range(-6f, 6f));
+        _spawnPoints[0].position = new Vector2(Random.Range(-9f, -7f), yOffset + Random.Range(-6f, 6f));
+        _spawnPoints[1].position = new Vector2(Random.Range(-2f, 2f), yOffset + Random.Range(-6f, 6f));
+        _spawnPoints[2].position = new Vector2(Random.Range(7f, 9f), yOffset + Random.Range(-6f, 6f));
     }
 
     public void SpawnFireworks()
