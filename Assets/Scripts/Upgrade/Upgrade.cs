@@ -210,11 +210,11 @@ public class Upgrade : MonoBehaviour
     private void ActivateUnitControl()
     {
         GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().isUnitControl = true;
-        StartCoroutine(DeactivateUnitControlAfterDelay(
+        StartCoroutine(DeactivateUnitControl(
             GameManager.Instance.abilityManager.GetComponent<UnitControl>().controlTime));
     }
 
-    private IEnumerator DeactivateUnitControlAfterDelay(float delay)
+    private IEnumerator DeactivateUnitControl(float delay)
     {
         yield return new WaitForSeconds(delay);
         GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().isUnitControl = false;
