@@ -27,8 +27,8 @@ public class ResourceManager : MonoBehaviour
 
     private void Update()
     {
-        _supplyText.text = $"Supply : {supply.ToString()}";
-        _energyText.text = $"Energy : {energy.ToString()}";
+        _supplyText.text = $"{supply.ToString()}";
+        _energyText.text = $"{energy.ToString()}";
     }
 
     public void AddSupply(int amount)
