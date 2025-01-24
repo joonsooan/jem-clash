@@ -2,5 +2,10 @@ using UnityEngine;
 
 public class UnitControl : MonoBehaviour
 {
-    public int controlTime;
+    public float controlTime;
+
+    private void Start()
+    {
+        controlTime = GameManager.Instance.abilityManager.GetComponent<UnitControl>().controlTime;
+    }
 }

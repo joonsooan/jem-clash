@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         gameLive = true;
+        abilityManager.GetComponent<UnitControl>().controlTime = 5f;
     }
 
     private void Update()

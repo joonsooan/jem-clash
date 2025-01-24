@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Energy Up
   m_EditorClassIdentifier: 
   type: 2
-  upgradeIcon: {fileID: 21300000, guid: 0a9993a9343af984d9ac20d1791214df, type: 3}
   upgradeDescription: 
-  counts: 6400000002000000030000000400000005000000
+  counts:
+  - 2
+  - 4
+  - 6
+  - 8
+  - 10
   energyCosts: 0a000000140000003200000064000000c8000000

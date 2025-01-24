@@ -1,9 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerBuff : MonoBehaviour
 {
     public float buffRadius;
     public bool isUnitControl;
+    public float boostMultiplier;
 
     private void Awake()
     {
@@ -43,6 +45,20 @@ public class PlayerBuff : MonoBehaviour
 
         // 상대 넥서스 방향으로 이동
         UnitMovement unitMovement = other.GetComponent<UnitMovement>();
+        UnitControl unitControl = GameManager.Instance.abilityManager.GetComponent<UnitControl>();
         unitMovement.HeadToEnemyNexus();
+
+        StartCoroutine(BoostUnitSpeed(unitMovement, boostMultiplier, unitControl.controlTime));
+    }
+
+    private IEnumerator BoostUnitSpeed(UnitMovement unitMovement, float mult, float controlTime)
+    {
+        float originalSpeed = unitMovement.rb.velocity.magnitude;
+        unitMovement.rb.velocity = unitMovement.rb.velocity.normalized * mult;
+
+        yield return new WaitForSeconds(controlTime);
+
+        Vector2 currentVec = unitMovement.rb.velocity.normalized;
+        unitMovement.rb.velocity = currentVec * originalSpeed;
     }
 }

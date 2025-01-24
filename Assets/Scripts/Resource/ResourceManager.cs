@@ -31,41 +31,41 @@ public class ResourceManager : MonoBehaviour
         _energyText.text = $"{energy.ToString()}";
     }
 
-    public void AddSupply(int amount)
+    public void AddSupply(float amount)
     {
-        supply += amount;
+        supply += (int)amount;
         // Debug.Log($"자원 {amount} 획득");
     }
 
-    public void AddEnergy(int amount)
+    public void AddEnergy(float amount)
     {
-        energy += amount;
+        energy += (int)amount;
         // Debug.Log($"에너지 {amount} 획득");
     }
 
-    public void SpendSupply(int amount)
+    public void SpendSupply(float amount)
     {
         if (supply < amount) return;
 
-        supply -= amount;
+        supply -= (int)amount;
         // Debug.Log($"자원 {amount} 사용. 남은 자원 : {supply}");
     }
 
-    public void SpendEnergy(int amount)
+    public void SpendEnergy(float amount)
     {
         if (energy < amount) return;
 
-        energy -= amount;
+        energy -= (int)amount;
         // Debug.Log($"에너지 {amount} 사용. 남은 에너지 : {supply}");
     }
 
-    public void SupplyAmountUp(int amount)
+    public void SupplyAmountUp(float amount)
     {
-        supplyAmount += amount;
+        supplyAmount += (int)amount;
     }
 
-    public void EnergyAmountUp(int amount)
+    public void EnergyAmountUp(float amount)
     {
-        energyAmount += amount;
+        energyAmount += (int)amount;
     }
 }

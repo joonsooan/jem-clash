@@ -112,6 +112,7 @@ public class Upgrade : MonoBehaviour
         }
 
         if (upgradeData.type == UpgradeData.UpgradeType.Fireworks) return;
+        if (upgradeData.type == UpgradeData.UpgradeType.UnitControl) return;
 
         if (level == upgradeData.counts.Length)
             GetComponent<Button>().interactable = false;
@@ -129,6 +130,10 @@ public class Upgrade : MonoBehaviour
         {
             case UpgradeData.UpgradeType.Fireworks:
                 UpgradeFirework();
+                break;
+
+            case UpgradeData.UpgradeType.UnitControl:
+                UpgradeUnitControl();
                 break;
         }
     }
@@ -170,7 +175,7 @@ public class Upgrade : MonoBehaviour
         if (!EnoughEnergy()) return;
 
         SpendEnergy();
-        GameManager.Instance.unitSpawner.spawnCount += upgradeData.counts[level];
+        GameManager.Instance.unitSpawner.spawnCount += (int)upgradeData.counts[level];
         IncrementLevel();
     }
 
@@ -179,7 +184,7 @@ public class Upgrade : MonoBehaviour
         if (!EnoughEnergy()) return;
 
         SpendEnergy();
-        GameManager.Instance.unitSpawner.allyData.health += upgradeData.counts[level];
+        GameManager.Instance.unitSpawner.allyData.health += (int)upgradeData.counts[level];
         IncrementLevel();
     }
 
@@ -188,7 +193,7 @@ public class Upgrade : MonoBehaviour
         if (!EnoughEnergy()) return;
 
         SpendEnergy();
-        GameManager.Instance.unitSpawner.allyData.attackDamage += upgradeData.counts[level];
+        GameManager.Instance.unitSpawner.allyData.attackDamage += (int)upgradeData.counts[level];
         IncrementLevel();
     }
 
@@ -200,7 +205,16 @@ public class Upgrade : MonoBehaviour
 
     private void ActivateUnitControl()
     {
+        // 현재 upgradeData 데이터를 적용
+        if (level == upgradeData.counts.Length)
+            GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().boostMultiplier =
+                upgradeData.counts[level - 1];
+        else
+            GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().boostMultiplier =
+                upgradeData.counts[level];
+
         GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().isUnitControl = true;
+
         StartCoroutine(DeactivateUnitControl(
             GameManager.Instance.abilityManager.GetComponent<UnitControl>().controlTime));
     }
@@ -216,7 +230,16 @@ public class Upgrade : MonoBehaviour
         if (!EnoughEnergy()) return;
 
         SpendEnergy();
-        GameManager.Instance.abilityManager.GetComponent<Firework>().unitCount += upgradeData.counts[level];
+        GameManager.Instance.abilityManager.GetComponent<Firework>().unitCount += (int)upgradeData.counts[level];
+        IncrementLevel();
+    }
+
+    private void UpgradeUnitControl()
+    {
+        if (!EnoughEnergy()) return;
+
+        SpendEnergy();
+        GameManager.Instance.abilityManager.GetComponent<UnitControl>().controlTime += upgradeData.counts[level];
         IncrementLevel();
     }
 

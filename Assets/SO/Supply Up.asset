@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Supply Up
   m_EditorClassIdentifier: 
   type: 1
-  upgradeIcon: {fileID: 927338625, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
   upgradeDescription: 
-  counts: 020000000400000006000000080000000a000000
+  counts:
+  - 2
+  - 4
+  - 6
+  - 8
+  - 10
   energyCosts: 0a000000140000003200000064000000c8000000

@@ -180,6 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  rb: {fileID: 0}
 --- !u!114 &7852281290537318950
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -19,6 +19,6 @@ public class UpgradeData : ScriptableObject
     public UpgradeType type;
     [TextArea] public string upgradeDescription;
 
-    public int[] counts;
+    public float[] counts;
     public int[] energyCosts;
 }
