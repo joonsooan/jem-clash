@@ -9,9 +9,7 @@ public class Upgrade : MonoBehaviour
     public int level;
 
     private bool _isShiftPressed;
-    private TMP_Text _textDescription;
-    private TMP_Text _textLevel;
-    private TMP_Text _textName;
+    private TMP_Text _levelText;
 
     private void Awake()
     {
@@ -25,7 +23,7 @@ public class Upgrade : MonoBehaviour
 
     public void OnEnable()
     {
-        // textLevel.text = $"Lv. {level}";
+        _levelText.text = $"Lv.{level:D2}";
 
         switch (upgradeData.type)
         {
@@ -51,9 +49,7 @@ public class Upgrade : MonoBehaviour
     private void InitializeUI()
     {
         var texts = GetComponentsInChildren<TMP_Text>();
-        _textName = texts[0];
-        // textLevel = texts[1];
-        // textDescription = texts[2];
+        _levelText = texts[0];
     }
 
     public void OnClick()
@@ -237,5 +233,6 @@ public class Upgrade : MonoBehaviour
     private void IncrementLevel()
     {
         level++;
+        _levelText.text = $"Lv.{level:D2}";
     }
 }
