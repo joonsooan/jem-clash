@@ -13,7 +13,8 @@ public class UpgradeData : ScriptableObject
         UnitHealth,
         UnitAttack,
         Fireworks,
-        UnitControl
+        UnitControl,
+        BuffRange
     }
 
     public UpgradeType type;

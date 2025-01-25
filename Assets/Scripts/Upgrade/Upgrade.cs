@@ -43,6 +43,8 @@ public class Upgrade : MonoBehaviour
                 break;
             case UpgradeData.UpgradeType.UnitControl:
                 break;
+            case UpgradeData.UpgradeType.BuffRange:
+                break;
         }
     }
 
@@ -108,6 +110,10 @@ public class Upgrade : MonoBehaviour
 
             case UpgradeData.UpgradeType.UnitControl:
                 ActivateUnitControl();
+                break;
+
+            case UpgradeData.UpgradeType.BuffRange:
+                IncreaseBuffRange();
                 break;
         }
 
@@ -223,6 +229,16 @@ public class Upgrade : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().isUnitControl = false;
+    }
+
+    private void IncreaseBuffRange()
+    {
+        if (!EnoughEnergy()) return;
+
+        SpendEnergy();
+        GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().ChangeSprite(level);
+        GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().buffRadius = upgradeData.counts[level];
+        IncrementLevel();
     }
 
     private void UpgradeFirework()
