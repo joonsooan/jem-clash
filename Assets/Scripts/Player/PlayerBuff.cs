@@ -54,7 +54,7 @@ public class PlayerBuff : MonoBehaviour
     private IEnumerator BoostUnitSpeed(UnitMovement unitMovement, float mult, float controlTime)
     {
         float originalSpeed = unitMovement.rb.velocity.magnitude;
-        unitMovement.rb.velocity = unitMovement.rb.velocity.normalized * mult;
+        unitMovement.rb.velocity *= mult;
 
         yield return new WaitForSeconds(controlTime);
 
