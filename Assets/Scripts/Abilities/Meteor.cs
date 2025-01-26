@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Meteor : MonoBehaviour
 {
@@ -35,6 +36,12 @@ public class Meteor : MonoBehaviour
 
         if (_isActive && Input.GetMouseButtonDown(0))
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                Debug.Log("UI 클릭");
+                return;
+            }
+
             Vector2 mousePos = GetMousePosition();
             StartCoroutine(DeactivateAbility(meteorDropDelay, mousePos));
         }
