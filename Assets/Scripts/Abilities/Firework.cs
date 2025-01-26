@@ -42,7 +42,7 @@ public class Firework : MonoBehaviour
             // 원형으로 배치 후 간격 살짝 벌림
             Vector3 rotVec = Vector3.forward * 360 * i / unitCount;
             spawnUnit.Rotate(rotVec);
-            spawnUnit.Translate(spawnUnit.up * 0.2f, Space.World);
+            spawnUnit.Translate(spawnUnit.up * 0.5f, Space.World);
             spawnUnit.Rotate(-rotVec);
 
             // 지정한 방향으로 이동 시작

@@ -15,7 +15,8 @@ public class UpgradeData : ScriptableObject
         BuffRange,
         UnitControl,
         Fireworks,
-        Meteor
+        Meteor,
+        Blover
     }
 
     public UpgradeType type;

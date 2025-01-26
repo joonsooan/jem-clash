@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,12 +10,15 @@ public class Upgrade : MonoBehaviour
     public UpgradeData upgradeData;
     public int level;
 
+    private readonly int _activeEnumStart = 8;
+    private HashSet<UpgradeData.UpgradeType> _activeUpgrades;
     private bool _isShiftPressed;
     private TMP_Text _levelText;
 
     private void Awake()
     {
         InitializeUI();
+        _activeUpgrades = InitActiveUpgrades();
     }
 
     private void Update()
@@ -45,7 +50,19 @@ public class Upgrade : MonoBehaviour
                 break;
             case UpgradeData.UpgradeType.BuffRange:
                 break;
+            case UpgradeData.UpgradeType.Blover:
+                break;
         }
+    }
+
+    private HashSet<UpgradeData.UpgradeType> InitActiveUpgrades()
+    {
+        var hash = new HashSet<UpgradeData.UpgradeType>();
+
+        for (int index = _activeEnumStart; index < Enum.GetValues(typeof(UpgradeData.UpgradeType)).Length; index++)
+            hash.Add((UpgradeData.UpgradeType)index);
+
+        return hash;
     }
 
     private void InitializeUI()
@@ -119,10 +136,14 @@ public class Upgrade : MonoBehaviour
             case UpgradeData.UpgradeType.Meteor:
                 ActivateMeteor();
                 break;
+
+            case UpgradeData.UpgradeType.Blover:
+                ActivateBlover();
+                break;
         }
 
-        if (upgradeData.type == UpgradeData.UpgradeType.Fireworks) return;
-        if (upgradeData.type == UpgradeData.UpgradeType.UnitControl) return;
+        if (_activeUpgrades.Contains(upgradeData.type))
+            return;
 
         if (level == upgradeData.counts.Length)
             GetComponent<Button>().interactable = false;
@@ -144,6 +165,10 @@ public class Upgrade : MonoBehaviour
 
             case UpgradeData.UpgradeType.UnitControl:
                 UpgradeUnitControl();
+                break;
+
+            case UpgradeData.UpgradeType.Meteor:
+                UpgradeMeteor();
                 break;
         }
     }
@@ -250,6 +275,10 @@ public class Upgrade : MonoBehaviour
         GameManager.Instance.abilityManager.GetComponent<Meteor>().ActivateAbility();
     }
 
+    private void ActivateBlover()
+    {
+    }
+
     private void UpgradeFirework()
     {
         if (!EnoughEnergy()) return;
@@ -265,6 +294,15 @@ public class Upgrade : MonoBehaviour
 
         SpendEnergy();
         GameManager.Instance.abilityManager.GetComponent<UnitControl>().controlTime += upgradeData.counts[level];
+        IncrementLevel();
+    }
+
+    private void UpgradeMeteor()
+    {
+        if (!EnoughEnergy()) return;
+
+        SpendEnergy();
+        GameManager.Instance.abilityManager.GetComponent<Meteor>().damageAmount += (int)upgradeData.counts[level];
         IncrementLevel();
     }
 

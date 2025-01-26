@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
         else if (Input.GetKey(KeyCode.F2)) Time.timeScale = 2;
         else if (Input.GetKey(KeyCode.F3)) Time.timeScale = 3;
         else if (Input.GetKey(KeyCode.F4)) Time.timeScale = 4;
+        else if (Input.GetKey(KeyCode.F5)) Time.timeScale = 0.2f;
     }
 
     public void Stop()

@@ -15,5 +15,9 @@ MonoBehaviour:
   type: 9
   upgradeDescription: 
   counts:
-  - 0
+  - 1
+  - 1
+  - 2
+  - 2
+  - 2
   energyCosts: 0a000000140000003200000064000000c8000000
