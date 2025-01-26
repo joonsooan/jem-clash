@@ -12,9 +12,10 @@ public class UpgradeData : ScriptableObject
         SpawnCount,
         UnitHealth,
         UnitAttack,
-        Fireworks,
+        BuffRange,
         UnitControl,
-        BuffRange
+        Fireworks,
+        Meteor
     }
 
     public UpgradeType type;

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dbf9f8560f0e734baab86fd1c1f0b7d, type: 3}
   m_Name: Buff Range
   m_EditorClassIdentifier: 
-  type: 9
+  type: 7
   upgradeDescription: 
   counts:
   - 1.5

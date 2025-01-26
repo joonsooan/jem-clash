@@ -115,6 +115,10 @@ public class Upgrade : MonoBehaviour
             case UpgradeData.UpgradeType.BuffRange:
                 IncreaseBuffRange();
                 break;
+
+            case UpgradeData.UpgradeType.Meteor:
+                ActivateMeteor();
+                break;
         }
 
         if (upgradeData.type == UpgradeData.UpgradeType.Fireworks) return;
@@ -239,6 +243,11 @@ public class Upgrade : MonoBehaviour
         GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().ChangeSprite(level);
         GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().buffRadius = upgradeData.counts[level];
         IncrementLevel();
+    }
+
+    private void ActivateMeteor()
+    {
+        GameManager.Instance.abilityManager.GetComponent<Meteor>().ActivateAbility();
     }
 
     private void UpgradeFirework()

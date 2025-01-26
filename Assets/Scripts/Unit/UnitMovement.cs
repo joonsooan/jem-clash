@@ -19,7 +19,7 @@ public class UnitMovement : MonoBehaviour
 
     private void Start()
     {
-        switch (_unitCollision.isAlly)
+        switch (_stats.isAlly)
         {
             case 1:
                 target = GameManager.Instance.enemyNexus;
@@ -38,7 +38,7 @@ public class UnitMovement : MonoBehaviour
     private void MoveInRandomDirection()
     {
         Vector2 randomVec = new Vector2(
-            Random.Range(0f, 1f) * _unitCollision.isAlly, Random.Range(-0.5f, 0.5f)).normalized;
+            Random.Range(0f, 1f) * _stats.isAlly, Random.Range(-0.5f, 0.5f)).normalized;
         // Debug.Log(_stats.moveSpeed);
         rb.velocity = randomVec * _stats.moveSpeed;
     }

@@ -45,8 +45,8 @@ public class PlayerBuff : MonoBehaviour
 
     private void ActivateUnitControl(Collider2D other)
     {
-        UnitCollision unitCollision = other.GetComponent<UnitCollision>();
-        if (unitCollision.isAlly == -1) return; // 적군이면 리턴
+        UnitStats otherStats = other.GetComponent<UnitStats>();
+        if (otherStats.isAlly == -1) return; // 적군이면 리턴
 
         if (!isUnitControl) return;
 

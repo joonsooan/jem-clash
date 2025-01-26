@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class UnitCollision : MonoBehaviour
 {
-    public int isAlly; // 1 : player, -1 : enemy
-
     private UnitStats _stats;
 
     private void Awake()
@@ -17,7 +15,7 @@ public class UnitCollision : MonoBehaviour
         if (!otherObj.CompareTag("Unit")) return; // 유닛이 아니면 리턴
 
         UnitCollision otherCollision = otherObj.GetComponent<UnitCollision>();
-        if (isAlly == otherCollision.isAlly) return; // 아군일 경우 리턴
+        if (_stats.isAlly == otherCollision._stats.isAlly) return; // 아군일 경우 리턴
 
         UnitStats otherStats = otherObj.GetComponent<UnitStats>();
 

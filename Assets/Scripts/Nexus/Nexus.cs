@@ -24,13 +24,13 @@ public class Nexus : MonoBehaviour
         GameObject otherObj = collision.gameObject;
         if (!otherObj.CompareTag("Unit")) return;
 
-        UnitCollision otherCollision = otherObj.GetComponent<UnitCollision>();
-        if (isAlly == otherCollision.isAlly) return;
+        UnitStats otherStats = otherObj.GetComponent<UnitStats>();
+        if (isAlly == otherStats.isAlly) return;
 
         Debug.Log("Nexus Hit");
-        health -= otherObj.GetComponent<UnitStats>().attackDamage;
+        health -= otherStats.attackDamage;
         // 1안. 유닛과 넥서스가 충돌하면 유닛 사망
-        otherObj.GetComponent<UnitStats>().Die();
+        otherStats.Die();
         // 2안. 유닛과 넥서스가 충돌하면 유닛 체력 깎임
         // otherObj.GetComponent<UnitStats>().TakeDamage(attackDamage);
 

@@ -3,6 +3,7 @@ using UnityEngine;
 public class UnitStats : MonoBehaviour
 {
     public UnitData unitData;
+    public int isAlly; // 1 : player, -1 : enemy
 
     [Header("Runtime Stats")] public int health;
 
