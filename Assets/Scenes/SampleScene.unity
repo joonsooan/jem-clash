@@ -2516,12 +2516,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ab5321b552ba7744bb812d495e2151d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rangePrefab: {fileID: 6069070996726473348, guid: 57e48e13d181ab84e80de6f2710dedd5, type: 3}
+  rangePrefab: {fileID: 7821725321460920769, guid: 57e48e13d181ab84e80de6f2710dedd5, type: 3}
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
   radius: 2
   damageAmount: 1
+  meteorDropDelay: 1
 --- !u!1 &700089990
 GameObject:
   m_ObjectHideFlags: 0
@@ -6057,7 +6058,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 390675e92354ece46ba25adbf87661e9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6b0b61fa2c501a34ba103d9f64129bb5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

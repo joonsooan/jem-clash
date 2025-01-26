@@ -1,34 +1,42 @@
+using System.Collections;
 using UnityEngine;
 
 public class Meteor : MonoBehaviour
 {
     public GameObject rangePrefab;
     public LayerMask targetLayer;
-    public float radius;
+
+    [Header("Values")] public float radius;
+
     public int damageAmount;
+    public float meteorDropDelay;
 
     private bool _isActive;
     private GameObject _rangeIndicator;
 
     private void Update()
     {
-        if (_isActive && _rangeIndicator != null) FollowMouse();
-
-        if (_isActive && Input.GetMouseButtonDown(0))
-        {
-            Vector2 mousePos = GetMousePosition();
-            DealDamage(mousePos);
-            DeactivateAbility();
-        }
+        Function();
     }
 
     private void OnDrawGizmosSelected()
     {
         if (_isActive)
         {
-            Gizmos.color = Color.red;
+            Gizmos.color = Color.green;
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Gizmos.DrawWireSphere(new Vector3(mousePos.x, mousePos.y, 0), radius);
+        }
+    }
+
+    private void Function()
+    {
+        if (_isActive && _rangeIndicator != null) FollowMouse();
+
+        if (_isActive && Input.GetMouseButtonDown(0))
+        {
+            Vector2 mousePos = GetMousePosition();
+            StartCoroutine(DeactivateAbility(meteorDropDelay, mousePos));
         }
     }
 
@@ -45,9 +53,15 @@ public class Meteor : MonoBehaviour
         FollowMouse();
     }
 
-    private void DeactivateAbility()
+    private IEnumerator DeactivateAbility(float delay, Vector2 mousePos)
     {
-        _isActive = false;
+        _isActive = false; // 비활성화해서 이후 클릭을 방지
+        SpriteRenderer sr = _rangeIndicator.GetComponent<SpriteRenderer>();
+        sr.color = Color.red;
+
+        yield return new WaitForSeconds(delay);
+
+        DealDamage(mousePos);
 
         if (_rangeIndicator != null)
             Destroy(_rangeIndicator);
