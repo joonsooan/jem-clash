@@ -9,22 +9,7 @@ public class UnitStats : MonoBehaviour
 
     public int attackDamage;
     public float moveSpeed;
-
-    private int _baseAttackDamage;
-    private int _baseHealth;
-    private float _baseMoveSpeed;
-
-    // private void Awake()
-    // {
-    //     CacheBaseStats();
-    // }
-    //
-    // private void CacheBaseStats()
-    // {
-    //     _baseHealth = unitData.health;
-    //     _baseAttackDamage = unitData.attackDamage;
-    //     _baseMoveSpeed = unitData.moveSpeed;
-    // }
+    public float maxMoveSpeed;
 
     public void InitStats()
     {
@@ -32,15 +17,6 @@ public class UnitStats : MonoBehaviour
         attackDamage = unitData.attackDamage;
         moveSpeed = unitData.moveSpeed;
     }
-
-    // public void ResetStats()
-    // {
-    //     unitData.health = _baseHealth;
-    //     unitData.attackDamage = _baseAttackDamage;
-    //     unitData.moveSpeed = _baseMoveSpeed;
-    //
-    //     InitStats();
-    // }
 
     public void TakeDamage(int damage)
     {

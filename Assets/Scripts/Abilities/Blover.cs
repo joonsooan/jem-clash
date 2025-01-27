@@ -1,18 +1,21 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Blover : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float blowMagnitude;
+
+    public void ActivateBlover()
     {
-        
+        StartCoroutine(BlowEnemies());
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator BlowEnemies()
     {
-        
+        for (int i = 0; i < 10; i++)
+        {
+            GameManager.Instance.poolManager.BlowEnemies(blowMagnitude);
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 }

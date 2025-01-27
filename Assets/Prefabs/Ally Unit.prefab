@@ -168,6 +168,7 @@ MonoBehaviour:
   health: 10
   attackDamage: 2
   moveSpeed: 3
+  maxMoveSpeed: 8
 --- !u!114 &3430666866166136232
 MonoBehaviour:
   m_ObjectHideFlags: 0

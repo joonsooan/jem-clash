@@ -142,9 +142,11 @@ public class Upgrade : MonoBehaviour
                 break;
         }
 
+        // 액티브 능력인지 확인
         if (_activeUpgrades.Contains(upgradeData.type))
             return;
 
+        // 만렙이면 버튼 비활성화
         if (level == upgradeData.counts.Length)
             GetComponent<Button>().interactable = false;
     }
@@ -169,6 +171,10 @@ public class Upgrade : MonoBehaviour
 
             case UpgradeData.UpgradeType.Meteor:
                 UpgradeMeteor();
+                break;
+
+            case UpgradeData.UpgradeType.Blover:
+                UpgradeBlover();
                 break;
         }
     }
@@ -277,6 +283,7 @@ public class Upgrade : MonoBehaviour
 
     private void ActivateBlover()
     {
+        GameManager.Instance.abilityManager.GetComponent<Blover>().ActivateBlover();
     }
 
     private void UpgradeFirework()
@@ -303,6 +310,15 @@ public class Upgrade : MonoBehaviour
 
         SpendEnergy();
         GameManager.Instance.abilityManager.GetComponent<Meteor>().damageAmount += (int)upgradeData.counts[level];
+        IncrementLevel();
+    }
+
+    private void UpgradeBlover()
+    {
+        if (!EnoughEnergy()) return;
+
+        SpendEnergy();
+        // 바람 업그레이드 해주는 코드
         IncrementLevel();
     }
 
