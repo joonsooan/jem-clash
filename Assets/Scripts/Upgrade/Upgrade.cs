@@ -318,7 +318,7 @@ public class Upgrade : MonoBehaviour
         if (!EnoughEnergy()) return;
 
         SpendEnergy();
-        // 바람 업그레이드 해주는 코드
+        GameManager.Instance.abilityManager.GetComponent<Blover>().blowMagnitude = upgradeData.counts[level];
         IncrementLevel();
     }
 

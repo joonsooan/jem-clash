@@ -167,8 +167,8 @@ MonoBehaviour:
   isAlly: -1
   health: 10
   attackDamage: 1
-  moveSpeed: 3
-  maxMoveSpeed: 8
+  moveSpeed: 4
+  maxMoveSpeed: 10
 --- !u!114 &3788797343346555503
 MonoBehaviour:
   m_ObjectHideFlags: 0
