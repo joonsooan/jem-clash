@@ -33,6 +33,7 @@ public class UnitControl : MonoBehaviour
 
         yield return new WaitForSeconds(controlTime);
 
+        isUnitControl = false;
         Vector2 currentVec = unitMovement.rb.velocity.normalized;
         unitMovement.rb.velocity = currentVec * originalSpeed;
     }

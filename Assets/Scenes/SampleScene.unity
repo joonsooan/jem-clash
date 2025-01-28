@@ -2826,8 +2826,8 @@ MonoBehaviour:
     m_Bits: 128
   radius: 2
   controlTime: 5
-  gravityInterval: 1
-  gravityForce: 50
+  gravityInterval: 0.05
+  gravityForce: 20
 --- !u!1 &700089990
 GameObject:
   m_ObjectHideFlags: 0

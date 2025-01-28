@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -260,15 +258,6 @@ public class Upgrade : MonoBehaviour
                 upgradeData.counts[level];
 
         GameManager.Instance.abilityManager.GetComponent<UnitControl>().isUnitControl = true;
-
-        StartCoroutine(DeactivateUnitControl(
-            GameManager.Instance.abilityManager.GetComponent<UnitControl>().controlTime));
-    }
-
-    private IEnumerator DeactivateUnitControl(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        GameManager.Instance.abilityManager.GetComponent<UnitControl>().isUnitControl = false;
     }
 
     private void IncreaseBuffRange()

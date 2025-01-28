@@ -33,6 +33,8 @@ public class Gravity : MonoBehaviour
 
     private void Function()
     {
+        if (_isGravity) return;
+
         if (_isActive && _rangeIndicator != null) FollowMouse();
 
         if (_isActive && Input.GetMouseButtonDown(0))
@@ -44,7 +46,6 @@ public class Gravity : MonoBehaviour
             }
 
             Vector2 mousePos = GetMousePos();
-            // Gravity 비활성화 코루틴 시작
             StartCoroutine(DeactivateAbility(controlTime, mousePos));
         }
     }
@@ -105,8 +106,6 @@ public class Gravity : MonoBehaviour
 
             yield return new WaitForSeconds(gravityInterval);
         }
-
-        Debug.Log("Gravity pull End");
     }
 
     private Vector3 GetMousePos()
