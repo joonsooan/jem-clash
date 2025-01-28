@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -140,6 +141,10 @@ public class Upgrade : MonoBehaviour
             case UpgradeData.UpgradeType.Blover:
                 ActivateBlover();
                 break;
+
+            case UpgradeData.UpgradeType.Gravity:
+                ActivateGravity();
+                break;
         }
 
         // 액티브 능력인지 확인
@@ -248,13 +253,13 @@ public class Upgrade : MonoBehaviour
     {
         // 현재 upgradeData 데이터를 적용
         if (level == upgradeData.counts.Length)
-            GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().boostMultiplier =
+            GameManager.Instance.abilityManager.GetComponent<UnitControl>().boostMultiplier =
                 upgradeData.counts[level - 1];
         else
-            GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().boostMultiplier =
+            GameManager.Instance.abilityManager.GetComponent<UnitControl>().boostMultiplier =
                 upgradeData.counts[level];
 
-        GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().isUnitControl = true;
+        GameManager.Instance.abilityManager.GetComponent<UnitControl>().isUnitControl = true;
 
         StartCoroutine(DeactivateUnitControl(
             GameManager.Instance.abilityManager.GetComponent<UnitControl>().controlTime));
@@ -263,7 +268,7 @@ public class Upgrade : MonoBehaviour
     private IEnumerator DeactivateUnitControl(float delay)
     {
         yield return new WaitForSeconds(delay);
-        GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().isUnitControl = false;
+        GameManager.Instance.abilityManager.GetComponent<UnitControl>().isUnitControl = false;
     }
 
     private void IncreaseBuffRange()
@@ -284,6 +289,11 @@ public class Upgrade : MonoBehaviour
     private void ActivateBlover()
     {
         GameManager.Instance.abilityManager.GetComponent<Blover>().ActivateBlover();
+    }
+
+    private void ActivateGravity()
+    {
+        GameManager.Instance.abilityManager.GetComponent<Gravity>().ActivateGravity();
     }
 
     private void UpgradeFirework()

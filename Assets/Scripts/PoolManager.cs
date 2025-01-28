@@ -42,9 +42,6 @@ public class PoolManager : MonoBehaviour
     {
         foreach (GameObject enemy in _pools[EnemyIndex])
             if (enemy.activeSelf)
-            {
-                Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
-                rb.AddForce(new Vector2(magnitude * 0.1f, 0), ForceMode2D.Impulse);
-            }
+                enemy.GetComponent<UnitMovement>().Blover(magnitude);
     }
 }

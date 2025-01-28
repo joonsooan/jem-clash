@@ -2,17 +2,18 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Meteor : MonoBehaviour
+public class Gravity : MonoBehaviour
 {
     public GameObject rangePrefab;
     public LayerMask targetLayer;
 
     [Header("Values")] public float radius;
-
-    public int damageAmount;
-    public float meteorDropDelay;
+    public float controlTime;
+    public float gravityInterval;
+    public float gravityForce;
 
     private bool _isActive;
+    private bool _isGravity;
     private GameObject _rangeIndicator;
 
     private void Update()
@@ -43,11 +44,12 @@ public class Meteor : MonoBehaviour
             }
 
             Vector2 mousePos = GetMousePos();
-            StartCoroutine(DeactivateAbility(meteorDropDelay, mousePos));
+            // Gravity 비활성화 코루틴 시작
+            StartCoroutine(DeactivateAbility(controlTime, mousePos));
         }
     }
 
-    public void ActivateAbility()
+    public void ActivateGravity()
     {
         _isActive = true;
 
@@ -60,15 +62,19 @@ public class Meteor : MonoBehaviour
         FollowMouse();
     }
 
-    private IEnumerator DeactivateAbility(float delay, Vector2 mousePos)
+    private IEnumerator DeactivateAbility(float delay, Vector2 targetPos)
     {
         _isActive = false; // 비활성화해서 이후 클릭을 방지
+        _isGravity = true;
+
         SpriteRenderer sr = _rangeIndicator.GetComponent<SpriteRenderer>();
         sr.color = Color.red;
 
+        StartCoroutine(GravityPull(targetPos));
+
         yield return new WaitForSeconds(delay);
 
-        DealDamage(mousePos);
+        _isGravity = false;
 
         if (_rangeIndicator != null)
             Destroy(_rangeIndicator);
@@ -80,17 +86,27 @@ public class Meteor : MonoBehaviour
         _rangeIndicator.transform.position = new Vector3(mousePos.x, mousePos.y, 0);
     }
 
-    private void DealDamage(Vector2 position)
+    private IEnumerator GravityPull(Vector2 targetPos)
     {
-        var hitColliders = Physics2D.OverlapCircleAll(position, radius, targetLayer);
-
-        foreach (Collider2D coll in hitColliders)
+        while (_isGravity)
         {
-            UnitStats unitStats = coll.gameObject.GetComponent<UnitStats>();
+            var hitColliders = Physics2D.OverlapCircleAll(targetPos, radius, targetLayer);
 
-            if (unitStats != null && unitStats.isAlly == -1) // 적군일 때 
-                unitStats.TakeDamage(damageAmount);
+            foreach (Collider2D coll in hitColliders)
+            {
+                UnitStats unitStats = coll.gameObject.GetComponent<UnitStats>();
+
+                if (unitStats != null && unitStats.isAlly == -1) // 적군일 때
+                {
+                    Debug.Log("Pull Enemy");
+                    coll.gameObject.GetComponent<UnitMovement>().GravityPull(targetPos);
+                }
+            }
+
+            yield return new WaitForSeconds(gravityInterval);
         }
+
+        Debug.Log("Gravity pull End");
     }
 
     private Vector3 GetMousePos()

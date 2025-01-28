@@ -35,7 +35,7 @@ public class UnitMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        MoveInRandomDirection();
+        MoveInRandFrontDir();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -55,10 +55,17 @@ public class UnitMovement : MonoBehaviour
             rb.velocity = rb.velocity.normalized * _stats.maxMoveSpeed;
     }
 
-    private void MoveInRandomDirection()
+    private void MoveInRandFrontDir()
     {
         Vector2 randomVec = new Vector2(
             Random.Range(0f, 1f) * _stats.isAlly, Random.Range(-0.5f, 0.5f)).normalized;
+        rb.velocity = randomVec * _stats.moveSpeed;
+    }
+
+    private void MoveInRandDir()
+    {
+        Vector2 randomVec = new Vector2(
+            Random.Range(-1f, 1f) * _stats.isAlly, Random.Range(-1f, 1f)).normalized;
         rb.velocity = randomVec * _stats.moveSpeed;
     }
 
@@ -66,5 +73,18 @@ public class UnitMovement : MonoBehaviour
     {
         Vector2 dirVec = (target.position - transform.position).normalized;
         rb.velocity = dirVec * _stats.moveSpeed;
+    }
+
+    public void Blover(float magnitude)
+    {
+        rb.AddForce(new Vector2(magnitude * 0.1f, 0), ForceMode2D.Impulse);
+    }
+
+    public void GravityPull(Vector2 targetPos)
+    {
+        Vector2 dirVec = targetPos - new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+
+        rb.AddForce(dirVec * (GameManager.Instance.abilityManager.GetComponent<Gravity>().gravityForce * 0.1f),
+            ForceMode2D.Impulse);
     }
 }
