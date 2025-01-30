@@ -33,8 +33,6 @@ public class Gravity : MonoBehaviour
 
     private void Function()
     {
-        if (_isGravity) return;
-
         if (_isActive && _rangeIndicator != null) FollowMouse();
 
         if (_isActive && Input.GetMouseButtonDown(0))
@@ -91,20 +89,40 @@ public class Gravity : MonoBehaviour
     {
         while (_isGravity)
         {
-            var hitColliders = Physics2D.OverlapCircleAll(targetPos, radius, targetLayer);
-
-            foreach (Collider2D coll in hitColliders)
-            {
-                UnitStats unitStats = coll.gameObject.GetComponent<UnitStats>();
-
-                if (unitStats != null && unitStats.isAlly == -1) // 적군일 때
-                {
-                    Debug.Log("Pull Enemy");
-                    coll.gameObject.GetComponent<UnitMovement>().GravityPull(targetPos);
-                }
-            }
-
+            ApplyGravityPull(targetPos);
             yield return new WaitForSeconds(gravityInterval);
+        }
+
+        ResetVelocity(targetPos);
+    }
+
+    private void ApplyGravityPull(Vector2 targetPos)
+    {
+        var hitColliders = Physics2D.OverlapCircleAll(targetPos, radius, targetLayer);
+
+        foreach (Collider2D coll in hitColliders)
+        {
+            UnitStats unitStats = coll.gameObject.GetComponent<UnitStats>();
+
+            if (unitStats != null && unitStats.isAlly == -1) // 적군일 때
+            {
+                Debug.Log("Pull Enemy");
+                coll.gameObject.GetComponent<UnitMovement>().GravityPull(targetPos);
+            }
+        }
+    }
+
+    private void ResetVelocity(Vector2 targetPos)
+    {
+        var hitColl = Physics2D.OverlapCircleAll(targetPos, radius, targetLayer);
+
+        foreach (Collider2D coll in hitColl)
+        {
+            UnitStats unitStats = coll.gameObject.GetComponent<UnitStats>();
+            UnitMovement unitMovement = coll.gameObject.GetComponent<UnitMovement>();
+
+            if (unitMovement != null && unitStats.isAlly == -1) // 적군일 때
+                unitMovement.rb.velocity = unitMovement.rb.velocity.normalized * unitStats.moveSpeed;
         }
     }
 
