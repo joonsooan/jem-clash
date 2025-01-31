@@ -277,12 +277,12 @@ public class Upgrade : MonoBehaviour
 
     private void ActivateBlover()
     {
-        GameManager.Instance.abilityManager.GetComponent<Blover>().ActivateBlover();
+        GameManager.Instance.abilityManager.GetComponent<Blover>().ActivateAbility();
     }
 
     private void ActivateGravity()
     {
-        GameManager.Instance.abilityManager.GetComponent<Gravity>().ActivateGravity();
+        GameManager.Instance.abilityManager.GetComponent<Gravity>().ActivateAbility();
     }
 
     private void UpgradeFirework()

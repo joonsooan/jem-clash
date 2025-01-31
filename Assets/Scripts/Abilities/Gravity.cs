@@ -48,7 +48,7 @@ public class Gravity : MonoBehaviour
         }
     }
 
-    public void ActivateGravity()
+    public void ActivateAbility()
     {
         _isActive = true;
 

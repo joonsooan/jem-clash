@@ -5,7 +5,7 @@ public class Blover : MonoBehaviour
 {
     public float blowMagnitude;
 
-    public void ActivateBlover()
+    public void ActivateAbility()
     {
         StartCoroutine(BlowEnemies());
     }
