@@ -32,24 +32,19 @@ public class Upgrade : MonoBehaviour
         switch (upgradeData.type)
         {
             case UpgradeData.UpgradeType.UnitSpawn:
-                break;
             case UpgradeData.UpgradeType.SupplyUp:
-                break;
             case UpgradeData.UpgradeType.EnergyUp:
-                break;
             case UpgradeData.UpgradeType.UnitAuto:
-                break;
             case UpgradeData.UpgradeType.SpawnCount:
-                break;
             case UpgradeData.UpgradeType.UnitHealth:
-                break;
-            case UpgradeData.UpgradeType.Fireworks:
-                break;
-            case UpgradeData.UpgradeType.UnitControl:
-                break;
+            case UpgradeData.UpgradeType.UnitAttack:
             case UpgradeData.UpgradeType.BuffRange:
                 break;
+            case UpgradeData.UpgradeType.Fireworks:
+            case UpgradeData.UpgradeType.UnitControl:
             case UpgradeData.UpgradeType.Blover:
+            case UpgradeData.UpgradeType.Meteor:
+            case UpgradeData.UpgradeType.Gravity:
                 break;
         }
     }
@@ -78,18 +73,20 @@ public class Upgrade : MonoBehaviour
 
     private void OnNormalClick()
     {
-        Debug.Log("Normal Click detected!");
+        // Debug.Log("Normal Click detected!");
         HandleUpgrade();
     }
 
     private void OnShiftClick()
     {
-        Debug.Log("Shift + Click detected!");
+        // Debug.Log("Shift + Click detected!");
         HandleShiftUpgrade();
     }
 
     private void HandleUpgrade()
     {
+        if (IsOnCooldown()) return;
+
         switch (upgradeData.type)
         {
             case UpgradeData.UpgradeType.UnitSpawn:
@@ -145,13 +142,24 @@ public class Upgrade : MonoBehaviour
                 break;
         }
 
-        // 액티브 능력인지 확인
         if (_activeUpgrades.Contains(upgradeData.type))
             return;
 
-        // 만렙이면 버튼 비활성화
+        // 만렙이면 버튼 비활성화 (액티브 능력 제외)
         if (level == upgradeData.counts.Length)
             GetComponent<Button>().interactable = false;
+    }
+
+    private bool IsOnCooldown()
+    {
+        if (_activeUpgrades.Contains(upgradeData.type))
+            if (CooldownManager.Instance.IsOnCooldown(upgradeData.type))
+            {
+                Debug.Log($"{upgradeData.type} is on cooldown.");
+                return true;
+            }
+
+        return false;
     }
 
     private void HandleShiftUpgrade()
@@ -181,6 +189,8 @@ public class Upgrade : MonoBehaviour
                 break;
         }
     }
+
+    // 기본 능력 업그레이드
 
     private static void SpawnAllyUnit()
     {
@@ -241,10 +251,23 @@ public class Upgrade : MonoBehaviour
         IncrementLevel();
     }
 
+    private void IncreaseBuffRange()
+    {
+        if (!EnoughEnergy()) return;
+
+        SpendEnergy();
+        GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().ChangeSprite(level);
+        GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().buffRadius = upgradeData.counts[level];
+        IncrementLevel();
+    }
+
+    // 액티브 능력 사용
+
     private void ActivateFirework()
     {
         GameManager.Instance.abilityManager.GetComponent<Firework>().SetFireworkPoints();
         GameManager.Instance.abilityManager.GetComponent<Firework>().SpawnFireworks();
+        StartCooldown();
     }
 
     private void ActivateUnitControl()
@@ -258,32 +281,36 @@ public class Upgrade : MonoBehaviour
                 upgradeData.counts[level];
 
         GameManager.Instance.abilityManager.GetComponent<UnitControl>().isUnitControl = true;
-    }
-
-    private void IncreaseBuffRange()
-    {
-        if (!EnoughEnergy()) return;
-
-        SpendEnergy();
-        GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().ChangeSprite(level);
-        GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().buffRadius = upgradeData.counts[level];
-        IncrementLevel();
-    }
-
-    private void ActivateMeteor()
-    {
-        GameManager.Instance.abilityManager.GetComponent<Meteor>().ActivateAbility();
+        StartCooldown();
     }
 
     private void ActivateBlover()
     {
         GameManager.Instance.abilityManager.GetComponent<Blover>().ActivateAbility();
+        StartCooldown();
+    }
+
+    private void ActivateMeteor()
+    {
+        ActivateStrangeAbility<Meteor>(upgradeData);
     }
 
     private void ActivateGravity()
     {
-        GameManager.Instance.abilityManager.GetComponent<Gravity>().ActivateAbility();
+        ActivateStrangeAbility<Gravity>(upgradeData);
     }
+
+    private void ActivateStrangeAbility<T>(UpgradeData data) where T : MonoBehaviour, IStrangeAbility
+    {
+        T ability = GameManager.Instance.abilityManager.GetComponent<T>();
+
+        if (ability.IsActive)
+            ability.CancelAbility();
+        else
+            ability.ActivateAbility(data);
+    }
+
+    // 액티브 능력 업그레이드
 
     private void UpgradeFirework()
     {
@@ -321,6 +348,13 @@ public class Upgrade : MonoBehaviour
         IncrementLevel();
     }
 
+    // 기본 함수
+
+    private void StartCooldown()
+    {
+        StartCoroutine(CooldownManager.Instance.StartCoolDown(upgradeData));
+    }
+
     private bool EnoughEnergy()
     {
         return GameManager.Instance.resourceManager.energy >= upgradeData.energyCosts[level];
@@ -336,4 +370,11 @@ public class Upgrade : MonoBehaviour
         level++;
         _levelText.text = $"Lv.{level:D2}";
     }
+}
+
+public interface IStrangeAbility
+{
+    bool IsActive { get; }
+    void CancelAbility();
+    void ActivateAbility(UpgradeData upgradeData);
 }

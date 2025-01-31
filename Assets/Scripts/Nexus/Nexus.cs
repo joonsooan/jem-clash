@@ -27,7 +27,7 @@ public class Nexus : MonoBehaviour
         UnitStats otherStats = otherObj.GetComponent<UnitStats>();
         if (isAlly == otherStats.isAlly) return;
 
-        Debug.Log("Nexus Hit");
+        // Debug.Log("Nexus Hit");
         health -= otherStats.attackDamage;
         // 1안. 유닛과 넥서스가 충돌하면 유닛 사망
         otherStats.Die();
