@@ -32,24 +32,19 @@ public class Upgrade : MonoBehaviour
         switch (upgradeData.type)
         {
             case UpgradeData.UpgradeType.UnitSpawn:
-                break;
             case UpgradeData.UpgradeType.SupplyUp:
-                break;
             case UpgradeData.UpgradeType.EnergyUp:
-                break;
             case UpgradeData.UpgradeType.UnitAuto:
-                break;
             case UpgradeData.UpgradeType.SpawnCount:
-                break;
             case UpgradeData.UpgradeType.UnitHealth:
-                break;
-            case UpgradeData.UpgradeType.Fireworks:
-                break;
-            case UpgradeData.UpgradeType.UnitControl:
-                break;
+            case UpgradeData.UpgradeType.UnitAttack:
             case UpgradeData.UpgradeType.BuffRange:
                 break;
+            case UpgradeData.UpgradeType.Fireworks:
+            case UpgradeData.UpgradeType.UnitControl:
             case UpgradeData.UpgradeType.Blover:
+            case UpgradeData.UpgradeType.Meteor:
+            case UpgradeData.UpgradeType.Gravity:
                 break;
         }
     }
@@ -150,7 +145,7 @@ public class Upgrade : MonoBehaviour
         if (_activeUpgrades.Contains(upgradeData.type))
             return;
 
-        // 만렙이면 버튼 비활성화
+        // 만렙이면 버튼 비활성화 (액티브 능력 제외)
         if (level == upgradeData.counts.Length)
             GetComponent<Button>().interactable = false;
     }
@@ -289,24 +284,30 @@ public class Upgrade : MonoBehaviour
         StartCooldown();
     }
 
-    private void ActivateMeteor()
-    {
-        if (GameManager.Instance.abilityManager.GetComponent<Meteor>().isActive)
-            GameManager.Instance.abilityManager.GetComponent<Meteor>().CancelAbility();
-
-        GameManager.Instance.abilityManager.GetComponent<Meteor>().ActivateAbility(upgradeData);
-    }
-
     private void ActivateBlover()
     {
         GameManager.Instance.abilityManager.GetComponent<Blover>().ActivateAbility();
         StartCooldown();
     }
 
+    private void ActivateMeteor()
+    {
+        ActivateStrangeAbility<Meteor>(upgradeData);
+    }
+
     private void ActivateGravity()
     {
-        GameManager.Instance.abilityManager.GetComponent<Gravity>().ActivateAbility();
-        StartCooldown();
+        ActivateStrangeAbility<Gravity>(upgradeData);
+    }
+
+    private void ActivateStrangeAbility<T>(UpgradeData data) where T : MonoBehaviour, IStrangeAbility
+    {
+        T ability = GameManager.Instance.abilityManager.GetComponent<T>();
+
+        if (ability.IsActive)
+            ability.CancelAbility();
+
+        ability.ActivateAbility(data);
     }
 
     // 액티브 능력 업그레이드
@@ -374,4 +375,11 @@ public class Upgrade : MonoBehaviour
         level++;
         _levelText.text = $"Lv.{level:D2}";
     }
+}
+
+public interface IStrangeAbility
+{
+    bool IsActive { get; set; }
+    void CancelAbility();
+    void ActivateAbility(UpgradeData upgradeData);
 }

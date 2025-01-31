@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Gravity : MonoBehaviour
+public class Gravity : MonoBehaviour, IStrangeAbility
 {
     public GameObject rangePrefab;
     public LayerMask targetLayer;
@@ -11,10 +11,10 @@ public class Gravity : MonoBehaviour
     public float controlTime;
     public float gravityInterval;
     public float gravityForce;
-
-    private bool _isActive;
     private bool _isGravity;
     private GameObject _rangeIndicator;
+
+    private UpgradeData _upgradeData;
 
     private void Update()
     {
@@ -23,7 +23,7 @@ public class Gravity : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (_isActive)
+        if (IsActive)
         {
             Gizmos.color = Color.green;
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -31,26 +31,14 @@ public class Gravity : MonoBehaviour
         }
     }
 
-    private void Function()
+    public bool IsActive { get; set; }
+
+    public void ActivateAbility(UpgradeData upgradeData)
     {
-        if (_isActive && _rangeIndicator != null) FollowMouse();
+        if (IsActive) return;
 
-        if (_isActive && Input.GetMouseButtonDown(0))
-        {
-            if (EventSystem.current.IsPointerOverGameObject())
-            {
-                Debug.Log("UI 클릭");
-                return;
-            }
-
-            Vector2 mousePos = GetMousePos();
-            StartCoroutine(DeactivateAbility(controlTime, mousePos));
-        }
-    }
-
-    public void ActivateAbility()
-    {
-        _isActive = true;
+        IsActive = true;
+        _upgradeData = upgradeData;
 
         if (_rangeIndicator == null)
         {
@@ -61,9 +49,35 @@ public class Gravity : MonoBehaviour
         FollowMouse();
     }
 
+    public void CancelAbility()
+    {
+        IsActive = false;
+
+        if (_rangeIndicator != null)
+            Destroy(_rangeIndicator);
+    }
+
+    private void Function()
+    {
+        if (IsActive && _rangeIndicator != null) FollowMouse();
+
+        if (IsActive && Input.GetMouseButtonDown(0))
+        {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                Debug.Log("UI 클릭");
+                return;
+            }
+
+            Vector2 mousePos = GetMousePos();
+            StartCoroutine(DeactivateAbility(controlTime, mousePos));
+            CooldownManager.Instance.StartCoroutine(CooldownManager.Instance.StartCoolDown(_upgradeData));
+        }
+    }
+
     private IEnumerator DeactivateAbility(float delay, Vector2 targetPos)
     {
-        _isActive = false; // 비활성화해서 이후 클릭을 방지
+        IsActive = false; // 비활성화해서 이후 클릭을 방지
         _isGravity = true;
 
         SpriteRenderer sr = _rangeIndicator.GetComponent<SpriteRenderer>();

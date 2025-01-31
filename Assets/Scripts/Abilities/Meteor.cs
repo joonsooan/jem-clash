@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Meteor : MonoBehaviour
+public class Meteor : MonoBehaviour, IStrangeAbility
 {
     public GameObject rangePrefab;
     public LayerMask targetLayer;
@@ -11,7 +11,6 @@ public class Meteor : MonoBehaviour
 
     public int damageAmount;
     public float meteorDropDelay;
-    public bool isActive;
 
     private GameObject _rangeIndicator;
 
@@ -24,7 +23,7 @@ public class Meteor : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (isActive)
+        if (IsActive)
         {
             Gizmos.color = Color.green;
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -32,29 +31,13 @@ public class Meteor : MonoBehaviour
         }
     }
 
-    private void Function()
-    {
-        if (isActive && _rangeIndicator != null) FollowMouse();
-
-        if (isActive && Input.GetMouseButtonDown(0))
-        {
-            if (EventSystem.current.IsPointerOverGameObject()) // UI를 클릭한 경우
-            {
-                Debug.Log("UI 클릭");
-                return;
-            }
-
-            Vector2 mousePos = GetMousePos();
-            StartCoroutine(DeactivateAbility(meteorDropDelay, mousePos));
-            CooldownManager.Instance.StartCoroutine(CooldownManager.Instance.StartCoolDown(_upgradeData));
-        }
-    }
+    public bool IsActive { get; set; }
 
     public void ActivateAbility(UpgradeData upgradeData)
     {
-        if (isActive) return;
+        if (IsActive) return;
 
-        isActive = true;
+        IsActive = true;
         _upgradeData = upgradeData;
 
         if (_rangeIndicator == null)
@@ -68,15 +51,33 @@ public class Meteor : MonoBehaviour
 
     public void CancelAbility()
     {
-        isActive = false;
+        IsActive = false;
 
         if (_rangeIndicator != null)
             Destroy(_rangeIndicator);
     }
 
+    private void Function()
+    {
+        if (IsActive && _rangeIndicator != null) FollowMouse();
+
+        if (IsActive && Input.GetMouseButtonDown(0))
+        {
+            if (EventSystem.current.IsPointerOverGameObject()) // UI를 클릭한 경우
+            {
+                Debug.Log("UI 클릭");
+                return;
+            }
+
+            Vector2 mousePos = GetMousePos();
+            StartCoroutine(DeactivateAbility(meteorDropDelay, mousePos));
+            CooldownManager.Instance.StartCoroutine(CooldownManager.Instance.StartCoolDown(_upgradeData));
+        }
+    }
+
     private IEnumerator DeactivateAbility(float delay, Vector2 mousePos)
     {
-        isActive = false; // 비활성화해서 이후 클릭을 방지
+        IsActive = false; // 비활성화해서 이후 클릭을 방지
 
         SpriteRenderer sr = _rangeIndicator.GetComponent<SpriteRenderer>();
         sr.color = Color.red;
