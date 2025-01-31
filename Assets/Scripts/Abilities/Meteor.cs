@@ -11,9 +11,11 @@ public class Meteor : MonoBehaviour
 
     public int damageAmount;
     public float meteorDropDelay;
+    public bool isActive;
 
-    private bool _isActive;
     private GameObject _rangeIndicator;
+
+    private UpgradeData _upgradeData;
 
     private void Update()
     {
@@ -22,7 +24,7 @@ public class Meteor : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (_isActive)
+        if (isActive)
         {
             Gizmos.color = Color.green;
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -32,11 +34,11 @@ public class Meteor : MonoBehaviour
 
     private void Function()
     {
-        if (_isActive && _rangeIndicator != null) FollowMouse();
+        if (isActive && _rangeIndicator != null) FollowMouse();
 
-        if (_isActive && Input.GetMouseButtonDown(0))
+        if (isActive && Input.GetMouseButtonDown(0))
         {
-            if (EventSystem.current.IsPointerOverGameObject())
+            if (EventSystem.current.IsPointerOverGameObject()) // UI를 클릭한 경우
             {
                 Debug.Log("UI 클릭");
                 return;
@@ -44,12 +46,16 @@ public class Meteor : MonoBehaviour
 
             Vector2 mousePos = GetMousePos();
             StartCoroutine(DeactivateAbility(meteorDropDelay, mousePos));
+            CooldownManager.Instance.StartCoroutine(CooldownManager.Instance.StartCoolDown(_upgradeData));
         }
     }
 
-    public void ActivateAbility()
+    public void ActivateAbility(UpgradeData upgradeData)
     {
-        _isActive = true;
+        if (isActive) return;
+
+        isActive = true;
+        _upgradeData = upgradeData;
 
         if (_rangeIndicator == null)
         {
@@ -60,9 +66,18 @@ public class Meteor : MonoBehaviour
         FollowMouse();
     }
 
+    public void CancelAbility()
+    {
+        isActive = false;
+
+        if (_rangeIndicator != null)
+            Destroy(_rangeIndicator);
+    }
+
     private IEnumerator DeactivateAbility(float delay, Vector2 mousePos)
     {
-        _isActive = false; // 비활성화해서 이후 클릭을 방지
+        isActive = false; // 비활성화해서 이후 클릭을 방지
+
         SpriteRenderer sr = _rangeIndicator.GetComponent<SpriteRenderer>();
         sr.color = Color.red;
 

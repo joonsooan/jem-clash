@@ -78,18 +78,20 @@ public class Upgrade : MonoBehaviour
 
     private void OnNormalClick()
     {
-        Debug.Log("Normal Click detected!");
+        // Debug.Log("Normal Click detected!");
         HandleUpgrade();
     }
 
     private void OnShiftClick()
     {
-        Debug.Log("Shift + Click detected!");
+        // Debug.Log("Shift + Click detected!");
         HandleShiftUpgrade();
     }
 
     private void HandleUpgrade()
     {
+        if (IsOnCooldown()) return;
+
         switch (upgradeData.type)
         {
             case UpgradeData.UpgradeType.UnitSpawn:
@@ -145,13 +147,24 @@ public class Upgrade : MonoBehaviour
                 break;
         }
 
-        // 액티브 능력인지 확인
         if (_activeUpgrades.Contains(upgradeData.type))
             return;
 
         // 만렙이면 버튼 비활성화
         if (level == upgradeData.counts.Length)
             GetComponent<Button>().interactable = false;
+    }
+
+    private bool IsOnCooldown()
+    {
+        if (_activeUpgrades.Contains(upgradeData.type))
+            if (CooldownManager.Instance.IsOnCooldown(upgradeData.type))
+            {
+                Debug.Log($"{upgradeData.type} is on cooldown.");
+                return true;
+            }
+
+        return false;
     }
 
     private void HandleShiftUpgrade()
@@ -181,6 +194,8 @@ public class Upgrade : MonoBehaviour
                 break;
         }
     }
+
+    // 기본 능력 업그레이드
 
     private static void SpawnAllyUnit()
     {
@@ -241,10 +256,23 @@ public class Upgrade : MonoBehaviour
         IncrementLevel();
     }
 
+    private void IncreaseBuffRange()
+    {
+        if (!EnoughEnergy()) return;
+
+        SpendEnergy();
+        GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().ChangeSprite(level);
+        GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().buffRadius = upgradeData.counts[level];
+        IncrementLevel();
+    }
+
+    // 액티브 능력 사용
+
     private void ActivateFirework()
     {
         GameManager.Instance.abilityManager.GetComponent<Firework>().SetFireworkPoints();
         GameManager.Instance.abilityManager.GetComponent<Firework>().SpawnFireworks();
+        StartCooldown();
     }
 
     private void ActivateUnitControl()
@@ -258,32 +286,30 @@ public class Upgrade : MonoBehaviour
                 upgradeData.counts[level];
 
         GameManager.Instance.abilityManager.GetComponent<UnitControl>().isUnitControl = true;
-    }
-
-    private void IncreaseBuffRange()
-    {
-        if (!EnoughEnergy()) return;
-
-        SpendEnergy();
-        GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().ChangeSprite(level);
-        GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().buffRadius = upgradeData.counts[level];
-        IncrementLevel();
+        StartCooldown();
     }
 
     private void ActivateMeteor()
     {
-        GameManager.Instance.abilityManager.GetComponent<Meteor>().ActivateAbility();
+        if (GameManager.Instance.abilityManager.GetComponent<Meteor>().isActive)
+            GameManager.Instance.abilityManager.GetComponent<Meteor>().CancelAbility();
+
+        GameManager.Instance.abilityManager.GetComponent<Meteor>().ActivateAbility(upgradeData);
     }
 
     private void ActivateBlover()
     {
         GameManager.Instance.abilityManager.GetComponent<Blover>().ActivateAbility();
+        StartCooldown();
     }
 
     private void ActivateGravity()
     {
         GameManager.Instance.abilityManager.GetComponent<Gravity>().ActivateAbility();
+        StartCooldown();
     }
+
+    // 액티브 능력 업그레이드
 
     private void UpgradeFirework()
     {
@@ -319,6 +345,18 @@ public class Upgrade : MonoBehaviour
         SpendEnergy();
         GameManager.Instance.abilityManager.GetComponent<Blover>().blowMagnitude = upgradeData.counts[level];
         IncrementLevel();
+    }
+
+    // 기본 함수
+
+    public UpgradeData GetUpgradeData()
+    {
+        return upgradeData;
+    }
+
+    private void StartCooldown()
+    {
+        StartCoroutine(CooldownManager.Instance.StartCoolDown(upgradeData));
     }
 
     private bool EnoughEnergy()

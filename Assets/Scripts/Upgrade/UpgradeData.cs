@@ -25,4 +25,6 @@ public class UpgradeData : ScriptableObject
 
     public float[] counts;
     public int[] energyCosts;
+
+    [Header("Cooldown")] public float cooldownTime;
 }
