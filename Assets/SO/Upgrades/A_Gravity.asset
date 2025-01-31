@@ -17,6 +17,4 @@ MonoBehaviour:
   counts:
   - 0
   energyCosts: 0a000000140000003200000064000000c8000000
-  hasCooldown: 1
-  cooldownTime: 2
-  isOnCooldown: 0
+  cooldownTime: 6

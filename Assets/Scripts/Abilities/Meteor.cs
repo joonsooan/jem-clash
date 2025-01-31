@@ -13,7 +13,6 @@ public class Meteor : MonoBehaviour, IStrangeAbility
     public float meteorDropDelay;
 
     private GameObject _rangeIndicator;
-
     private UpgradeData _upgradeData;
 
     private void Update()
@@ -64,10 +63,7 @@ public class Meteor : MonoBehaviour, IStrangeAbility
         if (IsActive && Input.GetMouseButtonDown(0))
         {
             if (EventSystem.current.IsPointerOverGameObject()) // UI를 클릭한 경우
-            {
-                Debug.Log("UI 클릭");
                 return;
-            }
 
             Vector2 mousePos = GetMousePos();
             StartCoroutine(DeactivateAbility(meteorDropDelay, mousePos));

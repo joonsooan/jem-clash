@@ -11,9 +11,9 @@ public class Gravity : MonoBehaviour, IStrangeAbility
     public float controlTime;
     public float gravityInterval;
     public float gravityForce;
+
     private bool _isGravity;
     private GameObject _rangeIndicator;
-
     private UpgradeData _upgradeData;
 
     private void Update()
@@ -63,11 +63,8 @@ public class Gravity : MonoBehaviour, IStrangeAbility
 
         if (IsActive && Input.GetMouseButtonDown(0))
         {
-            if (EventSystem.current.IsPointerOverGameObject())
-            {
-                Debug.Log("UI 클릭");
+            if (EventSystem.current.IsPointerOverGameObject()) // UI를 클릭한 경우
                 return;
-            }
 
             Vector2 mousePos = GetMousePos();
             StartCoroutine(DeactivateAbility(controlTime, mousePos));
@@ -119,10 +116,7 @@ public class Gravity : MonoBehaviour, IStrangeAbility
             UnitStats unitStats = coll.gameObject.GetComponent<UnitStats>();
 
             if (unitStats != null && unitStats.isAlly == -1) // 적군일 때
-            {
-                Debug.Log("Pull Enemy");
                 coll.gameObject.GetComponent<UnitMovement>().GravityPull(targetPos);
-            }
         }
     }
 

@@ -306,8 +306,8 @@ public class Upgrade : MonoBehaviour
 
         if (ability.IsActive)
             ability.CancelAbility();
-
-        ability.ActivateAbility(data);
+        else
+            ability.ActivateAbility(data);
     }
 
     // 액티브 능력 업그레이드
@@ -350,11 +350,6 @@ public class Upgrade : MonoBehaviour
 
     // 기본 함수
 
-    public UpgradeData GetUpgradeData()
-    {
-        return upgradeData;
-    }
-
     private void StartCooldown()
     {
         StartCoroutine(CooldownManager.Instance.StartCoolDown(upgradeData));
@@ -379,7 +374,7 @@ public class Upgrade : MonoBehaviour
 
 public interface IStrangeAbility
 {
-    bool IsActive { get; set; }
+    bool IsActive { get; }
     void CancelAbility();
     void ActivateAbility(UpgradeData upgradeData);
 }
