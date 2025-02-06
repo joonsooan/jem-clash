@@ -34,12 +34,7 @@ public class Nexus : MonoBehaviour
         // 2안. 유닛과 넥서스가 충돌하면 유닛 체력 깎임
         // otherObj.GetComponent<UnitStats>().TakeDamage(attackDamage);
 
-        if (health <= 0) Die();
-    }
-
-    private void Die()
-    {
-        // 넥서스 깨짐 -> 게임 오버
-        Debug.Log("Game Over");
+        if (health <= 0)
+            GameManager.Instance.GameWin();
     }
 }

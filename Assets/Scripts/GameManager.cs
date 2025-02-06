@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     [Header("Managers")] public PoolManager poolManager;
 
     public ResourceManager resourceManager;
+    public ResultManager resultManager;
     public UnitSpawner unitSpawner;
     public GameObject abilityManager;
 
@@ -39,7 +40,19 @@ public class GameManager : MonoBehaviour
         else if (Input.GetKey(KeyCode.F5)) Time.timeScale = 0.2f;
     }
 
-    public void Stop()
+    public void GameLose()
+    {
+        Stop();
+        resultManager.OpenGameOverPanel();
+    }
+
+    public void GameWin()
+    {
+        Stop();
+        resultManager.OpenSummaryPanel();
+    }
+
+    private void Stop()
     {
         gameLive = false;
         Time.timeScale = 0;

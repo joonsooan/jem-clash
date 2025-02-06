@@ -17,4 +17,9 @@ public class SceneChanger : MonoBehaviour
     {
         SceneManager.LoadScene(2);
     }
+
+    public void LoadMapSelect()
+    {
+        SceneManager.LoadScene(3);
+    }
 }
