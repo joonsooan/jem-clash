@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dbf9f8560f0e734baab86fd1c1f0b7d, type: 3}
   m_Name: Unit Health
   m_EditorClassIdentifier: 
-  type: 5
-  upgradeDescription: 
+  itemName: 
+  itemType: 5
+  itemRarity: 0
+  itemImage: {fileID: 0}
+  description: 
+  maxLevel: 0
   counts:
   - 2
   - 4
@@ -21,3 +25,4 @@ MonoBehaviour:
   - 8
   - 10
   energyCosts: 0a000000140000003200000064000000c8000000
+  cooldownTime: 0

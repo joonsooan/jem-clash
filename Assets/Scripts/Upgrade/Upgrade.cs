@@ -29,7 +29,7 @@ public class Upgrade : MonoBehaviour
     {
         _levelText.text = $"Lv.{level:D2}";
 
-        switch (upgradeData.type)
+        switch (upgradeData.itemType)
         {
             case UpgradeData.UpgradeType.UnitSpawn:
             case UpgradeData.UpgradeType.SupplyUp:
@@ -87,7 +87,7 @@ public class Upgrade : MonoBehaviour
     {
         if (IsOnCooldown()) return;
 
-        switch (upgradeData.type)
+        switch (upgradeData.itemType)
         {
             case UpgradeData.UpgradeType.UnitSpawn:
                 SpawnAllyUnit();
@@ -142,7 +142,7 @@ public class Upgrade : MonoBehaviour
                 break;
         }
 
-        if (_activeUpgrades.Contains(upgradeData.type))
+        if (_activeUpgrades.Contains(upgradeData.itemType))
             return;
 
         // 만렙이면 버튼 비활성화 (액티브 능력 제외)
@@ -152,10 +152,10 @@ public class Upgrade : MonoBehaviour
 
     private bool IsOnCooldown()
     {
-        if (_activeUpgrades.Contains(upgradeData.type))
-            if (CooldownManager.Instance.IsOnCooldown(upgradeData.type))
+        if (_activeUpgrades.Contains(upgradeData.itemType))
+            if (CooldownManager.Instance.IsOnCooldown(upgradeData.itemType))
             {
-                Debug.Log($"{upgradeData.type} is on cooldown.");
+                Debug.Log($"{upgradeData.itemType} is on cooldown.");
                 return true;
             }
 
@@ -170,7 +170,7 @@ public class Upgrade : MonoBehaviour
             return;
         }
 
-        switch (upgradeData.type)
+        switch (upgradeData.itemType)
         {
             case UpgradeData.UpgradeType.Fireworks:
                 UpgradeFirework();

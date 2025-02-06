@@ -26,11 +26,11 @@ public class CooldownManager : MonoBehaviour
 
     public IEnumerator StartCoolDown(UpgradeData upgradeData)
     {
-        _cooldowns[upgradeData.type] = true;
+        _cooldowns[upgradeData.itemType] = true;
 
         yield return new WaitForSeconds(upgradeData.cooldownTime);
 
-        _cooldowns[upgradeData.type] = false;
-        Debug.Log($"{upgradeData.type} is ready to use again!");
+        _cooldowns[upgradeData.itemType] = false;
+        Debug.Log($"{upgradeData.itemType} is ready to use again!");
     }
 }

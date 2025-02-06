@@ -1,0 +1,96 @@
+﻿{
+  "items": [
+    {
+      "itemName": "Blover",
+      "itemType": "Blover",
+      "itemRarity": "Common",
+      "imagePath": "Assets/Sprites/Items/blover.png",
+      "description": "바람을 부는 능력입니다",
+      "maxLevel": 5,
+      "counts": [
+        4,
+        6,
+        8,
+        10,
+        12
+      ],
+      "energyCosts": [
+        10,
+        20,
+        50,
+        100,
+        200
+      ],
+      "cooldownTime": 2
+    },
+    {
+      "itemName": "Meteor",
+      "itemType": "Meteor",
+      "itemRarity": "Common",
+      "imagePath": "Assets/Sprites/Items/meteor.png",
+      "description": "메테오 쾅",
+      "maxLevel": 5,
+      "counts": [
+        4,
+        6,
+        8,
+        10,
+        12
+      ],
+      "energyCosts": [
+        10,
+        20,
+        50,
+        100,
+        200
+      ],
+      "cooldownTime": 2
+    },
+    {
+      "itemName": "Gravity",
+      "itemType": "Gravity",
+      "itemRarity": "Common",
+      "imagePath": "Assets/Sprites/Items/gravity.png",
+      "description": "자기장이 접근 중입니다",
+      "maxLevel": 5,
+      "counts": [
+        4,
+        6,
+        8,
+        10,
+        12
+      ],
+      "energyCosts": [
+        10,
+        20,
+        50,
+        100,
+        200
+      ],
+      "cooldownTime": 2
+    },
+    {
+      "itemName": "Fireworks",
+      "itemType": "Fireworks",
+      "itemRarity": "Common",
+      "imagePath": "Assets/Sprites/Items/fireworks.png",
+      "description": "축제인가요? 아니요",
+      "maxLevel": 5,
+      "counts": [
+        4,
+        6,
+        8,
+        10,
+        12
+      ],
+      "energyCosts": [
+        10,
+        20,
+        50,
+        100,
+        200
+      ],
+      "cooldownTime": 2
+    }
+  ]
+}

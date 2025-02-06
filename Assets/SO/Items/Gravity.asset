@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7dbf9f8560f0e734baab86fd1c1f0b7d, type: 3}
-  m_Name: Buff Range
+  m_Name: Gravity
   m_EditorClassIdentifier: 
-  itemName: 
-  itemType: 7
+  itemName: Gravity
+  itemType: 12
   itemRarity: 0
   itemImage: {fileID: 0}
-  description: 
-  maxLevel: 0
+  description: "\uC790\uAE30\uC7A5\uC774 \uC811\uADFC \uC911\uC785\uB2C8\uB2E4"
+  maxLevel: 5
   counts:
-  - 1.5
-  - 2
-  - 2.5
-  - 3
-  - 3.5
+  - 4
+  - 6
+  - 8
+  - 10
+  - 12
   energyCosts: 0a000000140000003200000064000000c8000000
-  cooldownTime: 0
+  cooldownTime: 2
