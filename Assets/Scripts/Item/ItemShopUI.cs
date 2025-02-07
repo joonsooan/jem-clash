@@ -30,9 +30,18 @@ public class ItemShopUI : MonoBehaviour
         if (itemDatabase.items.Count < count)
         {
             Debug.LogError("아이템 개수가 부족합니다!");
-            return new List<UpgradeData>(itemDatabase.items); // 가능한 만큼 반환
+            return new List<UpgradeData>(itemDatabase.items);
         }
 
-        return itemDatabase.items.OrderBy(x => Random.value).Take(count).ToList();
+        var items = new List<UpgradeData>(itemDatabase.items);
+        int n = items.Count;
+
+        for (int i = 0; i < count; i++)
+        {
+            int randomIndex = Random.Range(i, n);
+            (items[i], items[randomIndex]) = (items[randomIndex], items[i]);
+        }
+
+        return items.Take(count).ToList();
     }
 }

@@ -5,9 +5,9 @@ using UnityEngine;
 public class ItemDatabase : ScriptableObject
 {
     public List<UpgradeData> items;
-
-    public UpgradeData GetItem(string itemName)
-    {
-        return items.Find(item => item.itemName == itemName);
-    }
+    //
+    // public UpgradeData GetItem(string itemName)
+    // {
+    //     return items.Find(item => item.itemName == itemName);
+    // }
 }
