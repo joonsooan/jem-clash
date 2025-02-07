@@ -3,6 +3,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Upgrade", menuName = "ScriptableObjects/UpgradeData")]
 public class UpgradeData : ScriptableObject
 {
+    public enum Category
+    {
+        Active,
+        Passive
+    }
+
     public enum Rarity
     {
         Common,
@@ -29,9 +35,10 @@ public class UpgradeData : ScriptableObject
     }
 
     public string itemName;
+    public Sprite itemImage;
     public UpgradeType itemType;
     public Rarity itemRarity;
-    public Sprite itemImage;
+    public Category itemCategory;
     [TextArea] public string description;
 
     public int maxLevel;

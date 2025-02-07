@@ -4,44 +4,96 @@
       "itemName": "Blover",
       "itemType": "Blover",
       "itemRarity": "Common",
-      "imagePath": "Assets/Sprites/Items/blover.png",
+      "itemCategory": "Active",
+      "imagePath": "blover",
       "description": "바람을 부는 능력입니다",
       "maxLevel": 5,
-      "counts": [4, 6, 8, 10, 12],
-      "energyCosts": [10, 20, 50, 100, 200],
+      "counts": [
+        4,
+        6,
+        8,
+        10,
+        12
+      ],
+      "energyCosts": [
+        10,
+        20,
+        50,
+        100,
+        200
+      ],
       "cooldownTime": 2
     },
     {
       "itemName": "Meteor",
       "itemType": "Meteor",
       "itemRarity": "Common",
-      "imagePath": "Assets/Sprites/Items/meteor.png",
+      "itemCategory": "Active",
+      "imagePath": "meteor",
       "description": "메테오 능력입니다",
       "maxLevel": 5,
-      "counts": [4, 6, 8, 10, 12],
-      "energyCosts": [10, 20, 50, 100, 200],
+      "counts": [
+        4,
+        6,
+        8,
+        10,
+        12
+      ],
+      "energyCosts": [
+        10,
+        20,
+        50,
+        100,
+        200
+      ],
       "cooldownTime": 2
     },
     {
       "itemName": "Gravity",
       "itemType": "Gravity",
       "itemRarity": "Common",
-      "imagePath": "Assets/Sprites/Items/gravity.png",
+      "itemCategory": "Active",
+      "imagePath": "gravity",
       "description": "중력 능력입니다",
       "maxLevel": 5,
-      "counts": [4, 6, 8, 10, 12],
-      "energyCosts": [10, 20, 50, 100, 200],
+      "counts": [
+        4,
+        6,
+        8,
+        10,
+        12
+      ],
+      "energyCosts": [
+        10,
+        20,
+        50,
+        100,
+        200
+      ],
       "cooldownTime": 2
     },
     {
       "itemName": "Fireworks",
       "itemType": "Fireworks",
       "itemRarity": "Common",
-      "imagePath": "Assets/Sprites/Items/fireworks.png",
+      "itemCategory": "Active",
+      "imagePath": "fireworks",
       "description": "불꽃 능력입니다",
       "maxLevel": 5,
-      "counts": [4, 6, 8, 10, 12],
-      "energyCosts": [10, 20, 50, 100, 200],
+      "counts": [
+        4,
+        6,
+        8,
+        10,
+        12
+      ],
+      "energyCosts": [
+        10,
+        20,
+        50,
+        100,
+        200
+      ],
       "cooldownTime": 2
     }
   ]

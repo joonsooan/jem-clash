@@ -16,6 +16,7 @@ public class ItemDataJSON
     public string itemName;
     public string itemType;
     public string itemRarity;
+    public string itemCategory;
     public string imagePath;
     public string description;
     public int maxLevel;
@@ -46,6 +47,7 @@ public class ItemImporter : MonoBehaviour
             newItem.itemName = item.itemName;
             newItem.itemType = (UpgradeData.UpgradeType)Enum.Parse(typeof(UpgradeData.UpgradeType), item.itemType);
             newItem.itemRarity = (UpgradeData.Rarity)Enum.Parse(typeof(UpgradeData.Rarity), item.itemRarity);
+            newItem.itemCategory = (UpgradeData.Category)Enum.Parse(typeof(UpgradeData.Category), item.itemCategory);
             newItem.itemImage = Resources.Load<Sprite>(item.imagePath);
             newItem.description = item.description;
 
