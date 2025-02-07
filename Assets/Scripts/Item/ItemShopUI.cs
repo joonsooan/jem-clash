@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ItemShopUI : MonoBehaviour
 {
-    private const int DISPLAY_ITEM_COUNT = 4;
+    private const int DisplayItemCount = 4;
     public ItemDatabase itemDatabase;
     public ItemSlot[] itemSlots;
-    private List<UpgradeData> currentItems = new();
+    private List<UpgradeData> _currentItems = new();
 
     private void Start()
     {
@@ -16,11 +16,11 @@ public class ItemShopUI : MonoBehaviour
 
     public void RerollShop()
     {
-        currentItems = GetRandomItems(DISPLAY_ITEM_COUNT);
+        _currentItems = GetRandomItems(DisplayItemCount);
 
         for (int i = 0; i < itemSlots.Length; i++)
-            if (i < currentItems.Count)
-                itemSlots[i].SetItem(currentItems[i]);
+            if (i < _currentItems.Count)
+                itemSlots[i].SetItem(_currentItems[i]);
             else
                 itemSlots[i].SetItem(null);
     }
