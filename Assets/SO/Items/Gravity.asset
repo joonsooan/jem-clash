@@ -16,7 +16,7 @@ MonoBehaviour:
   itemType: 12
   itemRarity: 0
   itemImage: {fileID: 0}
-  description: "\uC790\uAE30\uC7A5\uC774 \uC811\uADFC \uC911\uC785\uB2C8\uB2E4"
+  description: "\uC911\uB825 \uB2A5\uB825\uC785\uB2C8\uB2E4"
   maxLevel: 5
   counts:
   - 4
