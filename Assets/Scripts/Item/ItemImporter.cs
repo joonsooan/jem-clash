@@ -33,12 +33,22 @@ public class ItemImporter : MonoBehaviour
         string path = "Assets/Resources/items.json";
         if (!File.Exists(path))
         {
-            Debug.LogError("JSON 파일을 찾을 수 없습니다!");
+            Debug.LogError("JSON 파일을 찾을 수 없습니다");
             return;
         }
 
         string json = File.ReadAllText(path);
         ItemDataList itemList = JsonUtility.FromJson<ItemDataList>(json);
+
+        const string databasePath = "Assets/SO/ItemDatabase.asset";
+        ItemDatabase itemDatabase = AssetDatabase.LoadAssetAtPath<ItemDatabase>(databasePath);
+        if (itemDatabase == null)
+        {
+            Debug.LogError("ItemDatabase를 찾을 수 없습니다");
+            return;
+        }
+
+        itemDatabase.items.Clear();
 
         foreach (ItemDataJSON item in itemList.items)
         {
@@ -57,10 +67,11 @@ public class ItemImporter : MonoBehaviour
             newItem.cooldownTime = item.cooldownTime;
 
             AssetDatabase.CreateAsset(newItem, $"Assets/SO/Items/{item.itemName}.asset");
+            itemDatabase.items.Add(newItem);
         }
 
+        EditorUtility.SetDirty(itemDatabase); // 변경 사항 감지
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
-        Debug.Log("데이터를 ScriptableObject로 변환 완료");
     }
 }

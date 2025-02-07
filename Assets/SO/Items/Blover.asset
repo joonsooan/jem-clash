@@ -20,10 +20,10 @@ MonoBehaviour:
   description: "\uBC14\uB78C\uC744 \uBD80\uB294 \uB2A5\uB825\uC785\uB2C8\uB2E4"
   maxLevel: 5
   counts:
+  - 1
+  - 2
+  - 3
   - 4
-  - 6
-  - 8
-  - 10
-  - 12
+  - 5
   energyCosts: 0a000000140000003200000064000000c8000000
   cooldownTime: 2

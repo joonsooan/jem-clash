@@ -9,11 +9,11 @@
       "description": "바람을 부는 능력입니다",
       "maxLevel": 5,
       "counts": [
+        1,
+        2,
+        3,
         4,
-        6,
-        8,
-        10,
-        12
+        5
       ],
       "energyCosts": [
         10,
