@@ -1,22 +1,27 @@
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class ItemShopUI : MonoBehaviour
 {
     private const int DisplayItemCount = 4;
-    public ItemDatabase itemDatabase;
+
+    [Header("Item Data")] public ItemDatabase itemDatabase;
     public ItemDescription itemDescription;
     public ItemSlot[] itemSlots;
+
+    [Header("Shop Data")] public TMP_Text rerollPriceText;
+    public int rerollPrice;
 
     private List<UpgradeData> _currentItems = new();
 
     private void Start()
     {
-        RerollShop();
+        InitShopData();
     }
 
-    public void RerollShop()
+    private void InitShopData()
     {
         _currentItems = GetRandomItems(DisplayItemCount);
 
@@ -27,6 +32,26 @@ public class ItemShopUI : MonoBehaviour
                 itemSlots[i].SetItem(null);
 
         itemDescription.EraseDescPanel();
+        rerollPriceText.text = rerollPrice.ToString();
+    }
+
+    public void RerollShop() // Reroll 버튼 눌렀을 때 실행
+    {
+        if (UpdateRerollPrice())
+            InitShopData();
+    }
+
+    private bool UpdateRerollPrice()
+    {
+        if (MoneyManager.Instance.SubtractMoney(rerollPrice))
+        {
+            rerollPrice++;
+            rerollPriceText.text = rerollPrice.ToString();
+            return true;
+        }
+
+        Debug.Log("Not enough money");
+        return false;
     }
 
     private List<UpgradeData> GetRandomItems(int count)

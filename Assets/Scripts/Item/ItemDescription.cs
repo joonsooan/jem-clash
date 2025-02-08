@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemDescription : MonoBehaviour
 {
@@ -13,9 +14,15 @@ public class ItemDescription : MonoBehaviour
     public TMP_Text descriptionText;
     public TMP_Text coolTimeText;
 
+    [Header("Buy Values")] public Button buyButton;
+    public TMP_Text itemPriceText;
+    public int itemPrice;
+
     private void Start()
     {
         EraseDescPanel();
+        buyButton.onClick.AddListener(() => BuyItem(itemPrice));
+        itemPriceText.text = itemPrice.ToString();
     }
 
     public void UpdateItemDescPanel(string itemName, string rarity, string category, string description,
@@ -47,5 +54,11 @@ public class ItemDescription : MonoBehaviour
         categoryText.text = "";
         descriptionText.text = "";
         coolTimeText.text = "";
+    }
+
+    // TODO: 아이템을 선택한 상태여야지만 아이템을 구매할 수 있음
+    private void BuyItem(int amount)
+    {
+        MoneyManager.Instance.SubtractMoney(amount);
     }
 }

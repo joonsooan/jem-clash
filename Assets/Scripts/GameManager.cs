@@ -21,7 +21,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+
         gameLive = true;
         abilityManager.GetComponent<UnitControl>().controlTime = 5f;
     }
