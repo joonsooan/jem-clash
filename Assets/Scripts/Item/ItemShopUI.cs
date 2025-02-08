@@ -6,7 +6,9 @@ public class ItemShopUI : MonoBehaviour
 {
     private const int DisplayItemCount = 4;
     public ItemDatabase itemDatabase;
+    public ItemDescription itemDescription;
     public ItemSlot[] itemSlots;
+
     private List<UpgradeData> _currentItems = new();
 
     private void Start()
@@ -23,6 +25,8 @@ public class ItemShopUI : MonoBehaviour
                 itemSlots[i].SetItem(_currentItems[i]);
             else
                 itemSlots[i].SetItem(null);
+
+        itemDescription.EraseDescPanel();
     }
 
     private List<UpgradeData> GetRandomItems(int count)

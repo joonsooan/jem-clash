@@ -27,7 +27,7 @@
     {
       "itemName": "Meteor",
       "itemType": "Meteor",
-      "itemRarity": "Common",
+      "itemRarity": "Rare",
       "itemCategory": "Active",
       "imagePath": "meteor",
       "description": "메테오 능력입니다",
@@ -46,12 +46,12 @@
         100,
         200
       ],
-      "cooldownTime": 2
+      "cooldownTime": 3
     },
     {
       "itemName": "Gravity",
       "itemType": "Gravity",
-      "itemRarity": "Common",
+      "itemRarity": "Epic",
       "itemCategory": "Active",
       "imagePath": "gravity",
       "description": "중력 능력입니다",
@@ -70,12 +70,12 @@
         100,
         200
       ],
-      "cooldownTime": 2
+      "cooldownTime": 4
     },
     {
       "itemName": "Fireworks",
       "itemType": "Fireworks",
-      "itemRarity": "Common",
+      "itemRarity": "Legendary",
       "itemCategory": "Active",
       "imagePath": "fireworks",
       "description": "불꽃 능력입니다",
@@ -94,7 +94,7 @@
         100,
         200
       ],
-      "cooldownTime": 2
+      "cooldownTime": 5
     }
   ]
 }

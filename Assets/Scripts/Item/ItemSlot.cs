@@ -8,6 +8,7 @@ public class ItemSlot : MonoBehaviour
     public Image itemImage;
     public TMP_Text itemNameText;
     private string _itemCategory;
+    private string _itemCooldownTime;
     private string _itemDescription;
     private string _itemRarity;
 
@@ -20,6 +21,7 @@ public class ItemSlot : MonoBehaviour
             _itemDescription = "";
             _itemRarity = "";
             _itemCategory = "";
+            _itemCooldownTime = "";
             return;
         }
 
@@ -29,10 +31,12 @@ public class ItemSlot : MonoBehaviour
         _itemDescription = item.description;
         _itemRarity = item.itemRarity.ToString();
         _itemCategory = item.itemCategory.ToString();
+        _itemCooldownTime = item.cooldownTime.ToString("F1");
     }
 
     public void OnClick()
     {
-        itemDescription.UpdateItemDescPanel();
+        itemDescription.UpdateItemDescPanel(
+            itemNameText.text, _itemRarity, _itemCategory, _itemDescription, _itemCooldownTime);
     }
 }
