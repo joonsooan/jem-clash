@@ -7,6 +7,7 @@ public class ItemSlot : MonoBehaviour
     public ItemDescription itemDescription;
     public Image itemImage;
     public TMP_Text itemNameText;
+    private UpgradeData _item;
     private string _itemCategory;
     private string _itemCooldownTime;
     private string _itemDescription;
@@ -17,7 +18,9 @@ public class ItemSlot : MonoBehaviour
     {
         if (item == null)
         {
+            _item = null;
             itemImage.enabled = false;
+            itemImage.sprite = null;
             itemNameText.text = "";
             _itemDescription = "";
             _itemRarity = "";
@@ -27,6 +30,7 @@ public class ItemSlot : MonoBehaviour
             return;
         }
 
+        _item = item;
         itemImage.enabled = true;
         itemImage.sprite = item.itemImage;
         itemNameText.text = item.itemName;
@@ -41,5 +45,6 @@ public class ItemSlot : MonoBehaviour
     {
         itemDescription.UpdateItemDescPanel(
             itemNameText.text, _itemRarity, _itemCategory, _itemDescription, _itemCooldownTime, _itemPrice);
+        itemDescription.SetSelectedItem(_item);
     }
 }

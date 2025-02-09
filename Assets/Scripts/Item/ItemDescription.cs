@@ -14,9 +14,12 @@ public class ItemDescription : MonoBehaviour
     public TMP_Text descriptionText;
     public TMP_Text coolTimeText;
 
-    [Header("Buy Values")] public Button buyButton;
+    [Header("Buy Values")] public ItemManager itemManager;
+    public Button buyButton;
     public TMP_Text itemPriceText;
     public int itemPrice;
+
+    private UpgradeData _selectedItem;
 
     private void Start()
     {
@@ -52,6 +55,11 @@ public class ItemDescription : MonoBehaviour
         itemPriceText.text = itemPrice.ToString();
     }
 
+    public void SetSelectedItem(UpgradeData item)
+    {
+        _selectedItem = item;
+    }
+
     public void EraseDescPanel()
     {
         rarityDefaultText.text = "";
@@ -62,11 +70,13 @@ public class ItemDescription : MonoBehaviour
         categoryText.text = "";
         descriptionText.text = "";
         coolTimeText.text = "";
+
+        _selectedItem = null;
     }
 
-    // TODO: 아이템을 선택한 상태여야지만 아이템을 구매할 수 있음
     private void BuyItem(int amount)
     {
         MoneyManager.Instance.SubtractMoney(amount);
+        itemManager.CreateItemBtn(_selectedItem);
     }
 }

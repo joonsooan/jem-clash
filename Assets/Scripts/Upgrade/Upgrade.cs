@@ -20,12 +20,7 @@ public class Upgrade : MonoBehaviour
         _activeUpgrades = InitActiveUpgrades();
     }
 
-    private void Update()
-    {
-        _isShiftPressed = Input.GetKey(KeyCode.LeftShift);
-    }
-
-    public void OnEnable()
+    public void Start()
     {
         _levelText.text = $"Lv.{level:D2}";
 
@@ -47,6 +42,11 @@ public class Upgrade : MonoBehaviour
             case UpgradeData.UpgradeType.Gravity:
                 break;
         }
+    }
+
+    private void Update()
+    {
+        _isShiftPressed = Input.GetKey(KeyCode.LeftShift);
     }
 
     private HashSet<UpgradeData.UpgradeType> InitActiveUpgrades()
