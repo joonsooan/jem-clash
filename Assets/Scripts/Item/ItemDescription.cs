@@ -76,7 +76,7 @@ public class ItemDescription : MonoBehaviour
 
     private void BuyItem(int amount)
     {
-        MoneyManager.Instance.SubtractMoney(amount);
-        itemManager.CreateItemBtn(_selectedItem);
+        if (MoneyManager.Instance.SubtractMoney(amount))
+            itemManager.CreateItemBtn(_selectedItem);
     }
 }
