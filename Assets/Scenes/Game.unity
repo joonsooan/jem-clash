@@ -158,10 +158,10 @@ RectTransform:
   - {fileID: 864545980}
   m_Father: {fileID: 1681572503}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 75, y: -206.25}
-  m_SizeDelta: {x: 130, y: 47.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &29973910
 MonoBehaviour:
@@ -1575,10 +1575,10 @@ RectTransform:
   - {fileID: 1240915145}
   m_Father: {fileID: 1681572503}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 75, y: -148.75}
-  m_SizeDelta: {x: 130, y: 47.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &166393367
 MonoBehaviour:
@@ -6304,10 +6304,10 @@ RectTransform:
   - {fileID: 1107574594}
   m_Father: {fileID: 1681572503}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 75, y: -91.25}
-  m_SizeDelta: {x: 130, y: 47.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &946725980
 MonoBehaviour:
@@ -8219,7 +8219,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1215651938
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8330,10 +8330,10 @@ RectTransform:
   - {fileID: 1988885068}
   m_Father: {fileID: 1681572503}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 75, y: -33.75}
-  m_SizeDelta: {x: 130, y: 47.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1233477945
 MonoBehaviour:
@@ -12519,7 +12519,7 @@ MonoBehaviour:
   coolTimeText: {fileID: 2008486670}
   buyButton: {fileID: 970468652}
   itemPriceText: {fileID: 541729217}
-  itemPrice: 4
+  itemPrice: 0
 --- !u!1 &1788586108
 GameObject:
   m_ObjectHideFlags: 0

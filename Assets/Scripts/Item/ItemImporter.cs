@@ -20,6 +20,7 @@ public class ItemDataJSON
     public string imagePath;
     public string description;
     public int maxLevel;
+    public int itemPrice;
     public float[] counts;
     public int[] energyCosts;
     public float cooldownTime;
@@ -62,6 +63,7 @@ public class ItemImporter : MonoBehaviour
             newItem.description = item.description;
 
             newItem.maxLevel = item.maxLevel;
+            newItem.itemPrice = item.itemPrice;
             newItem.counts = item.counts;
             newItem.energyCosts = item.energyCosts;
             newItem.cooldownTime = item.cooldownTime;

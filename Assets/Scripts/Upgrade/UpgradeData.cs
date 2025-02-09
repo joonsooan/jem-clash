@@ -34,14 +34,15 @@ public class UpgradeData : ScriptableObject
         Gravity
     }
 
-    public string itemName;
+    [Header("String Data")] public string itemName;
     public Sprite itemImage;
     public UpgradeType itemType;
     public Rarity itemRarity;
     public Category itemCategory;
     [TextArea] public string description;
 
-    public int maxLevel;
+    [Header("Number Data")] public int maxLevel;
+    public int itemPrice;
     public float[] counts;
     public int[] energyCosts;
     [Header("Cooldown")] public float cooldownTime;

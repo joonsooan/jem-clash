@@ -26,7 +26,7 @@ public class ItemDescription : MonoBehaviour
     }
 
     public void UpdateItemDescPanel(string itemName, string rarity, string category, string description,
-        string coolTime)
+        string coolTime, int price)
     {
         InitDescPanel();
 
@@ -35,6 +35,8 @@ public class ItemDescription : MonoBehaviour
         categoryText.text = category;
         descriptionText.text = description;
         coolTimeText.text = $"{coolTime} s";
+
+        SetItemPrice(price);
     }
 
     private void InitDescPanel()
@@ -42,6 +44,12 @@ public class ItemDescription : MonoBehaviour
         rarityDefaultText.text = "Rarity";
         categoryDefaultText.text = "Type";
         coolTimeDefaultText.text = "Cooldown";
+    }
+
+    private void SetItemPrice(int newPrice)
+    {
+        itemPrice = newPrice;
+        itemPriceText.text = itemPrice.ToString();
     }
 
     public void EraseDescPanel()

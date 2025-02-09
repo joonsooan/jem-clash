@@ -19,6 +19,7 @@ MonoBehaviour:
   itemCategory: 0
   description: "\uBD88\uAF43 \uB2A5\uB825\uC785\uB2C8\uB2E4"
   maxLevel: 5
+  itemPrice: 12
   counts:
   - 4
   - 6

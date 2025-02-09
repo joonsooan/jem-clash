@@ -8,6 +8,7 @@
       "imagePath": "blover",
       "description": "바람을 부는 능력입니다",
       "maxLevel": 5,
+      "itemPrice": 9,
       "counts": [
         1,
         2,
@@ -32,6 +33,7 @@
       "imagePath": "meteor",
       "description": "메테오 능력입니다",
       "maxLevel": 5,
+      "itemPrice": 10,
       "counts": [
         4,
         6,
@@ -56,6 +58,7 @@
       "imagePath": "gravity",
       "description": "중력 능력입니다",
       "maxLevel": 5,
+      "itemPrice": 11,
       "counts": [
         4,
         6,
@@ -80,6 +83,7 @@
       "imagePath": "fireworks",
       "description": "불꽃 능력입니다",
       "maxLevel": 5,
+      "itemPrice": 12,
       "counts": [
         4,
         6,

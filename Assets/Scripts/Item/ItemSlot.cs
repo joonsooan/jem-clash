@@ -10,6 +10,7 @@ public class ItemSlot : MonoBehaviour
     private string _itemCategory;
     private string _itemCooldownTime;
     private string _itemDescription;
+    private int _itemPrice;
     private string _itemRarity;
 
     public void SetItem(UpgradeData item)
@@ -22,6 +23,7 @@ public class ItemSlot : MonoBehaviour
             _itemRarity = "";
             _itemCategory = "";
             _itemCooldownTime = "";
+            _itemPrice = 0;
             return;
         }
 
@@ -32,11 +34,12 @@ public class ItemSlot : MonoBehaviour
         _itemRarity = item.itemRarity.ToString();
         _itemCategory = item.itemCategory.ToString();
         _itemCooldownTime = item.cooldownTime.ToString("F1");
+        _itemPrice = item.itemPrice;
     }
 
     public void OnClick()
     {
         itemDescription.UpdateItemDescPanel(
-            itemNameText.text, _itemRarity, _itemCategory, _itemDescription, _itemCooldownTime);
+            itemNameText.text, _itemRarity, _itemCategory, _itemDescription, _itemCooldownTime, _itemPrice);
     }
 }
