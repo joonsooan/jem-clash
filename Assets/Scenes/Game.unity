@@ -1687,7 +1687,7 @@ GameObject:
   - component: {fileID: 208313608}
   - component: {fileID: 208313607}
   m_Layer: 5
-  m_Name: Price Txt
+  m_Name: Buy Txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1732,7 +1732,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Gold
+  m_text: Buy
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b8cff3ba2682d304785e445cb02db09b, type: 2}
   m_sharedMaterial: {fileID: -8641277119808886060, guid: b8cff3ba2682d304785e445cb02db09b, type: 2}
@@ -3240,7 +3240,7 @@ GameObject:
   - component: {fileID: 541729218}
   - component: {fileID: 541729217}
   m_Layer: 5
-  m_Name: Price Txt (1)
+  m_Name: Buy Txt (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
