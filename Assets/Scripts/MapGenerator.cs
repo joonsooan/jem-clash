@@ -90,16 +90,48 @@ public class MapGenerator : MonoBehaviour
                 var possibleRooms = GetNextFloorRooms(room);
                 if (possibleRooms.Count > 0)
                 {
-                    // 다음 층의 방 중에서 랜덤으로 하나 골라 경로 저장
-                    //TODO: 방들 경로가 겹치지 않도록 수정하기
-                    RoomNode nextRoom = possibleRooms[Random.Range(0, possibleRooms.Count)];
-                    _paths.Add(new Path(room, nextRoom));
-                    nextFloorRooms.Add(nextRoom);
+                    // 겹치지 않는 경로로 랜덤 생성
+                    RoomNode nextRoom = null;
+                    do
+                    {
+                        nextRoom = possibleRooms[Random.Range(0, possibleRooms.Count)];
+                        possibleRooms.Remove(nextRoom);
+                    } while (PathIntersects(room, nextRoom));
+
+                    if (nextRoom != null)
+                    {
+                        _paths.Add(new Path(room, nextRoom));
+                        nextFloorRooms.Add(nextRoom);
+                    }
                 }
             }
 
             currentFloorRooms = nextFloorRooms;
         }
+    }
+
+    private bool PathIntersects(RoomNode a, RoomNode b)
+    {
+        foreach (Path path in _paths)
+            if (LinesIntersect(a.x, a.y, b.x, b.y,
+                    path.room1.x, path.room1.y,
+                    path.room2.x, path.room2.y))
+                return true;
+
+        return false;
+    }
+
+    private bool LinesIntersect(
+        float x1, float y1, float x2, float y2,
+        float x3, float y3, float x4, float y4)
+    {
+        float det = (x2 - x1) * (y4 - y3) - (y2 - y1) * (x4 - x3);
+        if (det == 0) return false; // 평행
+
+        float lambda = ((x3 - x1) * (y4 - y3) - (y3 - y1) * (x4 - x3)) / det;
+        float gamma = ((x3 - x1) * (y2 - y1) - (y3 - y1) * (x2 - x1)) / det;
+
+        return lambda is > 0 and < 1 && gamma is > 0 and < 1;
     }
 
     private List<RoomNode> GetNextFloorRooms(RoomNode room)

@@ -524,7 +524,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 7
-  width: 12
+  width: 15
   startRoomCount: 4
 --- !u!1 &1960691856
 GameObject:
