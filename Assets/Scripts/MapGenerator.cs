@@ -5,8 +5,10 @@ using Random = UnityEngine.Random;
 
 public class MapGenerator : MonoBehaviour
 {
-    public int height = 6;
-    public int width = 12;
+    public int height;
+    public int width;
+    public int startRoomCount;
+
     private readonly List<Path> _paths = new(); // 생성된 경로 리스트
     private readonly List<RoomNode> _rooms = new(); // 생성된 방 리스트
 
@@ -72,13 +74,17 @@ public class MapGenerator : MonoBehaviour
             start2 = firstFloorRooms[Random.Range(0, firstFloorRooms.Count)];
         } while (start1 == start2);
 
-        // 방들 사이의 랜덤 경로 생성
         var currentFloorRooms = new List<RoomNode> { start1, start2 };
 
+        for (int i = 0; i < startRoomCount; i++)
+            currentFloorRooms.Add(firstFloorRooms[Random.Range(0, currentFloorRooms.Count)]);
+
+        // 방들 사이의 랜덤 경로 생성
         for (int x = 1; x < width; x++)
         {
             List<RoomNode> nextFloorRooms = new();
 
+            // x층에서 경로 생성
             foreach (RoomNode room in currentFloorRooms)
             {
                 var possibleRooms = GetNextFloorRooms(room);
