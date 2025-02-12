@@ -5,9 +5,12 @@ using Random = UnityEngine.Random;
 
 public class MapGenerator : MonoBehaviour
 {
-    public int height;
+    [Header("Map Settings")] public int height;
     public int width;
     public int startRoomCount;
+
+    [Header("Game Objects")] public GameObject[] roomPrefabs;
+    public GameObject pathPrefab;
 
     private readonly List<Path> _paths = new(); // 생성된 경로 리스트
     private readonly List<RoomNode> _rooms = new(); // 생성된 방 리스트
@@ -49,6 +52,7 @@ public class MapGenerator : MonoBehaviour
         RemoveUnconnectedRooms(); // 연결되지 않은 방 제거
         AssignRoomTypes(); // 각 방에 타입 유형 할당
         AddBossRoom(); // 보스 방 추가
+        RenderMap();
     }
 
     private void InitializeGrid()
@@ -110,13 +114,33 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
+    private void RenderMap()
+    {
+        foreach (RoomNode room in _rooms)
+        {
+            //TODO: 타입에 따라 프리팹 적용
+            GameObject roomObj = Instantiate(roomPrefabs[0], new Vector3(room.x, room.y, 0), Quaternion.identity);
+            roomObj.transform.SetParent(transform);
+        }
+
+        foreach (Path path in _paths)
+        {
+            GameObject pathObj = Instantiate(pathPrefab, transform, true);
+            LineRenderer lr = pathObj.GetComponent<LineRenderer>();
+
+            lr.SetPosition(0, new Vector3(path.room1.x, path.room1.y, 0));
+            lr.SetPosition(1, new Vector3(path.room2.x, path.room2.y, 0));
+        }
+    }
+
     private bool PathIntersects(RoomNode a, RoomNode b)
     {
         foreach (Path path in _paths)
-            if (LinesIntersect(a.x, a.y, b.x, b.y,
-                    path.room1.x, path.room1.y,
-                    path.room2.x, path.room2.y))
-                return true;
+            if (path.room1.x == a.x)
+                if (LinesIntersect(a.x, a.y, b.x, b.y,
+                        path.room1.x, path.room1.y,
+                        path.room2.x, path.room2.y))
+                    return true;
 
         return false;
     }

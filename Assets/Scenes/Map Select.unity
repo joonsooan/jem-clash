@@ -526,6 +526,9 @@ MonoBehaviour:
   height: 7
   width: 15
   startRoomCount: 4
+  roomPrefabs:
+  - {fileID: 5755917410727377643, guid: ef79d9bbed36cc04dac73aeb86727040, type: 3}
+  pathPrefab: {fileID: 8750517888722526750, guid: e426a513c561f4d4eb2afe57a55b306d, type: 3}
 --- !u!1 &1960691856
 GameObject:
   m_ObjectHideFlags: 0
