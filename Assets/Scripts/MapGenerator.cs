@@ -9,6 +9,12 @@ public class MapGenerator : MonoBehaviour
     public int width;
     public int startRoomCount;
 
+    [Header("Map Scale")] public int mapScaleWidth;
+    public int mapScaleHeight;
+
+    [Header("Map Offset")] public int mapOffsetX;
+    public int mapOffsetY;
+
     [Header("Game Objects")] public GameObject[] roomPrefabs;
     public GameObject pathPrefab;
 
@@ -119,7 +125,10 @@ public class MapGenerator : MonoBehaviour
         foreach (RoomNode room in _rooms)
         {
             //TODO: 타입에 따라 프리팹 적용
-            GameObject roomObj = Instantiate(roomPrefabs[0], new Vector3(room.x, room.y, 0), Quaternion.identity);
+            GameObject roomObj = Instantiate(roomPrefabs[0],
+                new Vector3(room.x * mapScaleWidth + mapOffsetX,
+                    room.y * mapScaleHeight + mapOffsetY, -2f),
+                Quaternion.identity);
             roomObj.transform.SetParent(transform);
         }
 
@@ -128,8 +137,10 @@ public class MapGenerator : MonoBehaviour
             GameObject pathObj = Instantiate(pathPrefab, transform, true);
             LineRenderer lr = pathObj.GetComponent<LineRenderer>();
 
-            lr.SetPosition(0, new Vector3(path.room1.x, path.room1.y, 0));
-            lr.SetPosition(1, new Vector3(path.room2.x, path.room2.y, 0));
+            lr.SetPosition(0, new Vector3(path.room1.x * mapScaleWidth + mapOffsetX,
+                path.room1.y * mapScaleHeight + mapOffsetY, -1f));
+            lr.SetPosition(1, new Vector3(path.room2.x * mapScaleWidth + mapOffsetX,
+                path.room2.y * mapScaleHeight + mapOffsetY, -1f));
         }
     }
 

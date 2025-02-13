@@ -526,9 +526,13 @@ MonoBehaviour:
   height: 7
   width: 15
   startRoomCount: 4
+  mapScaleWidth: 3
+  mapScaleHeight: 2
+  mapOffsetX: -15
+  mapOffsetY: -5
   roomPrefabs:
   - {fileID: 5755917410727377643, guid: ef79d9bbed36cc04dac73aeb86727040, type: 3}
-  pathPrefab: {fileID: 8750517888722526750, guid: e426a513c561f4d4eb2afe57a55b306d, type: 3}
+  pathPrefab: {fileID: 1483560101257629013, guid: bce0e2d7954120c44b530f2cdc596a1d, type: 3}
 --- !u!1 &1960691856
 GameObject:
   m_ObjectHideFlags: 0
