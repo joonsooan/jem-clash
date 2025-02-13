@@ -5,6 +5,8 @@ using Random = UnityEngine.Random;
 
 public class MapGenerator : MonoBehaviour
 {
+    public static Dictionary<RoomNode.RoomType, float> probabilities;
+
     [Header("Map Settings")] public int height;
     public int width;
     public int startRoomCount;
@@ -23,6 +25,7 @@ public class MapGenerator : MonoBehaviour
 
     private void Start()
     {
+        probabilities = RoomNode.GenerateProbabilities();
         GenerateMap();
     }
 
@@ -56,10 +59,13 @@ public class MapGenerator : MonoBehaviour
         InitializeGrid(); // Grid 초기화
         GeneratePaths(); // 방과 경로 생성
         RemoveUnconnectedRooms(); // 연결되지 않은 방 제거
-        AssignRoomTypes(); // 각 방에 타입 유형 할당
         AddBossRoom(); // 보스 방 추가
+
+        AssignRoomTypes();
+
         RenderMap();
     }
+
 
     private void InitializeGrid()
     {
@@ -125,7 +131,7 @@ public class MapGenerator : MonoBehaviour
         foreach (RoomNode room in _rooms)
         {
             //TODO: 타입에 따라 프리팹 적용
-            GameObject roomObj = Instantiate(roomPrefabs[0],
+            GameObject roomObj = Instantiate(roomPrefabs[(int)room.Type],
                 new Vector3(room.x * mapScaleWidth + mapOffsetX,
                     room.y * mapScaleHeight + mapOffsetY, -2f),
                 Quaternion.identity);
@@ -205,12 +211,12 @@ public class MapGenerator : MonoBehaviour
     private void AssignRoomTypes()
     {
         foreach (RoomNode room in _rooms)
-            room.AssignRoomType();
+            room.AssignRoomType(room.x);
     }
 
     private void AddBossRoom()
     {
-        RoomNode bossRoom = new(width, height / 2);
+        RoomNode bossRoom = new(width + 1, height / 2);
 
         foreach (RoomNode room in _rooms)
             if (room.x == width - 1)
@@ -222,18 +228,18 @@ public class MapGenerator : MonoBehaviour
 
 public class RoomNode
 {
-    //TODO: 방 타입 규칙 적용하기 (확률, 고정 생성 등)
-
     public enum RoomType
     {
+        Event,
+        RestSite,
+        Enemy,
+        ToughEnemy,
         Shop,
         Treasure,
-        Enemy,
-        Rest
+        Boss
     }
 
-    private RoomType _roomType;
-
+    public RoomType Type;
     public int x, y;
 
     public RoomNode(int x, int y)
@@ -242,10 +248,63 @@ public class RoomNode
         this.y = y;
     }
 
-    public void AssignRoomType()
+    public static Dictionary<RoomType, float> GenerateProbabilities()
+    {
+        var dict = new Dictionary<RoomType, float>
+        {
+            { RoomType.Enemy, 45f },
+            { RoomType.Event, 22f },
+            { RoomType.ToughEnemy, 16f },
+            { RoomType.RestSite, 12f },
+            { RoomType.Shop, 5f },
+            { RoomType.Treasure, 0f },
+            { RoomType.Boss, 0f }
+        };
+
+        return dict;
+    }
+
+    public void AssignRoomType(int floor)
     {
         Array values = Enum.GetValues(typeof(RoomType));
-        _roomType = (RoomType)values.GetValue(Random.Range(0, values.Length));
+
+        switch (floor)
+        {
+            case 0: // Enemy
+                Type = RoomType.Enemy;
+                break;
+            case 7: // Treasure
+                Type = RoomType.Treasure;
+                break;
+            case 12: // Event or Rest Site
+                Type = (RoomType)values.GetValue(Random.Range(0, 2));
+                break;
+            case 14: // Boss Room
+                Type = RoomType.Boss;
+                break;
+            default:
+                Type = GetRandomEnum(MapGenerator.probabilities);
+                break;
+        }
+    }
+
+    private RoomType GetRandomEnum(Dictionary<RoomType, float> dict)
+    {
+        float totalWeight = 0f;
+        foreach (var kvp in dict)
+            totalWeight += kvp.Value;
+
+        float randomWeight = Random.Range(0, totalWeight);
+        float currentWeight = 0f;
+
+        foreach (var kvp in dict)
+        {
+            currentWeight += kvp.Value;
+            if (randomWeight < currentWeight)
+                return kvp.Key;
+        }
+
+        throw new Exception("Selection Failed");
     }
 }
 

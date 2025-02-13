@@ -229,7 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollSpeed: 5
   minX: 0
-  maxX: 40
+  maxX: 50
 --- !u!1 &1468023383
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,7 +329,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 0}
   parallaxFactor: 0.8
-  smoothSpeed: 0.5
 --- !u!1 &1572921757
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,14 +555,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 7
-  width: 15
+  width: 13
   startRoomCount: 4
-  mapScaleWidth: 4
+  mapScaleWidth: 5
   mapScaleHeight: 2
   mapOffsetX: -10
-  mapOffsetY: -5
+  mapOffsetY: -4
   roomPrefabs:
+  - {fileID: 5755917410727377643, guid: 3727530f65eb46742a7e8415ee00c822, type: 3}
+  - {fileID: 5755917410727377643, guid: a4c30e28f78a74f4b883671f5273ca71, type: 3}
   - {fileID: 5755917410727377643, guid: ef79d9bbed36cc04dac73aeb86727040, type: 3}
+  - {fileID: 5755917410727377643, guid: 34b16b7b2724bcf4ba252e1ca5d39f1e, type: 3}
+  - {fileID: 5755917410727377643, guid: f1081c5de0aeaad4293db95d41ccd9f7, type: 3}
+  - {fileID: 5755917410727377643, guid: 8e944d59832eb6041b6f4c6d4ae7bea1, type: 3}
+  - {fileID: 5755917410727377643, guid: 228d41c7231bc5c45bb348cc35b9f322, type: 3}
   pathPrefab: {fileID: 1483560101257629013, guid: bce0e2d7954120c44b530f2cdc596a1d, type: 3}
 --- !u!1 &1960691856
 GameObject:
