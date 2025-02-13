@@ -9,11 +9,11 @@ public class MapGenerator : MonoBehaviour
     public int width;
     public int startRoomCount;
 
-    [Header("Map Scale")] public int mapScaleWidth;
-    public int mapScaleHeight;
+    [Header("Map Scale")] public float mapScaleWidth;
+    public float mapScaleHeight;
 
-    [Header("Map Offset")] public int mapOffsetX;
-    public int mapOffsetY;
+    [Header("Map Offset")] public float mapOffsetX;
+    public float mapOffsetY;
 
     [Header("Game Objects")] public GameObject[] roomPrefabs;
     public GameObject pathPrefab;
