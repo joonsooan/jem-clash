@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -211,7 +212,23 @@ public class MapGenerator : MonoBehaviour
     private void AssignRoomTypes()
     {
         foreach (RoomNode room in _rooms)
-            room.AssignRoomType(room.x);
+        {
+            var connectedRooms = GetConnectedRooms(room);
+            room.AssignRoomType(room.x, connectedRooms);
+        }
+    }
+
+    private List<RoomNode> GetConnectedRooms(RoomNode room)
+    {
+        List<RoomNode> connectedRooms = new();
+
+        foreach (Path path in _paths)
+            if (path.room1 == room)
+                connectedRooms.Add(path.room2);
+            else if (path.room2 == room)
+                connectedRooms.Add(path.room1);
+
+        return connectedRooms;
     }
 
     private void AddBossRoom()
@@ -239,6 +256,8 @@ public class RoomNode
         Boss
     }
 
+    private readonly RoomType[] solidTypes = { RoomType.Treasure, RoomType.Treasure };
+
     public RoomType Type;
     public int x, y;
 
@@ -260,11 +279,10 @@ public class RoomNode
             { RoomType.Treasure, 0f },
             { RoomType.Boss, 0f }
         };
-
         return dict;
     }
 
-    public void AssignRoomType(int floor)
+    public void AssignRoomType(int floor, List<RoomNode> connectedRooms)
     {
         Array values = Enum.GetValues(typeof(RoomType));
 
@@ -283,9 +301,29 @@ public class RoomNode
                 Type = RoomType.Boss;
                 break;
             default:
-                Type = GetRandomEnum(MapGenerator.probabilities);
+                Type = GetDiffRoom(connectedRooms);
                 break;
         }
+    }
+
+    private RoomType GetDiffRoom(List<RoomNode> connectedRooms)
+    {
+        HashSet<RoomType> existingTypes = new(); // 연결된 방들의 타입 목록
+        foreach (RoomNode room in connectedRooms)
+            if (room != null)
+                existingTypes.Add(room.Type);
+
+        List<RoomType> availableTypes = new(); // 배정 가능한 타입 목록
+        foreach (RoomType type in Enum.GetValues(typeof(RoomType)))
+            if (!existingTypes.Contains(type) && !solidTypes.Contains(type))
+                availableTypes.Add(type);
+
+        // 경로가 3개여도 무조건 배정되는 타입이 존재
+        // ToughEnemy 층수 제한을 둬도 배정 가능 (딱 3개 타입)
+        if (availableTypes.Count > 0)
+            Type = availableTypes[Random.Range(0, availableTypes.Count)];
+
+        return Type;
     }
 
     private RoomType GetRandomEnum(Dictionary<RoomType, float> dict)

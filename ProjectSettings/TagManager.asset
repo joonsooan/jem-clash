@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Unit
   - Slow Zone
+  - Map Room
   layers:
   - Default
   - TransparentFX
