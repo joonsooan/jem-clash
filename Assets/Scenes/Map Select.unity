@@ -520,6 +520,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1787425533}
   - component: {fileID: 1787425534}
+  - component: {fileID: 1787425535}
   m_Layer: 0
   m_Name: Map Generator
   m_TagString: Untagged
@@ -570,6 +571,18 @@ MonoBehaviour:
   - {fileID: 6742514999812031963, guid: bb35d430228ffc24a9b1732877884c68, type: 3}
   - {fileID: 6742514999812031963, guid: 4ece1a7de05b6f44c8cff5ec7ee03f07, type: 3}
   pathPrefab: {fileID: 1483560101257629013, guid: bce0e2d7954120c44b530f2cdc596a1d, type: 3}
+--- !u!114 &1787425535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787425532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9ef30ee7804fb94aa538c06e7ae3e5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1960691856
 GameObject:
   m_ObjectHideFlags: 0
