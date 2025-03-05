@@ -2758,6 +2758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5435c00dbcd5f44f905928ffa8841e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneChanger: {fileID: 0}
   eventScreen: {fileID: 1805001518}
   restSiteScreen: {fileID: 922066387}
   shopScreen: {fileID: 990946539}
@@ -3144,7 +3145,7 @@ MonoBehaviour:
   startRoomCount: 4
   mapScaleWidth: 5
   mapScaleHeight: 2.3
-  mapOffsetX: -10
+  mapOffsetX: -15
   mapOffsetY: -5
   roomPrefabs:
   - {fileID: 6742514999812031963, guid: db620e5403053564797db6d409ef349e, type: 3}

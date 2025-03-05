@@ -3,13 +3,15 @@ using UnityEngine;
 public class RoomManager : MonoBehaviour
 {
     public static RoomManager Instance;
-    
-    [Header("Screens")]
-    public GameObject eventScreen;
+
+    public SceneChanger sceneChanger;
+
+    [Header("Screens")] public GameObject eventScreen;
+
     public GameObject restSiteScreen;
     public GameObject shopScreen;
     public GameObject treasureScreen;
-    
+
     private GameObject _currentScreen;
 
     private void Awake()
@@ -28,7 +30,7 @@ public class RoomManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+            var hit = Physics2D.Raycast(mousePos, Vector2.zero);
 
             if (hit.collider != null)
             {
@@ -49,6 +51,8 @@ public class RoomManager : MonoBehaviour
                         break;
 
                     case "Room_Enemy":
+                        GoToGameScene();
+                        break;
                     case "Room_ToughEnemy":
                     case "Room_Boss":
                         break;
@@ -57,34 +61,39 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    void ShowEventScreen()
+    private void ShowEventScreen()
     {
         PrevScreenDeactivate();
         eventScreen.SetActive(true);
         _currentScreen = eventScreen;
     }
 
-    void ShowRestSiteScreen()
+    private void ShowRestSiteScreen()
     {
         PrevScreenDeactivate();
         restSiteScreen.SetActive(true);
         _currentScreen = restSiteScreen;
     }
 
-    void ShowShopScreen()
+    private void ShowShopScreen()
     {
         PrevScreenDeactivate();
         shopScreen.SetActive(true);
         _currentScreen = shopScreen;
     }
 
-    void ShowTreasureScreen()
+    private void ShowTreasureScreen()
     {
         PrevScreenDeactivate();
         treasureScreen.SetActive(true);
         _currentScreen = treasureScreen;
     }
-    
+
+    private void GoToGameScene()
+    {
+        sceneChanger.LoadGame();
+    }
+
     private void PrevScreenDeactivate()
     {
         if (_currentScreen != null)
