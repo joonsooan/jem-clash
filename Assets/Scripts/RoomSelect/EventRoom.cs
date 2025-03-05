@@ -4,7 +4,9 @@ using UnityEngine.UI;
 
 public class EventRoom : MonoBehaviour
 {
-    public Image eventImage;
+    public CameraController cameraController;
+
+    [Header("UI Elements")] public Image eventImage;
     public TMP_Text eventDescription;
     public Button btn1;
     public Button btn2;
@@ -12,5 +14,6 @@ public class EventRoom : MonoBehaviour
     public void OnClick()
     {
         RoomManager.Instance.HideScreen();
+        cameraController.CameraShiftToRight();
     }
 }
