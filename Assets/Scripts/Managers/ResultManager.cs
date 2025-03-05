@@ -3,16 +3,8 @@ using UnityEngine;
 public class ResultManager : MonoBehaviour
 {
     [Header("Game Objects")] public GameObject summaryPanel;
-
     public GameObject shopPanel;
     public GameObject darkEffect;
-
-    private SceneChanger _sceneChanger;
-
-    private void Awake()
-    {
-        _sceneChanger = GetComponent<SceneChanger>();
-    }
 
     public void OpenSummaryPanel()
     {
@@ -44,6 +36,6 @@ public class ResultManager : MonoBehaviour
     public void LoadMapSelect()
     {
         darkEffect.SetActive(false);
-        _sceneChanger.LoadMapSelect();
+        SceneChanger.Instance.LoadMapSelect();
     }
 }

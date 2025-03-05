@@ -4,8 +4,6 @@ public class RoomManager : MonoBehaviour
 {
     public static RoomManager Instance;
 
-    public SceneChanger sceneChanger;
-
     [Header("Screens")] public GameObject eventScreen;
 
     public GameObject restSiteScreen;
@@ -16,8 +14,15 @@ public class RoomManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Update()
@@ -30,7 +35,7 @@ public class RoomManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            var hit = Physics2D.Raycast(mousePos, Vector2.zero);
+            RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
 
             if (hit.collider != null)
             {
@@ -91,7 +96,7 @@ public class RoomManager : MonoBehaviour
 
     private void GoToGameScene()
     {
-        sceneChanger.LoadGame();
+        SceneChanger.Instance.LoadGame();
     }
 
     private void PrevScreenDeactivate()
