@@ -67,7 +67,6 @@ public class MapGenerator : MonoBehaviour
         RenderMap();
     }
 
-
     private void InitializeGrid()
     {
         for (int x = 0; x < width; x++)

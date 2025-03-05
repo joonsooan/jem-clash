@@ -6,7 +6,13 @@ TagManager:
   tags:
   - Unit
   - Slow Zone
-  - Map Room
+  - Room_Event
+  - Room_RestSite
+  - Room_Enemy
+  - Room_ToughEnemy
+  - Room_Shop
+  - Room_Treasure
+  - Room_Boss
   layers:
   - Default
   - TransparentFX
