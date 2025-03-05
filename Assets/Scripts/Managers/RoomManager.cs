@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
+    public static RoomManager Instance;
+    
     [Header("Screens")]
     public GameObject eventScreen;
     public GameObject restSiteScreen;
@@ -9,12 +11,16 @@ public class RoomManager : MonoBehaviour
     public GameObject treasureScreen;
     
     private GameObject _currentScreen;
-    private bool _isScreenActive = false;
-    
+
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
+
     private void Update()
     {
         RoomSelect();
-        // HideScreen();
     }
 
     private void RoomSelect()
@@ -53,46 +59,40 @@ public class RoomManager : MonoBehaviour
 
     void ShowEventScreen()
     {
-        if (_currentScreen != null)
-            _currentScreen.SetActive(false);
+        PrevScreenDeactivate();
         eventScreen.SetActive(true);
         _currentScreen = eventScreen;
-        
     }
 
     void ShowRestSiteScreen()
     {
-        if (_currentScreen != null)
-            _currentScreen.SetActive(false);
+        PrevScreenDeactivate();
         restSiteScreen.SetActive(true);
         _currentScreen = restSiteScreen;
-        
     }
 
     void ShowShopScreen()
     {
-        if (_currentScreen != null)
-            _currentScreen.SetActive(false);
+        PrevScreenDeactivate();
         shopScreen.SetActive(true);
         _currentScreen = shopScreen;
-        
     }
 
     void ShowTreasureScreen()
     {
-        if (_currentScreen != null)
-            _currentScreen.SetActive(false);
+        PrevScreenDeactivate();
         treasureScreen.SetActive(true);
         _currentScreen = treasureScreen;
-        
+    }
+    
+    private void PrevScreenDeactivate()
+    {
+        if (_currentScreen != null)
+            _currentScreen.SetActive(false);
     }
 
-    void HideScreen()
+    public void HideScreen()
     {
-        if (Input.GetMouseButtonDown(0) && _isScreenActive)
-        {
-            _currentScreen.SetActive(false);
-            _isScreenActive = false;
-        }
+        _currentScreen.SetActive(false);
     }
 }
