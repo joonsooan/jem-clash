@@ -2,9 +2,24 @@ using UnityEngine;
 
 public class ResultManager : MonoBehaviour
 {
+    public static ResultManager instance;
+
     [Header("Game Objects")] public GameObject summaryPanel;
     public GameObject shopPanel;
     public GameObject darkEffect;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void OpenSummaryPanel()
     {
@@ -36,6 +51,6 @@ public class ResultManager : MonoBehaviour
     public void LoadMapSelect()
     {
         darkEffect.SetActive(false);
-        SceneChanger.Instance.LoadMapSelect();
+        SceneChanger.instance.LoadMapSelect();
     }
 }

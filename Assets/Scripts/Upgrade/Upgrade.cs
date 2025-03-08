@@ -153,7 +153,7 @@ public class Upgrade : MonoBehaviour
     private bool IsOnCooldown()
     {
         if (_activeUpgrades.Contains(upgradeData.itemType))
-            if (CooldownManager.Instance.IsOnCooldown(upgradeData.itemType))
+            if (CooldownManager.instance.IsOnCooldown(upgradeData.itemType))
             {
                 Debug.Log($"{upgradeData.itemType} is on cooldown.");
                 return true;
@@ -194,8 +194,8 @@ public class Upgrade : MonoBehaviour
 
     private static void SpawnAllyUnit()
     {
-        GameManager.Instance.unitSpawner.SpawnAllyUnit(
-            GameManager.Instance.unitSpawner.spawnCount);
+        GameManager.instance.unitSpawner.SpawnAllyUnit(
+            GameManager.instance.unitSpawner.spawnCount);
     }
 
     private void IncreaseSupply()
@@ -203,7 +203,7 @@ public class Upgrade : MonoBehaviour
         if (!EnoughEnergy()) return;
 
         SpendEnergy();
-        GameManager.Instance.resourceManager.SupplyAmountUp(
+        GameManager.instance.resourceManager.SupplyAmountUp(
             upgradeData.counts[level]);
         IncrementLevel();
     }
@@ -213,15 +213,15 @@ public class Upgrade : MonoBehaviour
         if (!EnoughEnergy()) return;
 
         SpendEnergy();
-        GameManager.Instance.resourceManager.EnergyAmountUp(
+        GameManager.instance.resourceManager.EnergyAmountUp(
             upgradeData.counts[level]);
         IncrementLevel();
     }
 
     private static void ToggleAutoSpawn()
     {
-        GameManager.Instance.unitSpawner.SetAutoSpawn(
-            !GameManager.Instance.unitSpawner.isAutoSpawn);
+        GameManager.instance.unitSpawner.SetAutoSpawn(
+            !GameManager.instance.unitSpawner.isAutoSpawn);
     }
 
     private void IncreaseSpawnCount()
@@ -229,7 +229,7 @@ public class Upgrade : MonoBehaviour
         if (!EnoughEnergy()) return;
 
         SpendEnergy();
-        GameManager.Instance.unitSpawner.spawnCount += (int)upgradeData.counts[level];
+        GameManager.instance.unitSpawner.spawnCount += (int)upgradeData.counts[level];
         IncrementLevel();
     }
 
@@ -238,7 +238,7 @@ public class Upgrade : MonoBehaviour
         if (!EnoughEnergy()) return;
 
         SpendEnergy();
-        GameManager.Instance.unitSpawner.allyData.health += (int)upgradeData.counts[level];
+        GameManager.instance.unitSpawner.allyData.health += (int)upgradeData.counts[level];
         IncrementLevel();
     }
 
@@ -247,7 +247,7 @@ public class Upgrade : MonoBehaviour
         if (!EnoughEnergy()) return;
 
         SpendEnergy();
-        GameManager.Instance.unitSpawner.allyData.attackDamage += (int)upgradeData.counts[level];
+        GameManager.instance.unitSpawner.allyData.attackDamage += (int)upgradeData.counts[level];
         IncrementLevel();
     }
 
@@ -256,8 +256,8 @@ public class Upgrade : MonoBehaviour
         if (!EnoughEnergy()) return;
 
         SpendEnergy();
-        GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().ChangeSprite(level);
-        GameManager.Instance.player.GetComponentInChildren<PlayerBuff>().buffRadius = upgradeData.counts[level];
+        GameManager.instance.player.GetComponentInChildren<PlayerBuff>().ChangeSprite(level);
+        GameManager.instance.player.GetComponentInChildren<PlayerBuff>().buffRadius = upgradeData.counts[level];
         IncrementLevel();
     }
 
@@ -265,8 +265,8 @@ public class Upgrade : MonoBehaviour
 
     private void ActivateFirework()
     {
-        GameManager.Instance.abilityManager.GetComponent<Firework>().SetFireworkPoints();
-        GameManager.Instance.abilityManager.GetComponent<Firework>().SpawnFireworks();
+        GameManager.instance.abilityManager.GetComponent<Firework>().SetFireworkPoints();
+        GameManager.instance.abilityManager.GetComponent<Firework>().SpawnFireworks();
         StartCooldown();
     }
 
@@ -274,19 +274,19 @@ public class Upgrade : MonoBehaviour
     {
         // 현재 upgradeData 데이터를 적용
         if (level == upgradeData.counts.Length)
-            GameManager.Instance.abilityManager.GetComponent<UnitControl>().boostMultiplier =
+            GameManager.instance.abilityManager.GetComponent<UnitControl>().boostMultiplier =
                 upgradeData.counts[level - 1];
         else
-            GameManager.Instance.abilityManager.GetComponent<UnitControl>().boostMultiplier =
+            GameManager.instance.abilityManager.GetComponent<UnitControl>().boostMultiplier =
                 upgradeData.counts[level];
 
-        GameManager.Instance.abilityManager.GetComponent<UnitControl>().isUnitControl = true;
+        GameManager.instance.abilityManager.GetComponent<UnitControl>().isUnitControl = true;
         StartCooldown();
     }
 
     private void ActivateBlover()
     {
-        GameManager.Instance.abilityManager.GetComponent<Blover>().ActivateAbility();
+        GameManager.instance.abilityManager.GetComponent<Blover>().ActivateAbility();
         StartCooldown();
     }
 
@@ -302,7 +302,7 @@ public class Upgrade : MonoBehaviour
 
     private void ActivateStrangeAbility<T>(UpgradeData data) where T : MonoBehaviour, IStrangeAbility
     {
-        T ability = GameManager.Instance.abilityManager.GetComponent<T>();
+        T ability = GameManager.instance.abilityManager.GetComponent<T>();
 
         if (ability.IsActive)
             ability.CancelAbility();
@@ -317,7 +317,7 @@ public class Upgrade : MonoBehaviour
         if (!EnoughEnergy()) return;
 
         SpendEnergy();
-        GameManager.Instance.abilityManager.GetComponent<Firework>().unitCount += (int)upgradeData.counts[level];
+        GameManager.instance.abilityManager.GetComponent<Firework>().unitCount += (int)upgradeData.counts[level];
         IncrementLevel();
     }
 
@@ -326,7 +326,7 @@ public class Upgrade : MonoBehaviour
         if (!EnoughEnergy()) return;
 
         SpendEnergy();
-        GameManager.Instance.abilityManager.GetComponent<UnitControl>().controlTime += upgradeData.counts[level];
+        GameManager.instance.abilityManager.GetComponent<UnitControl>().controlTime += upgradeData.counts[level];
         IncrementLevel();
     }
 
@@ -335,7 +335,7 @@ public class Upgrade : MonoBehaviour
         if (!EnoughEnergy()) return;
 
         SpendEnergy();
-        GameManager.Instance.abilityManager.GetComponent<Meteor>().damageAmount += (int)upgradeData.counts[level];
+        GameManager.instance.abilityManager.GetComponent<Meteor>().damageAmount += (int)upgradeData.counts[level];
         IncrementLevel();
     }
 
@@ -344,7 +344,7 @@ public class Upgrade : MonoBehaviour
         if (!EnoughEnergy()) return;
 
         SpendEnergy();
-        GameManager.Instance.abilityManager.GetComponent<Blover>().blowMagnitude = upgradeData.counts[level];
+        GameManager.instance.abilityManager.GetComponent<Blover>().blowMagnitude = upgradeData.counts[level];
         IncrementLevel();
     }
 
@@ -352,17 +352,17 @@ public class Upgrade : MonoBehaviour
 
     private void StartCooldown()
     {
-        StartCoroutine(CooldownManager.Instance.StartCoolDown(upgradeData));
+        StartCoroutine(CooldownManager.instance.StartCoolDown(upgradeData));
     }
 
     private bool EnoughEnergy()
     {
-        return GameManager.Instance.resourceManager.energy >= upgradeData.energyCosts[level];
+        return GameManager.instance.resourceManager.energy >= upgradeData.energyCosts[level];
     }
 
     private void SpendEnergy()
     {
-        GameManager.Instance.resourceManager.SpendEnergy(upgradeData.energyCosts[level]);
+        GameManager.instance.resourceManager.SpendEnergy(upgradeData.energyCosts[level]);
     }
 
     private void IncrementLevel()

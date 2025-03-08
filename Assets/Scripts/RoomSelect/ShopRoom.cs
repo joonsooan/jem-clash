@@ -9,7 +9,7 @@ public class ShopRoom : MonoBehaviour
 
     public void OnClick()
     {
-        RoomManager.Instance.HideScreen();
+        RoomManager.instance.HideScreen();
         cameraController.CameraShiftToRight();
     }
 }

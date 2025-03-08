@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
 {
+    public static ResourceManager instance;
+
     [Header("Resources")] public int supply;
 
     public int energy;
@@ -15,14 +17,24 @@ public class ResourceManager : MonoBehaviour
 
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         supply = 0;
         // energy = 0;
     }
 
     private void Start()
     {
-        _supplyText = GameManager.Instance.supplyText.GetComponent<TMP_Text>();
-        _energyText = GameManager.Instance.energyText.GetComponent<TMP_Text>();
+        _supplyText = GameManager.instance.supplyText.GetComponent<TMP_Text>();
+        _energyText = GameManager.instance.energyText.GetComponent<TMP_Text>();
     }
 
     private void Update()

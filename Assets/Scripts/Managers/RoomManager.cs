@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
-    public static RoomManager Instance;
+    public static RoomManager instance;
 
     [Header("Screens")] public GameObject eventScreen;
 
@@ -14,9 +14,9 @@ public class RoomManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -96,7 +96,7 @@ public class RoomManager : MonoBehaviour
 
     private void GoToGameScene()
     {
-        SceneChanger.Instance.LoadGame();
+        SceneChanger.instance.LoadGame();
     }
 
     private void PrevScreenDeactivate()

@@ -14,7 +14,7 @@ public class ItemDescription : MonoBehaviour
     public TMP_Text descriptionText;
     public TMP_Text coolTimeText;
 
-    [Header("Buy Values")] public ItemManager itemManager;
+    [Header("Buy Values")] public ItemList itemList;
     public Button buyButton;
     public TMP_Text itemPriceText;
     public int itemPrice;
@@ -77,6 +77,6 @@ public class ItemDescription : MonoBehaviour
     private void BuyItem(int amount)
     {
         if (MoneyManager.Instance.SubtractMoney(amount))
-            itemManager.CreateItemBtn(_selectedItem);
+            itemList.CreateItemBtn(_selectedItem);
     }
 }

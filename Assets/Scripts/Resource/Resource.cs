@@ -41,15 +41,15 @@ public class Resource : MonoBehaviour
     {
         while (_playerInZone)
         {
-            yield return new WaitForSeconds(GameManager.Instance.resourceManager.resourceInterval);
+            yield return new WaitForSeconds(GameManager.instance.resourceManager.resourceInterval);
 
             switch (resourceType)
             {
                 case ResourceType.Supply:
-                    GameManager.Instance.resourceManager.AddSupply(GameManager.Instance.resourceManager.supplyAmount);
+                    GameManager.instance.resourceManager.AddSupply(GameManager.instance.resourceManager.supplyAmount);
                     break;
                 case ResourceType.Energy:
-                    GameManager.Instance.resourceManager.AddEnergy(GameManager.Instance.resourceManager.energyAmount);
+                    GameManager.instance.resourceManager.AddEnergy(GameManager.instance.resourceManager.energyAmount);
                     break;
             }
         }

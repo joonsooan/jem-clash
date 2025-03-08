@@ -68,7 +68,7 @@ public class Gravity : MonoBehaviour, IStrangeAbility
 
             Vector2 mousePos = GetMousePos();
             StartCoroutine(DeactivateAbility(controlTime, mousePos));
-            CooldownManager.Instance.StartCoroutine(CooldownManager.Instance.StartCoolDown(_upgradeData));
+            CooldownManager.instance.StartCoroutine(CooldownManager.instance.StartCoolDown(_upgradeData));
         }
     }
 

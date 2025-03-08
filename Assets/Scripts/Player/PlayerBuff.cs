@@ -34,7 +34,7 @@ public class PlayerBuff : MonoBehaviour
     {
         if (!other.CompareTag("Unit")) return;
 
-        GameManager.Instance.abilityManager.GetComponent<UnitControl>().ActivateUnitControl(other);
+        GameManager.instance.abilityManager.GetComponent<UnitControl>().ActivateUnitControl(other);
     }
 
     public void ChangeSprite(int level)

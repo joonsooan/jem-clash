@@ -35,6 +35,6 @@ public class Nexus : MonoBehaviour
         // otherObj.GetComponent<UnitStats>().TakeDamage(attackDamage);
 
         if (health <= 0)
-            GameManager.Instance.GameWin();
+            GameManager.instance.GameWin();
     }
 }

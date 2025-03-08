@@ -31,7 +31,7 @@ public class Firework : MonoBehaviour
     {
         for (int i = 0; i < unitCount; i++)
         {
-            GameObject pooledObject = GameManager.Instance.poolManager.Get(0);
+            GameObject pooledObject = GameManager.instance.poolManager.Get(0);
             Transform spawnUnit = pooledObject.transform;
             spawnUnit.SetParent(spawnPoint);
 
@@ -50,7 +50,7 @@ public class Firework : MonoBehaviour
             UnitStats stats = spawnUnit.GetComponent<UnitStats>();
             spawnUnit.GetComponent<Rigidbody2D>().velocity = dirVec * stats.moveSpeed;
 
-            spawnUnit.SetParent(GameManager.Instance.poolManager.transform);
+            spawnUnit.SetParent(GameManager.instance.poolManager.transform);
         }
     }
 }

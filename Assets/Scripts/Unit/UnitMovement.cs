@@ -20,10 +20,10 @@ public class UnitMovement : MonoBehaviour
         switch (_stats.isAlly)
         {
             case 1:
-                target = GameManager.Instance.enemyNexus;
+                target = GameManager.instance.enemyNexus;
                 break;
             case -1:
-                target = GameManager.Instance.playerNexus;
+                target = GameManager.instance.playerNexus;
                 break;
         }
     }
@@ -84,7 +84,7 @@ public class UnitMovement : MonoBehaviour
     {
         Vector2 dirVec = targetPos - new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
 
-        rb.AddForce(dirVec * (GameManager.Instance.abilityManager.GetComponent<Gravity>().gravityForce * 0.1f),
+        rb.AddForce(dirVec * (GameManager.instance.abilityManager.GetComponent<Gravity>().gravityForce * 0.1f),
             ForceMode2D.Impulse);
     }
 }

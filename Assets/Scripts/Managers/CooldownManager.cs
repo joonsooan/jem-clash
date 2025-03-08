@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class CooldownManager : MonoBehaviour
 {
+    public static CooldownManager instance;
     private readonly Dictionary<UpgradeData.UpgradeType, bool> _cooldowns = new();
-
-    public static CooldownManager Instance { get; private set; }
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
         else
+        {
             Destroy(gameObject);
+        }
     }
 
     public bool IsOnCooldown(UpgradeData.UpgradeType upgradeType)

@@ -1,24 +1,32 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ItemManager : MonoBehaviour
 {
-    public GameObject itemBtnPrefab;
+    public static ItemManager instance;
+
     public List<UpgradeData> items = new();
 
-    public void CreateItemBtn(UpgradeData data)
+    private void Awake()
     {
-        if (data == null) return;
-
-        GameObject buttonObj = Instantiate(itemBtnPrefab, transform);
-        Upgrade upgrade = buttonObj.GetComponent<Upgrade>();
-
-        if (upgrade != null)
+        if (instance == null)
         {
-            upgrade.upgradeData = data;
-            buttonObj.GetComponent<Image>().sprite = upgrade.upgradeData.itemImage;
-            upgrade.level = 0;
+            instance = this;
+            DontDestroyOnLoad(gameObject);
         }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void AddItem(UpgradeData data)
+    {
+        items.Add(data);
+    }
+
+    public void RemoveItem(UpgradeData data)
+    {
+        items.Remove(data);
     }
 }

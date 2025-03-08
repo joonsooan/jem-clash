@@ -1,15 +1,16 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GameManager instance;
 
     [Header("Managers")] public PoolManager poolManager;
 
     public ResourceManager resourceManager;
     public ResultManager resultManager;
     public UnitSpawner unitSpawner;
-    public GameObject abilityManager;
+    public AbilityManager abilityManager;
 
     [Header("Game Objects")] public bool gameLive;
 
@@ -21,9 +22,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -32,12 +33,25 @@ public class GameManager : MonoBehaviour
         }
 
         gameLive = true;
-        abilityManager.GetComponent<UnitControl>().controlTime = 5f;
     }
 
     private void Update()
     {
         GameSpeedControl();
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        poolManager = GameObject.Find("PoolManager").GetComponent<PoolManager>();
+        unitSpawner = GameObject.Find("UnitSpawner").GetComponent<UnitSpawner>();
+        resourceManager = ResourceManager.instance;
+        resultManager = ResultManager.instance;
+        abilityManager = AbilityManager.instance;
     }
 
     private void GameSpeedControl()

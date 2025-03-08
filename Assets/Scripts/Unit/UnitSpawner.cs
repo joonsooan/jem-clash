@@ -75,13 +75,13 @@ public class UnitSpawner : MonoBehaviour
         // GameObject allyUnit = GameManager.Instance.poolManager.Get(0);
         // SpawnUnit(allyUnit, allyData, spawnPoints[1].position);
 
-        GameObject enemyUnit = GameManager.Instance.poolManager.Get(1);
+        GameObject enemyUnit = GameManager.instance.poolManager.Get(1);
         SpawnUnit(enemyUnit, enemyData, spawnPoints[2].position);
     }
 
     public void SpawnAllyUnit(int count)
     {
-        int maxCount = GameManager.Instance.resourceManager.supply / unitCost;
+        int maxCount = GameManager.instance.resourceManager.supply / unitCost;
 
         if (maxCount <= 0)
             return;
@@ -90,11 +90,11 @@ public class UnitSpawner : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            GameObject allyUnit = GameManager.Instance.poolManager.Get(0);
+            GameObject allyUnit = GameManager.instance.poolManager.Get(0);
             SpawnUnit(allyUnit, allyData, spawnPoints[1].position);
         }
 
-        GameManager.Instance.resourceManager.SpendSupply(unitCost * count);
+        GameManager.instance.resourceManager.SpendSupply(unitCost * count);
     }
 
     // 키보드 입력 테스트용
@@ -102,12 +102,12 @@ public class UnitSpawner : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            GameObject allyUnit = GameManager.Instance.poolManager.Get(0);
+            GameObject allyUnit = GameManager.instance.poolManager.Get(0);
             SpawnUnit(allyUnit, allyData, spawnPoints[1].position);
         }
         else if (Input.GetKeyDown(KeyCode.R))
         {
-            GameObject enemyUnit = GameManager.Instance.poolManager.Get(1);
+            GameObject enemyUnit = GameManager.instance.poolManager.Get(1);
             SpawnUnit(enemyUnit, enemyData, spawnPoints[2].position);
         }
     }

@@ -11,7 +11,7 @@ public class RestSiteRoom : MonoBehaviour
 
     public void OnClick()
     {
-        RoomManager.Instance.HideScreen();
+        RoomManager.instance.HideScreen();
         cameraController.CameraShiftToRight();
     }
 }

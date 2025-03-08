@@ -13,7 +13,7 @@ public class EventRoom : MonoBehaviour
 
     public void OnClick()
     {
-        RoomManager.Instance.HideScreen();
+        RoomManager.instance.HideScreen();
         cameraController.CameraShiftToRight();
     }
 }
